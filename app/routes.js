@@ -1,5 +1,7 @@
 // grab the nerd model we just created
-var Nerd = require('./models/nerd');
+var User = require('./models/user');
+var Event = require('./models/event');
+
 
 module.exports = function(app) {
 
@@ -7,17 +9,29 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  // sample api route
-  app.get('/api/nerds', function(req, res) {
+  app.get('/api/users', function(req, res) {
       // use mongoose to get all nerds in the database
-      Nerd.find(function(err, nerds) {
+      User.find(function(err, users) {
 
           // if there is an error retrieving, send the error. 
                           // nothing after res.send(err) will execute
           if (err)
               res.send(err);
 
-          res.json(nerds); // return all nerds in JSON format
+          res.json(users); // return all nerds in JSON format
+      });
+  });
+
+  app.get('/api/events', function(req, res) {
+      // use mongoose to get all nerds in the database
+      Nerd.find(function(err, events) {
+
+          // if there is an error retrieving, send the error. 
+                          // nothing after res.send(err) will execute
+          if (err)
+              res.send(err);
+
+          res.json(events); // return all nerds in JSON format
       });
   });
 
@@ -27,7 +41,7 @@ module.exports = function(app) {
   // frontend routes =========================================================
   // route to handle all angular requests
   app.get('*', function(req, res) {
-      res.sendfile('./public/views/index.html'); // load our public/index.html file
+      res.sendfile('./public/index.html'); // load our public/index.html file
   });
 
 };
