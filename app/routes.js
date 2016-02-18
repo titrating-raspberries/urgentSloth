@@ -24,7 +24,7 @@ module.exports = function(app) {
 
   app.get('/api/events', function(req, res) {
       // use mongoose to get all nerds in the database
-      Nerd.find(function(err, events) {
+      Event.find(function(err, events) {
 
           // if there is an error retrieving, send the error. 
                           // nothing after res.send(err) will execute
