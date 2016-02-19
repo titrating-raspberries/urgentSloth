@@ -6,7 +6,7 @@ angular.module('EventsCtrl', [])
 
 	Event.get()
 		.then(function(events) {
-      $scope.data.events = events.data;
+			$scope.data.events = events;
 		})
 		.catch(function (error) {
       console.error(error);
