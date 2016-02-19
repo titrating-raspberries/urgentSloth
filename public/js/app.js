@@ -1,1 +1,10 @@
-angular.module('sampleApp', ['ngRoute', 'appRoutes', 'EventCtrl', 'UserCtrl', 'CreateCtrl','EventsCtrl','UserService','EventService']);
+angular.module('sampleApp', [
+	'ngRoute',
+	'appRoutes',
+	'EventCtrl',
+	'UserCtrl',
+	'CreateCtrl',
+	'EventsCtrl',
+	'UserService',
+	'EventService'
+]);
