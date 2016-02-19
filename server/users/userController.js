@@ -13,7 +13,6 @@ module.exports = {
     var email = profile.emails[0].value;
     var picture = profile.photos[0].value;
 
-
       findUser({fbId: fbId})
         .then(function (match) {
           if (match) {
@@ -47,59 +46,6 @@ module.exports = {
           next(error);
         });
     },
-
-
-  // signin: function (req, res, next) {
-  //   /* will come from FB
-  //   var id = ??
-  //   */
-  //   findUser({fbId: id})
-  //     .then(function (user) {
-  //       if (!user) {
-  //         next(new Error('User does not exist'));
-  //       } else {
-  //         return user.compareIds(id)
-  //           .then(function (foundUser) {
-  //             if (foundUser) {
-  //               var token = jwt.encode(user, 'secret');
-  //               res.json({token: token});
-  //             } else {
-  //               return next(new Error('No user'));
-  //             }
-  //           });
-  //       }
-  //     })
-  //     .fail(function (error) {
-  //       next(error);
-  //     });
-  // },
-
-  // signup: function (req, res, next) {
-  //   /* will come from FB
-  //   var id = ??
-  //   */
-
-  //   // check to see if user already exists
-  //   findUser({fbId: id})
-  //     .then(function (user) {
-  //       if (user) {
-  //         next(new Error('User already exist!'));
-  //       } else {
-  //         // make a new user if not one
-  //         return createUser({
-  //           fbId: id
-  //         });
-  //       }
-  //     })
-  //     .then(function (user) {
-  //       // create token to send back for auth
-  //       var token = jwt.encode(user, 'secret');
-  //       res.json({token: token});
-  //     })
-  //     .catch(function (error) {
-  //       next(error);
-  //     });
-  // },
 
   checkAuth: function (req, res, next) {
     // checking to see if the user is authenticated

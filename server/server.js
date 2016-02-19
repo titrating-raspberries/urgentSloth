@@ -66,12 +66,9 @@ app.use(passport.session());
 var db = require('./config/db');
 
 //db conncection
-console.log('DB URL', db.url);
 mongoose.connect(db.url);
 var connection = mongoose.connection;
-connection.on('open', function () { console.log('db connection open??')});
-connection.on('error', function (err) { console.log('db connection err??',err)});
-
+connection.on('error', function (err) { console.log('db connection err:',err)});
 
 // set our port
 var port = process.env.PORT || 3000; 
@@ -93,7 +90,6 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/../public')); 
 // routes ==================================================
 require('./config/routes')(app); // configure our routes
-
 
 // start app ===============================================
 // startup our app at http://localhost:3000
