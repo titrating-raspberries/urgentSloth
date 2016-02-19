@@ -18,7 +18,11 @@
     .when('/event', {
         templateUrl: 'views/event.html',
         controller: 'EventController'
+    })
+    .otherwise({
+        redirectTo : '/'
     });
+
 
   $locationProvider.html5Mode(true);
 

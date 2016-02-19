@@ -1,7 +1,6 @@
 angular.module('UserService', []).factory('User', ['$http', function($http) {
 
   return {
-      // call to get all nerds
       get : function() {
           return $http.get('/api/users/');
       },
