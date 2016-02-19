@@ -1,6 +1,6 @@
 // grab the nerd model we just created
-var User = require('./models/user');
-var Event = require('./models/event');
+var User = require('../users/userModel.js');
+var Event = require('../events/eventModel.js');
 
 
 module.exports = function(app) {
@@ -41,7 +41,7 @@ module.exports = function(app) {
   // frontend routes =========================================================
   // route to handle all angular requests
   app.get('*', function(req, res) {
-      res.sendfile('./public/index.html'); // load our public/index.html file
+    res.redirect('/');
   });
 
 };
