@@ -5,9 +5,11 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
+var mongoose       = require('mongoose');
+
 
 //need to include this to add user to db
-// var userController = require('./users/userController');
+var userController = require('./users/userController');
 
 
 // configuration ===========================================
@@ -22,13 +24,12 @@ var Strategy       = require('passport-facebook').Strategy;
 passport.use(new Strategy({
     clientID: '1695145560770344',
     clientSecret: '6da4819c4f7124defe1035c55c6682bf',
-    callbackURL: 'http://localhost:3000/login/facebook/return'
+    callbackURL: 'http://localhost:3000/login/facebook/return',
+    profileFields: ['id', 'displayName', 'picture', 'email','friends']
   },
   function(accessToken, refreshToken, profile, cb) {
     //call a function which checks if user is in db
-    //if not in db, creates the user
-    //write this in user controller
-    //userController. 
+    userController.createOrFindOne(profile);
     return cb(null, profile);
   }));
 
@@ -63,6 +64,14 @@ app.use(passport.session());
 
 // config files
 var db = require('./config/db');
+
+//db conncection
+console.log('DB URL', db.url);
+mongoose.connect(db.url);
+var connection = mongoose.connection;
+connection.on('open', function () { console.log('db connection open??')});
+connection.on('error', function (err) { console.log('db connection err??',err)});
+
 
 // set our port
 var port = process.env.PORT || 3000; 

@@ -55,7 +55,7 @@ module.exports = function(app) {
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
       //here add to db?????
-      console.log('req.USER', req.user);
+      //console.log('req.USER', req.user.friends);
       res.redirect('/#events');
     });
 
