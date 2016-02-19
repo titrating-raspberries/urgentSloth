@@ -41,6 +41,7 @@ module.exports = {
           //   base_url: req.headers.origin,
           //   title: title
           // };
+          // WE CAN MODIFY THIS IF THERE IS TOO MUCH INFO DISPLAYED
           var newEvent = event;
           return createEvent(newEvent);
         }
@@ -56,20 +57,14 @@ module.exports = {
   },
 
   navToEvent: function (req, res, next) {
-    findEvent({code: req.params.code})
+    findEvent({_id: req.params.id})
       .then(function (event) {
         if (!event) {
           return next(new Error('Link not added yet'));
         }
 
-        event.visits++;
-        event.save(function (err, savedEvent) {
-          if (err) {
-            next(err);
-          } else {
-            res.redirect(savedEvent.url);
-          }
-        });
+        //res.redirect(THE PARTICULAR EVENT HTML);
+          
       })
       .fail(function (error) {
         next(error);
