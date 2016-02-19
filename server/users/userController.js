@@ -9,15 +9,14 @@ var createUser = Q.nbind(User.create, User);
 module.exports = {
   signin: function (req, res, next) {
     /* will come from FB
-    var username = ??
-    var password = ??
+    var id = ??
     */
-    findUser({username: username})
+    findUser({fbId: id})
       .then(function (user) {
         if (!user) {
           next(new Error('User does not exist'));
         } else {
-          return user.comparePasswords(password)
+          return user.compareIds(id)
             .then(function (foundUser) {
               if (foundUser) {
                 var token = jwt.encode(user, 'secret');
@@ -35,20 +34,18 @@ module.exports = {
 
   signup: function (req, res, next) {
     /* will come from FB
-    var username = ??
-    var password = ??
+    var id = ??
     */
 
     // check to see if user already exists
-    findUser({username: username})
+    findUser({fbId: id})
       .then(function (user) {
         if (user) {
           next(new Error('User already exist!'));
         } else {
           // make a new user if not one
           return createUser({
-            username: username,
-            password: password
+            fbId: id
           });
         }
       })
@@ -57,7 +54,7 @@ module.exports = {
         var token = jwt.encode(user, 'secret');
         res.json({token: token});
       })
-      .fail(function (error) {
+      .catch(function (error) {
         next(error);
       });
   },
