@@ -1,6 +1,8 @@
 // grab the nerd model we just created
 var User = require('../users/userModel.js');
 var Event = require('../events/eventModel.js');
+var passport       = require('passport');
+var Strategy       = require('passport-facebook').Strategy;
 
 
 module.exports = function(app) {
@@ -40,8 +42,19 @@ module.exports = function(app) {
 
   // frontend routes =========================================================
   // route to handle all angular requests
-  app.get('*', function(req, res) {
-    res.redirect('/');
-  });
+
+
+
+  // passport routes =========================================================
+  // route to handle all facebook passport requests
+
+  app.get('/login/facebook',
+    passport.authenticate('facebook'));
+
+  app.get('/login/facebook/return', 
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/#events');
+    });
 
 };

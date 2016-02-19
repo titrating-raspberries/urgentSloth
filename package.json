@@ -3,9 +3,14 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.4.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.1",
     "express": "~4.5.1",
+    "express-session": "^1.13.0",
+    "jwt-simple": "^0.4.1",
     "method-override": "~2.0.2",
     "mongoose": "~3.8.0",
+    "morgan": "^1.6.1",
     "nodemon": "^1.8.1",
     "q": "^1.4.1"
   }
