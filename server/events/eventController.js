@@ -30,17 +30,18 @@ module.exports = {
         if (match) {
           res.send(match);
         } else {
-          return util.getUrlTitle(url);
+        	return event;
         }
       })
-      .then(function (title) {
-        if (title) {
-          var newEvent = {
-            url: url,
-            visits: 0,
-            base_url: req.headers.origin,
-            title: title
-          };
+      .then(function (event) {
+        if (event) {
+          // var newEvent = {
+          //   url: url,
+          //   visits: 0,
+          //   base_url: req.headers.origin,
+          //   title: title
+          // };
+          var newEvent = event;
           return createEvent(newEvent);
         }
       })
