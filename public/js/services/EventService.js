@@ -1,4 +1,6 @@
-angular.module('EventService', []).factory('Event', ['$http', function($http) {
+angular.module('EventService', [])
+
+.factory('Event', ['$http', function($http) {
 
   return {
     get : function() {
