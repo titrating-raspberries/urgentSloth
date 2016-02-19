@@ -54,7 +54,15 @@ module.exports = function(app) {
   app.get('/login/facebook/return', 
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
+      //here add to db?????
+      console.log('req.USER', req.user);
       res.redirect('/#events');
     });
+
+  // app.get('/profile',
+  //   require('connect-ensure-login').ensureLoggedIn(),
+  //   function(req, res){
+  //     res.render('profile', { user: req.user });
+  //   });
 
 };

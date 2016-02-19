@@ -6,6 +6,8 @@ var methodOverride = require('method-override');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
 
+//need to include this to add user to db
+// var userController = require('./users/userController');
 
 
 // configuration ===========================================
@@ -23,11 +25,10 @@ passport.use(new Strategy({
     callbackURL: 'http://localhost:3000/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
-    // In this example, the user's Facebook profile is supplied as the user
-    // record.  In a production-quality application, the Facebook profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
+    //call a function which checks if user is in db
+    //if not in db, creates the user
+    //write this in user controller
+    //userController. 
     return cb(null, profile);
   }));
 
