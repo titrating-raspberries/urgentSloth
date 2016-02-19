@@ -4,8 +4,7 @@
 
     // events page
     .when('/', {
-        templateUrl: 'views/events.html',
-        controller: 'EventsController'
+        templateUrl: 'views/login.html',
     })
 
     // create page
@@ -15,13 +14,10 @@
     })
 
     // event page 
-    .when('/event', {
-        templateUrl: 'views/event.html',
+    .when('/events', {
+        templateUrl: 'views/events.html',
         controller: 'EventController'
     })
-    .otherwise({
-        redirectTo : '/'
-    });
 
 
   $locationProvider.html5Mode(true);
