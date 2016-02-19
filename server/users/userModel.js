@@ -1,7 +1,7 @@
 var Q = require('q');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var SALT_WORK_FACTOR = 10;
+var saltLength = 10;
 
 var userSchema = new mongoose.Schema({
   fbId : String,
@@ -15,10 +15,10 @@ var userSchema = new mongoose.Schema({
   events: []
 });
 
-UserSchema.methods.comparePasswords = function (candidatePassword) {
+UserSchema.methods.comparePasswords = function (password) {
   var savedPassword = this.password;
   return Q.Promise(function (resolve, reject) {
-    bcrypt.compare(candidatePassword, savedPassword, function (err, isMatch) {
+    bcrypt.compare(password, savedPassword, function (err, isMatch) {
       if (err) {
         reject(err);
       } else {
@@ -37,7 +37,7 @@ UserSchema.pre('save', function (next) {
   }
 
   // generate a salt
-  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+  bcrypt.genSalt(saltLength, function (err, salt) {
     if (err) {
       return next(err);
     }
