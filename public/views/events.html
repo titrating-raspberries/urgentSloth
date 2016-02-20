@@ -5,8 +5,7 @@
 </div>
 <input type='text' ng-model='search' placeholder='Search' />
 <div class="events">
-  <div class="event"
-      ng-repeat="event in data.events | filter:search | orderBy:'created_at'">
+  <div class="event" ng-repeat="event in data.events">
     <div class="info">
       <div class="name">
         {{ event.name }}
@@ -22,7 +21,10 @@
         {{ date }}
       </div>
       <div class="attendees" ng-repeat="user in event.users">
-        {{ user.picture }} {{ user.name }}
+	      <!-- 
+	      <img src="url{{ user.picture }}">
+				-->
+	      <span>{{ user.name }}</span>
       </div>
     </div>
   </div>
