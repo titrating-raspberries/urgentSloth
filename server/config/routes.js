@@ -52,9 +52,27 @@ module.exports = function(app) {
     passport.authenticate('facebook'));
 
   app.get('/login/facebook/return', 
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
+      res.cookie('name',req.user.displayName);
+      res.cookie('fbId',req.user.id);
+      res.cookie('picture',req.user.photos[0].value);
       res.redirect('/#events');
     });
+
+
+  app.get('/login',function(req, res){
+    res.redirect('/#login');
+  });
+
+
+  // catch all route =========================================================
+  // route to handle other things typed into the nav bar
+
+  app.get('/*',function(req, res){
+    res.redirect('/#events');
+  });
+
+
 
 };

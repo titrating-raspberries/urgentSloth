@@ -1,4 +1,4 @@
-angular.module('UserCtrl', []).controller('UserController', function($scope) {
+angular.module('UserCtrl', ['ngCookies']).controller('UserController', function($scope) {
 
   $scope.tagline = 'SLOOOOOOTH';
 

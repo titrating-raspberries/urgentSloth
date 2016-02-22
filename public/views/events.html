@@ -17,17 +17,17 @@
         {{ event.name }}
       </div>
       <div class="locations" ng-repeat="location in event.locations">
-	      <ul>
-	      	<li>{{ location.name }}</li>
-	      	<li>{{ location.rating }}</li>
-	      	<li>{{ location.url }}</li>
-	      </ul>
+        <ul>
+          <li>{{ location.name }}</li>
+          <li>{{ location.rating }}</li>
+          <li>{{ location.url }}</li>
+        </ul>
       </div>
       <div class="dates" ng-repeat="date in event.dates">
-	      {{ date }}
+        {{ date }}
       </div>
       <div class="attendees" ng-repeat="user in event.users">
-	      {{ user.picture }} {{ user.name }}
+        {{ user.picture }} {{ user.name }}
       </div>
     </div>
   </div>
