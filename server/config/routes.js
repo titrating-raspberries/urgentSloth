@@ -12,16 +12,34 @@ module.exports = function(app) {
   // authentication routes
 
   app.get('/api/users', function(req, res) {
-      // use mongoose to get all nerds in the database
-      User.find(function(err, users) {
+    User.find(function(err, users) {
+      if (err){
+        res.send(err)
+      }
+      res.json(users);
+    });
+  });
 
-          // if there is an error retrieving, send the error. 
-                          // nothing after res.send(err) will execute
-          if (err)
-              res.send(err);
+  app.post('/api/users', function(req, res) {
+    var user = req.body;
+    console.log('REQ BODDDDDDDDDDY: ', req.body);
 
-          res.json(users); // return all nerds in JSON format
-      });
+    User.find({fbId: user.fbId},function(err, users) {
+      if (err){
+        res.send(err)
+      }
+      if(users.length){
+        res.send(users[0])
+      } else {
+        var newUser = User({fbId: user.fbId, token: user.token, name: user.name, email: user.email, picture: user.picture, events: user.events}).save(function(err){
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(newUser);
+          }
+        });
+      }
+    });
   });
 
   app.get('/api/events', function(req, res) {
