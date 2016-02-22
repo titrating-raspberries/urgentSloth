@@ -1,3 +1,7 @@
+body {
+    overflow: scroll;
+}
+
 .navbar {
   margin-bottom: 0;
   background-color: #f4511e;
@@ -34,7 +38,12 @@
   overflow: hidden;
 }
 
+.row .border {
+  border: 5px solid;
+}
+
 .scroll {
+  height:180px;
   overflow-x: auto;
 }
 
@@ -48,5 +57,10 @@
   margin-bottom: 5px;
   width: 100px; /* same as review start image */
   height: auto;
+}
+
+.vertical {
+  max-height: 474px; /* Fit no more than 3 restaurant search results*/
+  overflow-y: scroll;
 }
 

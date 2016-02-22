@@ -37,7 +37,9 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     if ($scope.term && $scope.location) {
       Event.searchYelp($scope.term, $scope.location).then(function(results){
         $scope.yelpResults = results.data.businesses;
-        console.log($scope.yelpResults);
+        console.log('RESULTS: ', results.data.businesses);
+      }).catch(function(err){
+        console.log(err);
       })
     }
   };
