@@ -1,11 +1,9 @@
-<div class="container">
-  <!-- Your html here -->
-  <h1>Your Events</h1>
-  
+<div class="well">
+  <h2>Your Events</h2>
 </div>
-<input type='text' ng-model="search" placeholder='Search' /> 
+<input type='text' ng-model="search" placeholder='Search Events' /> 
 <div class="events">
-  <div ng-repeat="event in data.events">
+  <div ng-repeat="event in data.events | filter:search">
       <div class="name">{{ event.name }}</div>
       <div class="row" type="locations" ng-repeat="location in event.locations">
           <label class="col-md-2">
