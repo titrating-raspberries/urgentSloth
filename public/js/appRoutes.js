@@ -3,8 +3,9 @@
   $routeProvider
 
     // events page
-    .when('/', {
+    .when('/login', {
         templateUrl: 'views/login.html',
+        controller: 'IndexController'
     })
 
     // create page
@@ -16,8 +17,18 @@
     // event page 
     .when('/events', {
         templateUrl: 'views/events.html',
-        controller: 'EventController'
+        controller: 'EventsController'
     })
+
+    //go back to logout page
+    .when('/logout', {
+        templateUrl: 'views/login.html',
+        controller: 'LogoutController'
+    })
+    
+    .otherwise({
+      redirectTo: '/events'
+    });
 
 
   $locationProvider.html5Mode(true);
