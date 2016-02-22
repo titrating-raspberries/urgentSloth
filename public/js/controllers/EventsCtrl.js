@@ -15,6 +15,5 @@ angular.module('EventsCtrl', [])
   $scope.logData = function (event) {
     return Event.update(event);
   };
-
 });
 

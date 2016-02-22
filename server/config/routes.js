@@ -41,6 +41,7 @@ module.exports = function(app) {
       res.redirect('/#events');
     });
 
+<<<<<<< HEAD
   app.get('/login',function(req, res){
     res.redirect('/#login');
   });
@@ -52,6 +53,8 @@ module.exports = function(app) {
     res.redirect('/#events');
   });
 
+=======
+>>>>>>> adds new formatting to events page and sends data to backend to update the event in the database
   app.put('/api/events/:id', function(req, res) {
     var query = {_id: req.params.id};
     var updatedProps = req.body;
@@ -63,4 +66,8 @@ module.exports = function(app) {
       res.json(response);
     });
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> adds new formatting to events page and sends data to backend to update the event in the database
 };
