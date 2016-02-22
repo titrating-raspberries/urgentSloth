@@ -1,59 +1,99 @@
 <div class="jumbotron text-center">
-  <div class="well well-lg">Create new event</div>
-    </br>
-    <div class="well">Add friends</div>
-      <!-- Dynamic search form for friends -->
-      <form role="form">
-        <div class="form-group">
-          <label for="friendSearch">Add a friend:</label>
-          <input type="text" class="form-control" id="friendSearch" ng-model="friendName">
-        </div>
-      </form>
-      <!-- Search results for friends -->
-      <div class="col-xs-12">
-        <div class = "col-xs-2" ng-repeat="friend in friends | filter: friendName" ng-click="addFriend(friend)">
-          <img src="url({{friend.picture}})" class="img-responsive margin" style="width:100%" alt="Image">
-          <p class="text">{{friend.displayName}}</p>
-        </div>
-      </div>
-
-      </br>
-      <!-- List of attendees -->
-      <div class="well">Attendees</div>
-      <div class="col-xs-12">
-        <div class = "col-xs-2" ng-repeat="attendee in attendees">
-          <img src="url({{attendee.picture}})" class="img-responsive margin" style="width:100%" alt="Image">
-          <p class="text">{{attendee.displayName}}</p>
-        </div>
-      </div>
-    </div>
-
-    </br>
-
-    <div class="well">Add locations</div>
-      <!-- Dynamic search form using YelpAPI -->
-      <form role="form">
-        <div class="form-group">
-          <label for="termSearch">Name of restaurant:</label>
-          <input type="text" class="form-control" id="termSearch" ng-model="term">
-          <label for="locationSearch">Where:</label>
-          <input type="text" class="form-control" id="locationSearch" ng-model="location">
-        </div>
-      </form>
-      <!-- Search results from Yelp API -->
-      <div class="col-xs-12">
-        <div class = "col-xs-12" ng-repeat="restaurant in results" ng-click="addLocation(restaurant)">
-          <p class="text">!!!! ADD YELP PROFILE DATA HERE !!!</p>
-        </div>
-      </div>
-
-      </br>
-      <!-- List of locations -->
-      <div class="well">Locations</div>
-      <div class="col-xs-12">
-        <div class = "col-xs-12" ng-repeat="restaurant in locations">
-          <p class="text"> !!!! SHOW YELP PROFILE DATA HERE !!! </p>
-        </div>
-      </div>
-    </div>
+  <h1>Create new event</h1>
 </div>
+
+<div class="well"><h2>Add friends</h2></div>
+  <!-- Dynamic search form for friends -->
+<form>
+  <fieldset class="form-group">
+    <label for="friendSearch">Find friends:</label>
+    <input class="form-control" ng-model='friendName' id="friendSearch" placeholder="Enter friend's name"/>
+  </fieldset>
+</form>
+
+<div class="row scroll">
+  <div style="width: {{friends.length * 165}}px">
+    <div class="square text-center" ng-repeat="friend in friends | filter:friendName" ng-click="addFriend(friend)">
+      <img class="card-img-top" src='{{friend.user.picture.medium}}'>
+      <div class="card-block">
+        <h4 class="card-title">{{friend.user.name.first}} {{friend.user.name.last}}</h4>
+      </div>
+    </div>
+  </div>  
+</div>
+  
+</br>
+  <!-- List of attendees -->
+<div class="well"><h3>Invited friends</h3></div>
+<div class="row text-center">
+  <h3 ng-show="showLonelyMessage">{{lonelyMessage}}</h3>
+  <div class="square text-center" ng-repeat="attendee in attendees" ng-click="removeFriend(attendee)">
+    <img class="card-img-top" src='{{attendee.user.picture.medium}}'>
+    <div class="card-block">
+      <h4 class="card-title">{{attendee.user.name.first}} {{attendee.user.name.last}}</h4>
+    </div>
+  </div>
+</div>
+
+</br>
+
+<div class="well"><h2>Add locations</h2></div>
+
+<!-- Dynamic search form using YelpAPI -->
+<form role="form" ng-submit="submit()">
+  <div class="form-group">
+    <label for="termSearch">Name of restaurant:</label>
+    <input type="text" class="form-control" id="termSearch" ng-model="term">
+    <label for="locationSearch">Where:</label>
+    <input type="text" class="form-control" id="locationSearch" ng-model="location">
+  </div>
+  <input type="submit" value="Search" class="btn btn-primary"/>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapse">Hide results</button>
+</form>
+
+</br>
+<!-- Search results from Yelp API -->
+<div class="vertical collapse in" id="collapse">
+  <div class="row border" ng-repeat="restaurant in yelpResults" ng-click="addLocation(restaurant)">
+    <div class="col-xs-2">
+      <img class="restImage" src="{{restaurant.image_url}}">
+      <img class="restImage" src="{{restaurant.rating_img_url_large}}">
+      <p>{{restaurant.review_count}} reviews</p>
+    </div>
+
+    <div class="col-xs-10">
+      <h3 class="card-title">{{restaurant.name}}</h3>
+      <p class="card-text">{{restaurant.categories[0][0]}}</p>
+      <a target="_blank" href="{{restaurant.url}}" style="display:block;">Visit website</a>
+      <a target="_blank" href="http://maps.google.com/?q=?{{restaurant.location.display_address[0]}} {{restaurant.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+    </div>  
+  </div>
+</div>
+
+</br>
+<!-- List of locations -->
+<div class="well"><h3>My picks</h3></div>
+
+<h3 class = "text-center" ng-show="showNoLocationsMessage">{{noLocationsMessage}}</h3>
+
+<div class="row border" ng-repeat="rest in locations" ng-click="removeLocation(rest)">
+  <div class="col-xs-2">
+    <img class="restImage" src="{{rest.image_url}}">
+    <img class="restImage" src="{{rest.rating_img_url_large}}">
+    <p>{{rest.review_count}} reviews</p>
+  </div>
+
+  <div class="col-xs-10">
+    <h3 class="card-title">{{rest.name}}</h3>
+    <p class="card-text">{{rest.categories[0][0]}}</p>
+    <a target="_blank" href="{{rest.url}}" style="display:block;">Visit website</a>
+    <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.display_address[0]}} {{rest.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+  </div>  
+</div>
+
+</br>
+<!-- List of dates -->
+<div class="well"><h3>Date and Time options</h3></div>
+
+
+
