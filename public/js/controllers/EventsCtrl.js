@@ -1,4 +1,3 @@
-
 angular.module('EventsCtrl', [])
 
 .controller('EventsController', function($scope, Event) {

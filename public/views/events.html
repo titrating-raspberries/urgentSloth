@@ -1,7 +1,6 @@
 <div class="container">
-  HEYY EVENTS
   <!-- Your html here -->
-  <!-- <h1>Events</h1>
+  <h1>Events</h1>
   <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
       <li><a href="#/events">Events</a></li>
@@ -18,18 +17,18 @@
         {{ event.name }}
       </div>
       <div class="locations" ng-repeat="location in event.locations">
-	      <ul>
-	      	<li>{{ location.name }}</li>
-	      	<li>{{ location.rating }}</li>
-	      	<li>{{ location.url }}</li>
-	      </ul>
+        <ul>
+          <li>{{ location.name }}</li>
+          <li>{{ location.rating }}</li>
+          <li>{{ location.url }}</li>
+        </ul>
       </div>
       <div class="dates" ng-repeat="date in event.dates">
-	      {{ date }}
+        {{ date }}
       </div>
       <div class="attendees" ng-repeat="user in event.users">
-	      {{ user.picture }} {{ user.name }}
+        {{ user.picture }} {{ user.name }}
       </div>
     </div>
-  </div> -->
+  </div>
 </div>
