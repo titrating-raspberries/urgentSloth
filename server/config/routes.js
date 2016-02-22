@@ -47,11 +47,9 @@ module.exports = function(app) {
       res.redirect('/#events');
     });
 
-
   app.get('/login',function(req, res){
     res.redirect('/#login');
   });
-
 
   // catch all route =========================================================
   // route to handle other things typed into the nav bar
@@ -60,6 +58,15 @@ module.exports = function(app) {
     res.redirect('/#events');
   });
 
-
-
+  app.put('/api/events/:id', function(req, res) {
+    var query = {_id: req.params.id};
+    var updatedProps = req.body;
+    var options = {new: true, upsert: true};
+    User.findOneAndUpdate(query, updatedProps, options, function(err, response) {
+      if (err) {
+        return res.json(err);
+      }
+      res.json(response);
+    });
+  });
 };

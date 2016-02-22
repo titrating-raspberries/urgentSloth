@@ -3,29 +3,32 @@
   <h1>Your Events</h1>
   
 </div>
-<input type='text' ng-model='search' placeholder='Search' />
+<input type='text' ng-model="search" placeholder='Search' /> 
 <div class="events">
-  <div class="event" ng-repeat="event in data.events">
-    <div class="info">
-      <div class="name">
-        {{ event.name }}
+  <div ng-repeat="event in data.events">
+      <div class="name">{{ event.name }}</div>
+      <div class="row" type="locations" ng-repeat="location in event.locations">
+          <label class="col-md-2">
+            <input type="checkbox">
+            Select Location
+          </label>
+          <div class="col-md-1">{{ location.name }}</div>
+	      	<div class="col-md-1">{{ location.rating }}</div>
+	      	<div class="col-md-1">{{ location.url }}</div>
       </div>
-      <div class="locations" ng-repeat="location in event.locations">
-        <ul>
-          <li>{{ location.name }}</li>
-          <li>{{ location.rating }}</li>
-          <li>{{ location.url }}</li>
-        </ul>
+      <div class="row">
+	      <div ng-repeat="date in event.dates">
+          <label><input type="checkbox">Select Time</label>
+          {{ date | date:'MM/dd/yyyy @ h:mma' }}
+        </div>
       </div>
-      <div class="dates" ng-repeat="date in event.dates">
-        {{ date }}
-      </div>
-      <div class="attendees" ng-repeat="user in event.users">
+      <div class="row">
 	      <!-- 
 	      <img src="url{{ user.picture }}">
 				-->
-	      <span>{{ user.name }}</span>
+	      <div class="col-md-1" ng-repeat="user in event.users">{{ user.name }}</div>
       </div>
-    </div>
+      <div>{{ event.deadline | date:'MM/dd/yyyy @ h:mma' }}</div>
+      <button ng-submit="logData(event)">Submit</button>
   </div>
 </div>
