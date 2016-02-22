@@ -47,7 +47,6 @@ angular.module('EventService', [])
       //Generate oauth_signature using 3rd party script (included on index.html):
       var oauth_signature = oauthSignature.generate(httpMethod, yelpUrl, parameters, consumerSecret, tokenSecret, { encodeSignature: false});
       parameters['oauth_signature'] = oauth_signature;
-      console.log('GOT INTO FUNCTION');
       return $http.jsonp(yelpUrl, {params: parameters})
     }
   };       
