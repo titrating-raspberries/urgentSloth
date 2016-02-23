@@ -7,7 +7,6 @@ var userSchema = new mongoose.Schema({
   fbId : String,
   token: String,
   name: String,
-  email: String,
   picture: String,
   events: []
 });

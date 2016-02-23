@@ -10,7 +10,6 @@ module.exports = {
   createOrFindOne: function (profile) {
     var fbId = profile.id;
     var name = profile.displayName;
-    var email = profile.emails[0].value;
     var picture = profile.photos[0].value;
 
       findUser({fbId: fbId})
@@ -29,7 +28,6 @@ module.exports = {
             var newUser = {
               name: name,
               fbId: fbId,
-              email: email,
               picture: picture
             };
             return createUser(newUser);
