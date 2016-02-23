@@ -11,24 +11,25 @@ module.exports = {
     var fbId = profile.id;
     var name = profile.displayName;
     var picture = profile.photos[0].value;
+    var friends = profile._json.friends.data;
 
       findUser({fbId: fbId})
         .then(function (match) {
           if (match) {
             console.log('USER MATCH');
-           // res.send(match);
           } else {
             var noMatch = true;
             return noMatch;
           }
         })
-        .then(function (noMatch) { // this is hacky, ask about this
+        .then(function (noMatch) { // ask about this
           if (noMatch){
             console.log('NO MATCH');
             var newUser = {
               name: name,
               fbId: fbId,
-              picture: picture
+              picture: picture,
+              friends: friends
             };
             return createUser(newUser);
           }
@@ -36,36 +37,12 @@ module.exports = {
         .then(function (createdUser) {
           if (createdUser) {
             console.log('CREATED USER');
-            res.json(createdUser);
           }
         })
         .fail(function (error) {
           console.log('CREATE USER Error',error);
           next(error);
         });
-    },
-
-  checkAuth: function (req, res, next) {
-    // checking to see if the user is authenticated
-    // grab the token in the header is any
-    // then decode the token, which we end up being the user object
-    // check to see if that user exists in the database
-    var token = req.headers['x-access-token'];
-    if (!token) {
-      next(new Error('No token'));
-    } else {
-      var user = jwt.decode(token, 'secret');
-      findUser({username: user.username})
-        .then(function (foundUser) {
-          if (foundUser) {
-            res.send(200);
-          } else {
-            res.send(401);
-          }
-        })
-        .fail(function (error) {
-          next(error);
-        });
     }
-  }
+
 };
