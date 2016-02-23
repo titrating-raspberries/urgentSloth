@@ -24,7 +24,7 @@ var addFriendsPicture = function(friendArr){
 }
 
 module.exports = {
-  getUsers: function () {
+  getUsers: function (req, res) {
     getAllUsers({})
       .then(function (users) {
         if (users) {
