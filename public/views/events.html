@@ -7,8 +7,7 @@
       <div class="name">{{ event.name }}</div>
       <div class="row" type="locations" ng-repeat="location in event.locations">
           <label class="col-md-2">
-            <input type="checkbox">
-            Select Location
+            <input type="checkbox">Select Location
           </label>
           <div class="col-md-1">{{ location.name }}</div>
 	      	<div class="col-md-1">{{ location.rating }}</div>
@@ -24,7 +23,9 @@
 	      <!-- 
 	      <img src="url{{ user.picture }}">
 				-->
-	      <div class="col-md-1" ng-repeat="user in event.users">{{ user.name }}</div>
+	      <div class="col-md-1" ng-repeat="user in event.users">
+          {{ user.name }}
+        </div>
       </div>
       <div>{{ event.deadline | date:'MM/dd/yyyy @ h:mma' }}</div>
       <button ng-submit="logData(event)">Submit</button>
