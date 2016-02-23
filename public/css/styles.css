@@ -71,3 +71,7 @@ body {
   width:auto;
   vertical-align:middle;
 }
+
+.eventname {
+  font-size: 20px;
+}
