@@ -12,7 +12,7 @@ module.exports = {
   allEvents: function (req, res, next) {
   findAllEvents({})
     .then(function (events) {
-      res.json(links);
+      res.json(events);
     })
     .fail(function (error) {
       next(error);

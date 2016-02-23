@@ -10,15 +10,20 @@ angular.module('EventService', [])
 
   return {
     get : function() {
-        return $http.get('/api/events');
+      return $http.get('/api/events');
     },
 
     create : function(eventData) {
-        return $http.post('/api/events', eventData);
+      return $http.post('/api/events', eventData);
     },
 
     delete : function(id) {
-        return $http.delete('/api/events/' + id);
+      return $http.delete('/api/events/' + id);
+    },
+
+    update : function (event) {
+      console.log(event._id);
+      return $http.put('/api/events/' + event._id);
     },
 
     searchYelp: function(term, location){
