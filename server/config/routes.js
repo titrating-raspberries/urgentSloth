@@ -11,37 +11,6 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  app.get('/api/users', function(req, res) {
-    User.find(function(err, users) {
-      if (err){
-        res.send(err)
-      }
-      res.json(users);
-    });
-  });
-
-  app.post('/api/users', function(req, res) {
-    var user = req.body;
-    console.log('REQ BODDDDDDDDDDY: ', req.body);
-
-    User.find({fbId: user.fbId},function(err, users) {
-      if (err){
-        res.send(err)
-      }
-      if(users.length){
-        res.send(users[0])
-      } else {
-        var newUser = User({fbId: user.fbId, token: user.token, name: user.name, email: user.email, picture: user.picture, events: user.events}).save(function(err){
-          if (err) {
-            res.send(err);
-          } else {
-            res.send(newUser);
-          }
-        });
-      }
-    });
-  });
-
   app.get('/api/events', function(req, res) {
       // use mongoose to get all nerds in the database
       Event.find(function(err, events) {
@@ -67,7 +36,7 @@ module.exports = function(app) {
   // route to handle all facebook passport requests
 
   app.get('/login/facebook',
-    passport.authenticate('facebook'));
+    passport.authenticate('facebook', {scope: ['user_friends']}));
 
   app.get('/login/facebook/return', 
     passport.authenticate('facebook', { failureRedirect: '/' }),
