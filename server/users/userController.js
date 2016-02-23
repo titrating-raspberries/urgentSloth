@@ -35,6 +35,20 @@ module.exports = {
       });
   },
 
+  addEventToUsers: function (usersArray, eventId) {
+    getAllUsers({'fbId': {$in: usersArray}})
+      .then(function(users) {
+        users.forEach(function(user) {
+          user.events.push(eventId);
+          user.save(function(err) {
+            if (err) {
+              console.error(err);
+            } 
+          });
+        });
+      });
+  },
+
   createOrFindOne: function (profile) {
     console.log('AAAAAAHHHHHHHHHHH', profile);
 
