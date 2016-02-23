@@ -6,6 +6,7 @@ var methodOverride = require('method-override');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
 var mongoose       = require('mongoose');
+var auth           = require('./config/auth.js');
 
 
 //need to include this to add user to db
@@ -21,10 +22,12 @@ var userController = require('./users/userController');
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
+
+
 passport.use(new Strategy({
-    clientID: '1695145560770344',
-    clientSecret: '6da4819c4f7124defe1035c55c6682bf',
-    callbackURL: 'http://localhost:3000/login/facebook/return',
+    clientID: auth.facebookAuth.clientID,
+    clientSecret: auth.facebookAuth.clientSecret,
+    callbackURL: auth.facebookAuth.callbackURL,
     profileFields: ['id', 'displayName', 'picture','friends']
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -89,11 +92,11 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/../public')); 
 // routes ==================================================
-require('./config/routes')(app); // configure our routes
+require('./config/routes.js')(app); // configure our routes
 
 // start app ===============================================
 // startup our app at http://localhost:3000
-app.listen(port);               
+app.listen(port);   
 
 // shoutout to the user                     
 console.log('Magic happens on port ' + port);
