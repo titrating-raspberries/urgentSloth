@@ -5,7 +5,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.yelpResults = [];
   $scope.locations = {};
   $scope.dateTimes = {};
-  $scope.decideByTime = {};
+  $scope.decideByTime = [];
 
   $scope.lonelyMessage = "...There's nothing quite like sharing a meal with someone you love - yourself...";
   $scope.showLonelyMessage = true;
@@ -90,7 +90,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
       event.users.push($scope.attendees[key][fbId]);
     });
 
-    var event = Event.create(event);
+    Event.create(event);
     
   };
 });
