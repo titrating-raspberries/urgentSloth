@@ -36,8 +36,6 @@ module.exports = {
   },
 
   createOrFindOne: function (profile) {
-    console.log('AAAAAAHHHHHHHHHHH', profile);
-
     var fbId = profile.id;
     var name = profile.displayName;
     var picture = profile.photos[0].value;
