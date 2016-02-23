@@ -3,6 +3,7 @@ var User = require('./userModel.js');
     jwt = require('jwt-simple');
 
 // Promisify a few mongoose methods with the `q` promise library
+var getAllUsers = Q.nbind(User.findAll, User);
 var findUser = Q.nbind(User.findOne, User);
 var createUser = Q.nbind(User.create, User);
 
@@ -23,6 +24,17 @@ var addFriendsPicture = function(friendArr){
 }
 
 module.exports = {
+  getUsers: function () {
+    getAllUsers({})
+      .then(function (users) {
+        if (users) {
+          res.send(users);
+        } else {
+          console.log('THERE ARE NO USERS');
+        }
+      });
+  },
+
   createOrFindOne: function (profile) {
     console.log('AAAAAAHHHHHHHHHHH', profile);
 

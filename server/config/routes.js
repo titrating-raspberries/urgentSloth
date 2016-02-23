@@ -1,9 +1,8 @@
 // grab the nerd model we just created
-var User = require('../users/userModel.js');
-var Event = require('../events/eventModel.js');
+var UserController = require('../users/userController.js');
+var EventController = require('../events/eventController.js');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
-
 
 module.exports = function(app) {
 
@@ -11,18 +10,13 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  app.get('/api/events', function(req, res) {
-      // use mongoose to get all nerds in the database
-      Event.find(function(err, events) {
+  app.get('/api/users', UserController.getUsers);
 
-          // if there is an error retrieving, send the error. 
-                          // nothing after res.send(err) will execute
-          if (err)
-              res.send(err);
+  app.post('/api/users', UserController.createOrFindOne);
 
-          res.json(events); // return all nerds in JSON format
-      });
-  });
+  app.get('/api/events', EventController.allEvents);
+
+  app.post('/api/events', EventController.newEvent);
 
   // route to handle creating goes here (app.post)
   // route to handle delete goes here (app.delete)
