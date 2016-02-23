@@ -1,4 +1,4 @@
-angular.module('CreateCtrl', []).controller('CreateController', function($scope, User, Event) {
+angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, User, Event) {
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
@@ -15,7 +15,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   
   var getFriends = function(){
     //Replace with User.get() when real user database is ready.
-    User.getFake().then(function(friends){
+    User.get().then(function(friends){
       $scope.friends = friends;
     });
   };
@@ -25,11 +25,11 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.addFriend = function(friend){
     //Fix when real user database is ready
     $scope.showLonelyMessage = false;
-    $scope.attendees[friend.user.md5] = friend;
+    $scope.attendees[friend.fbId] = friend;
   };
 
   $scope.removeFriend = function(friend){
-    delete $scope.attendees[friend.user.md5];
+    delete $scope.attendees[friend.fbId];
     $scope.showLonelyMessage = Object.keys($scope.attendees).length === 0 ? true : false;
   };
 
@@ -86,9 +86,12 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     });
     //Add attendee fbId's from attendees object
     event.users = [];
-    Object.keys($scope.attendees).forEach(function(key){
-      event.users.push($scope.attendees[key][fbId]);
+    Object.keys($scope.attendees).forEach(function(fbId){
+      event.users.push(fbId);
     });
+
+    //Add myself
+    event.users.push($cookies.get('fbId'));
 
     Event.create(event);
     

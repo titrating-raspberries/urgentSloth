@@ -5,7 +5,7 @@
 <div class="row text-center">
   <label class="eventname" for="event">Event Name</label>
   <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
-<div>
+</div>
 
 </br>
 
@@ -21,9 +21,9 @@
 <div class="row scroll">
   <div style="width: {{friends.length * 165}}px">
     <div class="square text-center" ng-repeat="friend in friends | filter:friendName" ng-click="addFriend(friend)">
-      <img class="card-img-top" src='{{friend.user.picture.medium}}'>
+      <img class="card-img-top" src='{{friend.picture}}'>
       <div class="card-block">
-        <h4 class="card-title">{{friend.user.name.first}} {{friend.user.name.last}}</h4>
+        <h4 class="card-title">{{friend.name}}</h4>
       </div>
     </div>
   </div>  
@@ -35,9 +35,9 @@
 <div class="row text-center">
   <h3 ng-show="showLonelyMessage">{{lonelyMessage}}</h3>
   <div class="square text-center" ng-repeat="attendee in attendees" ng-click="removeFriend(attendee)">
-    <img class="card-img-top" src='{{attendee.user.picture.medium}}'>
+    <img class="card-img-top" src='{{attendee.picture}}'>
     <div class="card-block">
-      <h4 class="card-title">{{attendee.user.name.first}} {{attendee.user.name.last}}</h4>
+      <h4 class="card-title">{{attendee.name}}</h4>
     </div>
   </div>
 </div>
@@ -117,8 +117,8 @@
 <!-- List of picked dates -->
 <div class="list-group">
   <a href="#" class="list-group-item" ng-repeat="time in dateTimes">
-    <h4 class="list-group-item-heading">{{time.toDateString()}}</h4>
-    <p class="list-group-item-text">{{time.toTimeString()}}</p>
+    <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+    <!--<p class="list-group-item-text">{{time.toTimeString()}}</p>-->
   </a>
 </div>
 
@@ -140,8 +140,8 @@
 
 <div class="list-group">
   <a href="#" class="list-group-item" ng-repeat="time in decideByTime">
-    <h4 class="list-group-item-heading">{{time.toDateString()}}</h4>
-    <p class="list-group-item-text">{{time.toTimeString()}}</p>
+    <h4 class="list-group-item-heading">{{time | date:'MM/dd/yyyy @ h:mma'}}</h4>
+    <!--<p class="list-group-item-text">{{time.toTimeString()}}</p>-->
   </a>
 </div>
 
