@@ -2,6 +2,13 @@
   <h1>Create new event</h1>
 </div>
 
+<div class="row text-center">
+  <label class="eventname" for="event">Event Name</label>
+  <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
+<div>
+
+</br>
+
 <div class="well"><h2>Add friends</h2></div>
   <!-- Dynamic search form for friends -->
 <form>
@@ -54,7 +61,7 @@
 </br>
 <!-- Search results from Yelp API -->
 <div class="vertical collapse in" id="collapse">
-  <div class="row border" ng-repeat="restaurant in yelpResults" ng-click="addLocation(restaurant)">
+  <div class="row" ng-repeat="restaurant in yelpResults" ng-click="addLocation(restaurant)">
     <div class="col-xs-2">
       <img class="restImage" src="{{restaurant.image_url}}">
       <img class="restImage" src="{{restaurant.rating_img_url_large}}">
@@ -76,7 +83,7 @@
 
 <h3 class = "text-center" ng-show="showNoLocationsMessage">{{noLocationsMessage}}</h3>
 
-<div class="row border" ng-repeat="rest in locations" ng-click="removeLocation(rest)">
+<div class="row" ng-repeat="rest in locations" ng-click="removeLocation(rest)">
   <div class="col-xs-2">
     <img class="restImage" src="{{rest.image_url}}">
     <img class="restImage" src="{{rest.rating_img_url_large}}">
@@ -143,7 +150,9 @@
 <div class="well"><h3>Submit Event</h3></div>
 
 <div class="row text-center">
+<form role="form" ng-submit="submitEvent()">
   <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
 </div>
 
 </br>

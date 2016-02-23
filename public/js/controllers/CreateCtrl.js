@@ -64,7 +64,33 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.addDecideByTime = function(){
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
-    $scope.decideByTime[dateTime] = dateTime;
+    //Allow only one decideBy time
+    if(!$scope.decideByTime.length){
+      $scope.decideByTime.push(dateTime);
+    }
   };
 
+  $scope.submitEvent = function(){
+    var event = {};
+    event.name = $scope.eventName;
+    event.deadline = $scope.decideByTime[0];
+    //Add locations from locations object
+    event.locations = [];
+    Object.keys($scope.locations).forEach(function(key){
+      event.locations.push({location: $scope.locations[key], votes: 0});
+    });
+    //Add dates and times from dateTime object
+    event.dates = [];
+    Object.keys($scope.dateTimes).forEach(function(key){
+      event.dates.push({date:$scope.dateTimes[key], votes: 0});
+    });
+    //Add attendee fbId's from attendees object
+    event.users = [];
+    Object.keys($scope.attendees).forEach(function(key){
+      event.users.push($scope.attendees[key][fbId]);
+    });
+
+    var event = Event.create(event);
+    
+  };
 });
