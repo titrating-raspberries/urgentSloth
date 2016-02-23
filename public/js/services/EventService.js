@@ -22,7 +22,8 @@ angular.module('EventService', [])
     },
 
     update : function (event) {
-      return $http.put('/api/events/' + event.id);
+      console.log(event._id);
+      return $http.put('/api/events/' + event._id);
     },
 
     searchYelp: function(term, location){
