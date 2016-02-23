@@ -10,7 +10,12 @@ angular.module('EventService', [])
 
   return {
     get : function() {
-      return $http.get('/api/events');
+      return $http({
+        method: 'GET',
+        url: '/api/events/'
+      }).then(function(res){
+        return res.data;
+      });
     },
 
     create : function(eventData) {
