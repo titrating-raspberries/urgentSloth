@@ -2,16 +2,17 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
+  $scope.yelpResults = [];
+  $scope.locations = {};
+  $scope.dateTimes = {};
+  $scope.decideByTime = {};
 
   $scope.lonelyMessage = "...There's nothing quite like sharing a meal with someone you love - yourself...";
   $scope.showLonelyMessage = true;
-
   $scope.noLocationsMessage = '“When you make a choice, you change the future.” - Deepak Chopra';
   $scope.showNoLocationsMessage = true;
 
-  $scope.yelpResults = [];
-  $scope.locations = {};
-
+  
   var getFriends = function(){
     //Replace with User.get() when real user database is ready.
     User.getFake().then(function(friends){
@@ -54,5 +55,16 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     var uniqueKey = restaurant.location.coordinate.longitude + '-' + restaurant.location.coordinate.longitude;
     delete $scope.locations[uniqueKey];
     $scope.showNoLocationsMessage = Object.keys($scope.locations).length === 0 ? true : false;
-  }
+  };
+
+  $scope.addDateTimes = function(){
+    var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
+    $scope.dateTimes[dateTime] = dateTime;
+  };
+
+  $scope.addDecideByTime = function(){
+    var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
+    $scope.decideByTime[dateTime] = dateTime;
+  };
+
 });

@@ -95,5 +95,56 @@
 <!-- List of dates -->
 <div class="well"><h3>Date and Time options</h3></div>
 
+<form role="form" ng-submit="addDateTimes()">
+  <div class="form-group">
+    <label for="Date">Pick a date</label>
+    <input type="date" ng-model="date">
+    <label for="Time">Pick a time</label>
+    <input type="time" ng-model="time">
+  </div>
+  <input type="submit" value="Add" class="btn btn-primary"/>
+</form>
 
+</br>
+
+<!-- List of picked dates -->
+<div class="list-group">
+  <a href="#" class="list-group-item" ng-repeat="time in dateTimes">
+    <h4 class="list-group-item-heading">{{time.toDateString()}}</h4>
+    <p class="list-group-item-text">{{time.toTimeString()}}</p>
+  </a>
+</div>
+
+
+<!-- Decide by date -->
+<div class="well"><h3>Decide By Date</h3></div>
+
+<form role="form" ng-submit="addDecideByTime()">
+  <div class="form-group">
+    <label for="Date">Pick a date</label>
+    <input type="date" ng-model="decideDate">
+    <label for="Time">Pick a time</label>
+    <input type="time" ng-model="decideTime">
+  </div>
+  <input type="submit" value="Add" class="btn btn-primary"/>
+</form>
+
+</br>
+
+<div class="list-group">
+  <a href="#" class="list-group-item" ng-repeat="time in decideByTime">
+    <h4 class="list-group-item-heading">{{time.toDateString()}}</h4>
+    <p class="list-group-item-text">{{time.toTimeString()}}</p>
+  </a>
+</div>
+
+</br>
+<!-- Submit Event -->
+<div class="well"><h3>Submit Event</h3></div>
+
+<div class="row text-center">
+  <input type="submit" value="Submit" class="btn btn-primary"/>
+</div>
+
+</br>
 
