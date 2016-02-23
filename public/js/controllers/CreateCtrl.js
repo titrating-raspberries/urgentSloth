@@ -15,7 +15,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   
   var getFriends = function(){
     //Replace with User.get() when real user database is ready.
-    User.get().then(function(friends){
+    User.getFriends($cookies.get('fbId')).then(function(friends){
       $scope.friends = friends;
     });
   };

@@ -7,22 +7,6 @@ var getAllUsers = Q.nbind(User.find, User);
 var findUser = Q.nbind(User.findOne, User);
 var createUser = Q.nbind(User.create, User);
 
-//addFriendsPicture will grab a user's friends prof pic links to store in the db
-var addFriendsPicture = function(friendArr){
-  for(var i = 0; i < friendArr.length; i++){
-    var friend = friendArr[i];
-     findUser({fbId: friend.id})
-        .then(function (match) {
-          if(match !== null){
-            friend.picture = match.picture;
-          } else{
-            console.log('userController: Error retrieving friend', match);
-          }
-        });
-  }
-  return friendArr;
-};
-
 module.exports = {
   getUsers: function (req, res) {
     getAllUsers({})
@@ -35,6 +19,25 @@ module.exports = {
       });
   },
 
+  getUserFriends: function (req, res) {
+    var id = req.params.fbId.slice(1);
+    findUser({fbId: id})
+        .then(function (user) {
+          if(user !== null){
+            var friendArray = user.friends.map(function(friend) {
+              return friend.fbId;
+            });
+            getAllUsers({'fbId': {$in: friendArray}})
+              .then(function(friends) {
+                res.send(friends);
+              });
+          } else{
+            console.log('userController: Error retrieving friends');
+            res.send(404);
+          }
+        });
+  },
+  
   addEventToUsers: function (usersArray, eventId) {
     getAllUsers({'fbId': {$in: usersArray}})
       .then(function(users) {
@@ -53,7 +56,9 @@ module.exports = {
     var fbId = profile.id;
     var name = profile.displayName;
     var picture = profile.photos[0].value;
-    var friends = addFriendsPicture(profile._json.friends.data);
+    var friends = profile._json.friends.data.map(function(friend) {
+      return {fbId: friend.id}; 
+    });
 
       findUser({fbId: fbId})
         .then(function (match) {

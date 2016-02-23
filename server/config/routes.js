@@ -11,6 +11,8 @@ module.exports = function(app) {
   // authentication routes
 
   app.get('/api/users', UserController.getUsers);
+  
+  app.get('/api/users/:fbId', UserController.getUserFriends);
 
   app.post('/api/users', UserController.createOrFindOne);
 

@@ -10,13 +10,15 @@ angular.module('UserService', []).factory('User', ['$http', function($http) {
           })
       },
 
-      getFake: function(){
+      getFriends: function(fbId){
         return $http({
             method: 'GET',
-            url: 'https://randomuser.me/api/?results=20'
+            url: '/api/users/:' + fbId 
           }).then(function(res){
-            return res.data.results;
-          })
+            return res.data;
+          }).catch(function(err){
+            console.log(err);
+          });
       },
 
       // these will work when more API routes are defined on the Node side of things
