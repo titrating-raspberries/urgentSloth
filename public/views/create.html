@@ -20,7 +20,7 @@
 
 <div class="row scroll">
   <div style="width: {{friends.length * 165}}px">
-    <div class="square text-center" ng-repeat="friend in friends | filter:friendName" ng-click="addFriend(friend)">
+    <div class="square text-center" ng-repeat="friend in friends | filter:{name:friendName}" ng-click="addFriend(friend)">
       <img class="card-img-top" src='{{friend.picture}}'>
       <div class="card-block">
         <h4 class="card-title">{{friend.name}}</h4>
@@ -105,9 +105,9 @@
 <form role="form" ng-submit="addDateTimes()">
   <div class="form-group">
     <label for="Date">Pick a date</label>
-    <input type="date" ng-model="date">
+    <input type="date" id="Date" ng-model="date">
     <label for="Time">Pick a time</label>
-    <input type="time" ng-model="time">
+    <input type="time" id="Time" ng-model="time">
   </div>
   <input type="submit" value="Add" class="btn btn-primary"/>
 </form>
@@ -116,7 +116,7 @@
 
 <!-- List of picked dates -->
 <div class="list-group">
-  <a href="#" class="list-group-item" ng-repeat="time in dateTimes">
+  <a href="#" class="list-group-item" ng-repeat="time in dateTimes" ng-click="removeDateTime(time)">
     <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
     <!--<p class="list-group-item-text">{{time.toTimeString()}}</p>-->
   </a>
@@ -128,10 +128,10 @@
 
 <form role="form" ng-submit="addDecideByTime()">
   <div class="form-group">
-    <label for="Date">Pick a date</label>
-    <input type="date" ng-model="decideDate">
-    <label for="Time">Pick a time</label>
-    <input type="time" ng-model="decideTime">
+    <label for="DecideDate">Pick a date</label>
+    <input type="date" id="DecideDate" ng-model="decideDate">
+    <label for="DecideTime">Pick a time</label>
+    <input type="time" id="DecideTime" ng-model="decideTime">
   </div>
   <input type="submit" value="Add" class="btn btn-primary"/>
 </form>
@@ -139,8 +139,8 @@
 </br>
 
 <div class="list-group">
-  <a href="#" class="list-group-item" ng-repeat="time in decideByTime">
-    <h4 class="list-group-item-heading">{{time | date:'MM/dd/yyyy @ h:mma'}}</h4>
+  <a href="#" class="list-group-item" ng-repeat="time in decideByTime" ng-click="removeDecideBy()">
+    <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
     <!--<p class="list-group-item-text">{{time.toTimeString()}}</p>-->
   </a>
 </div>

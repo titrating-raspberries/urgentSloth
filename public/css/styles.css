@@ -72,6 +72,11 @@ body {
   vertical-align:middle;
 }
 
+#nomargins {
+  margin: 8px 15px 0 0;
+}
+
+
 .eventname {
   font-size: 20px;
 }
