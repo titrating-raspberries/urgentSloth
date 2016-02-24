@@ -31,13 +31,13 @@
 <div class="container">
 
     <!-- HEADER -->
-    <nav class="navbar navbar-inverse">
+    <nav  ng-show="loggedIn" class="navbar navbar-inverse">
 
         <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
         <ul class="nav navbar-nav">
             <li><a href="/events">Events</a></li>
             <li><a href="/create">Create</a></li>
-            <li ng-show="loggedIn"><a href="/logout">Logout</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
         <div class="pull-right navbar-text" id='nomargins'>
           <img src='{{userPic}}'>
