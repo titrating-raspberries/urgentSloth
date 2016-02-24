@@ -1,5 +1,48 @@
 body {
     overflow: scroll;
+    /*background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');*/
+}
+
+img {
+    -webkit-filter: contrast(10%); /* Chrome, Safari, Opera */
+    filter: contrast(10%);
+}
+
+.container{
+  padding-top: 60px;
+  padding-left: 60px;
+  background-repeat: no-repeat;
+  background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
+
+}
+
+.title {
+  color: #fff ;
+  font-family: 'Lato', sans-serif;
+  font-size: 100px;
+  font-weight: 800;
+  text-shadow: 6px 6px  #202020 ;
+  padding-bottom: 60px;
+}
+
+.landingText {
+  color: #fff ;
+    font-family: 'Lato', sans-serif;
+
+  background-color: #202020   ;
+  font-size: 50px;
+  font-weight: 800;
+
+}
+
+.login {
+  color: #fff ;
+  background-color:#202020  ;
+  font-size: 30px;
+  font-weight: 800;
+  float: right;
+  /*text-shadow: 1px 1px  #808080;;*/
+
 }
 
 .navbar {
