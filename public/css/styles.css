@@ -1,19 +1,11 @@
 body {
     overflow: scroll;
-    /*background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');*/
-}
+  }
 
-img {
-    -webkit-filter: contrast(10%); /* Chrome, Safari, Opera */
-    filter: contrast(10%);
-}
-
-.container{
+#photo{
   padding-top: 60px;
-  padding-left: 60px;
-  background-repeat: no-repeat;
+  padding-bottom: 200px;
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
-
 }
 
 .title {
@@ -27,8 +19,7 @@ img {
 
 .landingText {
   color: #fff ;
-    font-family: 'Lato', sans-serif;
-
+  font-family: 'Lato', sans-serif;
   background-color: #202020   ;
   font-size: 50px;
   font-weight: 800;
@@ -41,8 +32,6 @@ img {
   font-size: 30px;
   font-weight: 800;
   float: right;
-  /*text-shadow: 1px 1px  #808080;;*/
-
 }
 
 .navbar {

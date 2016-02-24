@@ -4,6 +4,10 @@ angular.module('IndexCtrl', ['ngCookies'])
   $scope.loggedIn = ($cookies.get('name')!== undefined);
   $scope.userPic = $cookies.get('picture');
   $scope.userName = $cookies.get('name');
+  
+  if($scope.loggedIn === false) {
+    $scope.photo = 'photo';
+  }
 
 
 });
