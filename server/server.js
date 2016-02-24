@@ -28,7 +28,7 @@ passport.use(new Strategy({
     clientID: auth.facebookAuth.clientID,
     clientSecret: auth.facebookAuth.clientSecret,
     callbackURL: auth.facebookAuth.callbackURL,
-    profileFields: ['id', 'displayName', 'picture.type(large)','friends']
+    profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends']
   },
   function(accessToken, refreshToken, profile, cb) {
     //call a function which checks if user is in db
