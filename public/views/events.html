@@ -1,39 +1,56 @@
 <div class="well">
   <h2>Your Events</h2>
 </div>
-<input type='text' ng-model="search" placeholder='Search Events' /> 
+
 <div class="events">
-  <div style="outline: 5px solid orange" ng-repeat="event in data.events | filter:search">
-      <div class="name">{{ event.name }}</div>
-      <label>Location Options</label>
-      <div class="row" type="locations" ng-repeat="location in event.locations">
-          <label class="col-md-2">
-            <input type="checkbox">Select Location
-          </label>
-          <div class="col-md-1">{{ location.location.name }}</div>
-	      	<div class="col-md-1">{{ location.location.rating }}</div>
-	      	<div class="col-md-1">{{ location.location.url }}</div>
+  <div style="outline: 1px dashed orange" ng-repeat="event in data.events">
+    <div class="well"><h3>{{ event.name }}</h3></div>
+
+    <div class="well well-sm">Location Options</div>
+    
+    <div class="row highlight" ng-repeat="rest in event.locations">
+      
+      <div class="col-xs-1">
+        <button type="button" class="voteButton" aria-label="Left Align">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        </button>
+      </div>  
+
+      <div class="col-xs-2">
+        <img class="restImage" src="{{rest.location.image_url}}">
+        <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
+        <p>{{rest.location.review_count}} reviews</p>
       </div>
-      <label>Date Options</label>
-      <div class="row" type="dates" ng-repeat="date in event.dates track by $index">
-        <label class="col-md-2">
-          <input type="checkbox">Select Time
-        </label>
-        <div class="col-md-2">{{ date.date | date:'MM/dd/yyyy @ h:mma' }}</div>
+
+      <div class="col-xs-9">
+        <h3 class="card-title">{{rest.location.name}}</h3>
+        <p class="card-text">{{rest.location.categories[0][0]}}</p>
+        <a target="_blank" href="{{rest.location.url}}" style="display:block;">Visit website</a>
+        <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
       </div>
-      <label>Friends Going</label>
-      <div class="row">
-	      <!-- 
-	      <img src="url{{ user.picture }}">
-				-->
-        <div class="col-md-1" ng-repeat="user in event.users">
-          {{ user.name }}
+    </div>
+
+    <div class="well well-sm">Date Options</div>
+    <div class="row" type="dates" ng-repeat="date in event.dates track by $index">
+      <input type="checkbox"> {{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}
+    </div>
+
+    <div class="well well-sm">Friends Going</div>  
+    <div class="row">
+      <div class="square text-center" ng-repeat="attendee in event.users">
+        <img class="card-img-top" src='{{attendee.picture}}'>
+        <div class="card-block">
+          <h4 class="card-title">{{attendee.name}}</h4>
         </div>
       </div>
-      <div>
-        <label>Deadline: </label>
-        {{ event.deadline | date:'MM/dd/yyyy @ h:mma' }}
-      </div>
-      <button ng-click="logData(event)">Submit</button>
+    </div>  
+
+    <div class="well well-sm">Decide By</div>
+      <h4>{{ event.deadline | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+    <input type="submit" value="Vote" class="btn btn-primary" ng-click="logData(event)"/>
+    <br>
+    <br>
   </div>
+
 </div>
+
