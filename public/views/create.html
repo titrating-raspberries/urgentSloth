@@ -64,7 +64,7 @@
   <div class="row" ng-repeat="restaurant in yelpResults" ng-click="addLocation(restaurant)">
     <div class="col-xs-2">
       <img class="restImage" src="{{restaurant.image_url}}">
-      <img class="restImage" src="{{restaurant.rating_img_url_large}}">
+      <img class="restImage review" src="{{restaurant.rating_img_url_large}}">
       <p>{{restaurant.review_count}} reviews</p>
     </div>
 
@@ -84,9 +84,10 @@
 <h3 class = "text-center" ng-show="showNoLocationsMessage">{{noLocationsMessage}}</h3>
 
 <div class="row" ng-repeat="rest in locations" ng-click="removeLocation(rest)">
+
   <div class="col-xs-2">
     <img class="restImage" src="{{rest.image_url}}">
-    <img class="restImage" src="{{rest.rating_img_url_large}}">
+    <img class="restImage review" src="{{rest.rating_img_url_large}}">
     <p>{{rest.review_count}} reviews</p>
   </div>
 

@@ -54,9 +54,15 @@ body {
 
 .restImage {
   display: block;
-  margin-bottom: 5px;
+  margin-top: 7px;
+  margin-bottom: 2px;
   width: 100px; /* same as review start image */
   height: auto;
+}
+
+.restImage.review {
+  margin-top: 0px;
+  margin-bottom: 2px;
 }
 
 .vertical {
@@ -76,7 +82,34 @@ body {
   margin: 8px 15px 0 0;
 }
 
-
 .eventname {
+  font-size: 20px;
+}
+
+.highlight:hover {
+  background-color: #efefef;
+}
+
+p {
+  margin: 0 0 2px; 
+}
+
+.voteButton {
+  background-color: #fff;
+  border: none;
+  outline: none; /*Removes aura from the pressed button*/
+  margin-top: 47px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display:none; /* Button only visible on hover */
+}
+
+.highlight:hover button {
+  display:block;
+}
+
+.glyphicon {
   font-size: 20px;
 }

@@ -7,6 +7,7 @@ angular.module('EventsCtrl', [])
 	Event.getUserEvents($cookies.get('fbId'))
 		.then(function(events) {
 			$scope.data.events = events;
+      console.log(events);
 		})
 		.catch(function (error) {
       console.error(error);
