@@ -16,7 +16,11 @@ module.exports = function(app) {
 
   app.post('/api/users', UserController.createOrFindOne);
 
+  
+
   app.get('/api/events', EventController.allEvents);
+
+  app.get('/api/events/:fbId', EventController.userEvents);
 
   app.post('/api/events', EventController.newEvent);
 

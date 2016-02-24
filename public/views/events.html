@@ -10,16 +10,16 @@
           <label class="col-md-2">
             <input type="checkbox">Select Location
           </label>
-          <div class="col-md-1">{{ location.name }}</div>
-	      	<div class="col-md-1">{{ location.rating }}</div>
-	      	<div class="col-md-1">{{ location.url }}</div>
+          <div class="col-md-1">{{ location.location.name }}</div>
+	      	<div class="col-md-1">{{ location.location.rating }}</div>
+	      	<div class="col-md-1">{{ location.location.url }}</div>
       </div>
       <label>Date Options</label>
       <div class="row" type="dates" ng-repeat="date in event.dates track by $index">
         <label class="col-md-2">
           <input type="checkbox">Select Time
         </label>
-        <div class="col-md-2">{{ date | date:'MM/dd/yyyy @ h:mma' }}</div>
+        <div class="col-md-2">{{ date.date | date:'MM/dd/yyyy @ h:mma' }}</div>
       </div>
       <label>Friends Going</label>
       <div class="row">

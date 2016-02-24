@@ -1,10 +1,10 @@
 angular.module('EventsCtrl', [])
 
-.controller('EventsController', function($scope, Event) {
+.controller('EventsController', function($scope, $cookies, Event) {
 
   $scope.data = {};
 
-	Event.get()
+	Event.getUserEvents($cookies.get('fbId'))
 		.then(function(events) {
 			$scope.data.events = events;
 		})
@@ -13,7 +13,7 @@ angular.module('EventsCtrl', [])
     });
 
   $scope.logData = function (event) {
-    return Event.update(event);
+    //return Event.update(event);
   };
 });
 

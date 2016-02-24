@@ -1,4 +1,4 @@
-angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, User, Event) {
+angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, User, Event) {
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
@@ -62,12 +62,20 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     $scope.dateTimes[dateTime] = dateTime;
   };
 
+  $scope.removeDateTime = function(dateTime){
+    delete $scope.dateTimes[dateTime];
+  };
+
   $scope.addDecideByTime = function(){
-    var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
     //Allow only one decideBy time
     if(!$scope.decideByTime.length){
+      var dateTime = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
       $scope.decideByTime.push(dateTime);
     }
+  };
+
+  $scope.removeDecideBy = function(){
+    $scope.decideByTime.pop();
   };
 
   $scope.submitEvent = function(){
@@ -90,10 +98,11 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
       event.users.push(fbId);
     });
 
-    //Add myself
+    //Add logged in user
     event.users.push($cookies.get('fbId'));
 
-    Event.create(event);
-    
+    Event.create(event).then(function(){
+      $location.path("/events");
+    })
   };
 });

@@ -18,6 +18,15 @@ angular.module('EventService', [])
       });
     },
 
+    getUserEvents: function(fbId) {
+      return $http({
+        method: 'GET',
+        url: '/api/events/:' + fbId
+      }).then(function(res){
+         return res.data;
+      });
+    },
+
     create : function(eventData) {
       return $http.post('/api/events', eventData);
     },
