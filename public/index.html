@@ -38,12 +38,24 @@
         <ul class="nav navbar-nav">
             <li><a href="/events">Events</a></li>
             <li><a href="/create">Create</a></li>
-            <li><a href="/logout">Logout</a></li>
         </ul>
-        <div class="pull-right navbar-text" id='nomargins'>
+       <!--  <div class="pull-right navbar-text" id='nomargins'>
           <img src='{{userPic}}'>
           {{userName}}
-        </div>
+        </div> -->
+
+       <div class="dropdown pull-right navbar-text" id='nomargins'>
+         <button class="btn dropdown-toggle navbar" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+           <img src='{{userPic}}'>
+           {{userName}}
+           <span class="caret"></span>
+         </button>
+         <ul class="dropdown-menu">
+           <li class="pull-right"><a href="/logout">Logout</a></li>
+         </ul>
+       </div>
+
+       
     </nav>
 
     <div ng-view></div>
