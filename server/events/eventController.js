@@ -116,10 +116,10 @@ module.exports = {
   },
 
   submitEventVotes: function(req, res, next){
-    var eventId = req.eventId;
-    var userFbId = req.userFbId;
-    var locationVotesArr = req.locations;
-    var datesVotesArr = req.dates;
+    var eventId = req.body.eventId;
+    var userFbId = req.body.userFbId;
+    var locationVotesArr = req.body.locationVotesArr;
+    var dateVotesArr = req.body.dateVotesArr;
 
     findEvent({_id: eventId})
     .then(function(event){
@@ -132,7 +132,7 @@ module.exports = {
           }
         });
         //add votes to selected dates
-        datesVotesArr.forEach(function(vote, index){
+        dateVotesArr.forEach(function(vote, index){
           if(vote){
             event['dates'][index].votes += 1;
           }
