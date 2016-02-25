@@ -54,6 +54,15 @@ body {
   background-color: #fff !important;
 }
 
+.dropdown-menu {
+  background-color: #f4511e !important;
+}
+
+.dropdown-menu li a {
+  color: #fff !important;
+  background-color: #f4511e !important;
+}
+
 .navbar-default .navbar-toggle {
   border-color: transparent;
   color: #fff !important;
