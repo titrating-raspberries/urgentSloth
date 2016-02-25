@@ -98,7 +98,7 @@ body {
 }
 
 .vertical {
-  max-height: 474px; /* Fit no more than 3 restaurant search results*/
+  max-height: 302px; /* Fit no more than 2 restaurant search results*/
   overflow-y: scroll;
 }
 
@@ -138,10 +138,37 @@ p {
   display:none; /* Button only visible on hover */
 }
 
+.voteButton.nomargin {
+  margin-top: 2px;
+}
+
+.voteButton.clicked {
+  background-color: #A6D785;
+  display:block;
+}
+
+/* Shows the vote button on hover over location selection */
 .highlight:hover button {
   display:block;
 }
 
+/* Vote icon inside vote button */
 .glyphicon {
   font-size: 20px;
+}
+
+.h3nomargin {
+  padding: 7px 0 7px 0;
+  margin-top: 5px;
+}
+
+.decideBy {
+  font-size: 50px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.bottom {
+  background-color: #FF9900;
 }
