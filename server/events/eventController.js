@@ -75,14 +75,18 @@ module.exports = {
           var userEvents = user.events;
           findAllEvents({'_id': {$in: userEvents}})
             .then(function(events){
-              events.forEach(function(event){
+              var counter = 0;
+              events.forEach(function(event,index){
                 var userIds = event.users;
                 getAllUsers({'fbId': {$in: userIds}})
                   .then(function(users){
                     event.users = users;
+                    counter++;
+                    if(counter === events.length){
+                      res.json(events);
+                    }
                   });
               });
-              res.json(events);
             })
         }
       })
