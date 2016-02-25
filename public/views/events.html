@@ -11,7 +11,7 @@
     <div class="row highlight" ng-repeat="rest in event.locations">
       
       <div class="col-xs-1">
-        <button type="button" class="voteButton" toggle-class="clicked">
+        <button type="button" class="voteButton" ng-click='locationVote($index, event)' toggle-class="clicked">
           <span class="glyphicon glyphicon-ok"></span>
         </button>
       </div>  
@@ -33,7 +33,7 @@
     <div class="well well-sm">Date Options</div>
     <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
       <div class="col-xs-1">
-        <button type="button" class="voteButton nomargin" toggle-class="clicked">
+        <button type="button" class="voteButton nomargin" ng-click='dateVote($index, event)' toggle-class="clicked">
           <span class="glyphicon glyphicon-ok"></span>
         </button>
       </div> 
@@ -65,7 +65,7 @@
     </div> 
     <br>
     <div class="bottom">
-      <input type="submit" value="Vote" class="btn btn-primary" ng-click="logData(event)"/>
+      <input type="submit" value="Vote" class="btn btn-primary" ng-click="submit(event)"/>
     </div>
     <br>
   </div>
