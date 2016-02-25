@@ -3,7 +3,6 @@ var UserController = require('../users/userController.js');
 var EventController = require('../events/eventController.js');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
-var eventController= require('../events/eventController.js');
 
 
 module.exports = function(app) {
@@ -44,7 +43,7 @@ module.exports = function(app) {
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
       //check users events and decide any passed deadline
-      eventController.decideUsersEvents(req.user.id);
+      EventController.decideUsersEvents(req.user.id);
 
       //send cookie so client side has user info
       res.cookie('name',req.user.displayName);
