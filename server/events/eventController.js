@@ -12,6 +12,25 @@ var findAllEvents = Q.nbind(Event.find, Event);
 var findUser = Q.nbind(User.findOne, User);
 var getAllUsers = Q.nbind(User.find, User);
 
+var pickWinner = function(choices, category){
+  var mostVotes = 0;
+  var winner = choices[0][category]; 
+  for(var i = 0; i < choices.length; i ++){
+    if(choices[i].votes > mostVotes){
+      mostVotes = choices[i].votes;
+      winner = choices[i][category];
+    }
+  }
+  return winner;
+}
+
+var makeEventDecision = function(event){
+  var date = pickWinner(event['dates'], 'date');
+  var location = pickWinner(event['locations'],'location');
+  console.log('loc, date', location, date);
+  event.decision = {date: date, location: location};
+}
+
 module.exports = {
 
   allEvents: function (req, res, next) {
@@ -26,7 +45,13 @@ module.exports = {
 
   newEvent: function (req, res, next) {
     var event = req.body;
-    
+
+    //store dates as js objects
+    event.deadline = new Date(event.deadline);
+    event.dates.forEach(function(choice){
+      choice.date = new Date(choice.date);
+    });
+
     createEvent(event)
       .then(function (createdEvent) {
         if (createdEvent) {
@@ -64,5 +89,32 @@ module.exports = {
       .fail(function (error) {
         next(error);
       });
-  }  
+  }, 
+
+  decideUsersEvents: function(fbId){
+    findUser({fbId: fbId})
+      .then(function (user) {
+        if (!user) {
+          console.log('user not found');
+        } else {
+          var userEvents = user.events;
+          findAllEvents({'_id': {$in: userEvents}})
+            .then(function(events){
+              events.forEach(function(event){
+                //if the event's deadline has passed
+                //and it doesn't have a decision, decide it
+                if(event.deadline < new Date() && event.decision === undefined){
+                  makeEventDecision(event);
+                }
+              });
+            })
+        }
+      })
+      .fail(function (error) {
+        next(error);
+      });
+
+  }
+
+
 };
