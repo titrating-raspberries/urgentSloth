@@ -11,19 +11,22 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
+  //user routes 
   app.get('/api/users', UserController.getUsers);
   
   app.get('/api/users/:fbId', UserController.getUserFriends);
 
   app.post('/api/users', UserController.createOrFindOne);
 
-  
-
+  //event routes
   app.get('/api/events', EventController.allEvents);
 
   app.get('/api/events/:fbId', EventController.userEvents);
 
   app.post('/api/events', EventController.newEvent);
+
+  app.post('/api/events/submit', EventController.submitEventVotes);
+
 
   // route to handle creating goes here (app.post)
   // route to handle delete goes here (app.delete)
