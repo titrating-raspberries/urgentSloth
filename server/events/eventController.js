@@ -101,8 +101,7 @@ module.exports = {
           findAllEvents({'_id': {$in: userEvents}})
             .then(function(events){
               events.forEach(function(event){
-                //if the event's deadline has passed
-                //and it doesn't have a decision, decide it
+                //if the event's deadline has passed and it doesn't have a decision, decide it
                 if(event.deadline < new Date() && event.decision === undefined){
                   makeEventDecision(event);
                 }
@@ -114,6 +113,46 @@ module.exports = {
         next(error);
       });
 
+  },
+
+  submitEventVotes: function(req, res, next){
+    var eventId = req.eventId;
+    var userFbId = req.userFbId;
+    var locationVotesArr = req.locations;
+    var datesVotesArr = req.dates;
+
+    findEvent({_id: eventId})
+    .then(function(event){
+      if(event){
+
+        //add votes to selected locations
+        locationVotesArr.forEach(function(vote, index){
+          if(vote){
+            event['locations'][index].votes += 1;
+          }
+        });
+        //add votes to selected dates
+        datesVotesArr.forEach(function(vote, index){
+          if(vote){
+            event['dates'][index].votes += 1;
+          }
+        });
+
+        //add user to list of user's who've submitted
+        event.usersWhoSubmitted.push(userFbId);
+
+        //save event
+        event.save(function (err, savedEvent) {
+          if (err) {
+            next(err);
+          } else {
+            res.send(savedEvent);
+          }
+        });
+      } else{ //if event isn't found send a 404
+        res.send(404);
+      }
+    });
   }
 
 
