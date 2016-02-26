@@ -18,19 +18,19 @@ angular.module('EventsCtrl', [])
   getUserEvents();
 
   $scope.locationVote = function (index, event) {
-    if($scope.locationVotesArr === undefined){
+    if($scope.events[index].locationVotesArr === undefined){
       var length = event.locations.length;
-      $scope.locationVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
+      $scope.events[index].locationVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
     }
-    $scope.locationVotesArr[index] = !$scope.locationVotesArr[index];
+    $scope.events[index].locationVotesArr[index] = !$scope.events[index].locationVotesArr[index];
   };
 
   $scope.dateVote = function (index, event) {
-    if($scope.dateVotesArr === undefined){
+    if($scope.events[index].dateVotesArr === undefined){
       var length = event.dates.length;
-      $scope.dateVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
+      $scope.events[index].dateVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
     }
-    $scope.dateVotesArr[index] = !$scope.dateVotesArr[index];
+    $scope.events[index].dateVotesArr[index] = !$scope.events[index].dateVotesArr[index];
 
   };
 
@@ -38,8 +38,8 @@ angular.module('EventsCtrl', [])
     var voteData = {
         userFbId: $cookies.get('fbId'), 
         eventId: event._id,
-        dateVotesArr: $scope.dateVotesArr, 
-        locationVotesArr: $scope.locationVotesArr 
+        dateVotesArr: $scope.events[index].dateVotesArr, 
+        locationVotesArr: $scope.events[index].locationVotesArr 
       };
     //NOTE: as of right now, user must vote yes for at least one location and one time option
     Event.submitEventVotes(voteData)
@@ -49,6 +49,17 @@ angular.module('EventsCtrl', [])
     alert('You submitted event votes!');
   };
 
+  $scope.getEventStatus = function (event) {
+    var userFbId =$cookies.get('fbId');
+    console.log('event DEC',event.decision);
+    if(event.decision !== undefined){
+      return 'decided';
+    } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
+     return 'submitted';
+    }  else{
+      return 'notSubmitted';
+    }
+  };
 
 
 

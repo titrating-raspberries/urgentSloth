@@ -27,8 +27,7 @@ var pickWinner = function(choices, category){
 var makeEventDecision = function(event){
   var date = pickWinner(event['dates'], 'date');
   var location = pickWinner(event['locations'],'location');
-  console.log('loc, date', location, date);
-  event.decision = {date: date, location: location};
+  return {date: date, location: location};
 }
 
 module.exports = {
@@ -107,7 +106,13 @@ module.exports = {
               events.forEach(function(event){
                 //if the event's deadline has passed and it doesn't have a decision, decide it
                 if(event.deadline < new Date() && event.decision === undefined){
-                  makeEventDecision(event);
+                  var decision = makeEventDecision(event);
+                  Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
+                      if (err) {
+                        console.error(err);
+                      } 
+                    });
+
                 }
               });
             })
