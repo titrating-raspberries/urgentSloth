@@ -60,8 +60,9 @@ angular.module('EventsCtrl', [])
 
   $scope.getEventStatus = function (event) {
     var userFbId =$cookies.get('fbId');
-
+    console.log('name', event.name, event.decision);
     if(event.decision !== undefined){
+      console.log('here??', event.name)
       return 'decided';
     } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
      return 'submitted';

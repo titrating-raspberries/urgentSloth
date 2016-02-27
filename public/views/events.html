@@ -1,11 +1,11 @@
 <div class="wholeEventsView">
-  <div class="jumbotron text-center">
+<!--   <div class="jumbotron text-center">
     <h1>Your events</h1>
-  </div>
+  </div> -->
   <div class='event' ng-repeat="event in data.events" >
 <div class='eventTitle'>{{ event.name }}</div></h2>
     <!-- notSubmitted events -->
-    <div class = 'notSubmitted'>
+    <div class = 'notSubmitted' ng-show="getEventStatus(event) === 'notSubmitted'">
       <div class="well well-sm">
         <div class='eventSubtitle'>Select the restaurants you like:  </div>
         <div class="row highlight" ng-repeat="rest in event.locations">
@@ -67,6 +67,68 @@
             </div>
           </div> 
       </div>
+    <!-- submitted events -->
+    <div class = 'submitted' ng-show="getEventStatus(event) === 'submitted'">
+      <div class="well well-sm">
+        <div class='eventSubtitle'>Restaurant options: </div>
+        <div class="row highlight" ng-repeat="rest in event.locations">
+          <div class="col-xs-2">
+            <img class="restImage" src="{{rest.location.image_url}}">
+            <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
+            <p>{{rest.location.review_count}} reviews</p>
+          </div>
+          <div class="col-xs-8">
+            <h4 class="card-title">{{rest.location.name}}</h4>
+            <p class="card-text">{{rest.location.categories[0][0]}}</p>
+            <a target="_blank" href="{{rest.location.url}}" style="display:block;">Visit website</a>
+            <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+          </div>
+          <div class="col-xs-2">
+            <div class='voteText'> Votes: {{rest.votes}} </div>
+          </div> 
+        </div>
+      </div>
+      <div class="well well-sm">
+        <div class='eventSubtitle'>Date options: </div>
+        <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
+          <div class="col-xs-10">
+            <h4 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+          </div>
+        <div class="col-xs-2">
+          <div class='voteText'> Votes: {{date.votes}} </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+    <!-- decided events -->
+    <div class = 'decided' ng-show="getEventStatus(event) === 'decided'">
+      <div class="well well-sm">
+
+        <div class='eventSubtitle'>You're going to:</div>
+        <div class="row">
+          <div class="col-xs-2">
+            <img class="restImage" src="{{event.decision.location.image_url}}">
+            <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
+            <p>{{event.decision.location.review_count}} reviews</p>
+          </div>
+
+          <div class="col-xs-6">
+            <h4 class="card-title">{{event.decision.location.name}}</h4>
+            <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
+            <a target="_blank" href="{{event.decision.location.url}}" style="display:block;">Visit website</a>
+            <a target="_blank" href="http://maps.google.com/?q=?{{event.decision.location.location.display_address[0]}} {{event.decision.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+          </div>
+
+          <div class="col-xs-4">
+            <div class='voteText'>  {{event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}  </div>
+          </div> 
+
+        </div>
+
+
+      </div>
+   </div>
+
 
   </div>  
 </div>
