@@ -130,6 +130,8 @@ module.exports = {
     var locationVotesArr = req.body.locationVotesArr;
     var dateVotesArr = req.body.dateVotesArr;
 
+    console.log('here', locationVotesArr,dateVotesArr );
+
     findEvent({_id: eventId})
     .then(function(event){
       if(event){
@@ -151,7 +153,7 @@ module.exports = {
         event.usersWhoSubmitted.push(userFbId);
 
         //save event
-        event.save(function (err, savedEvent) {
+        Event.update({_id: event._id}, {dates: event.dates, locations: event.locations, usersWhoSubmitted: event.usersWhoSubmitted} ,function (err, savedEvent) {
           if (err) {
             next(err);
           } else {

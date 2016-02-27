@@ -8,6 +8,10 @@ body {
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
 }
 
+.event{
+  border: 5px solid #000;
+}
+
 .title {
   color: #fff ;
   font-family: 'Lato', sans-serif;
@@ -179,5 +183,5 @@ p {
 }
 
 .bottom {
-  background-color: #FF9900;
+  background-color: #000;
 }
