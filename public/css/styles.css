@@ -1,5 +1,6 @@
 body {
     overflow: scroll;
+    font-family: 'Lato', sans-serif;
   }
 
 #photo{
@@ -12,20 +13,34 @@ body {
 
 .eventTitle{
   text-transform: uppercase;
+  font-weight: bold;
+  font-size: 35px;
+  margin: 15px;
 }
-.decided{
-  background-color: #AEC797
-;
+
+.eventSubtitle{
+  font-size: 20px;
+  font-weight: bold;
+  color: #2d7b52;
+  margin:15px;
 }
-.notSubmitted{
-  background-color: #98AFC7;
-}
-.submitted{
-  background-color: gray;
+
+.pageHeader{
+  font-size: 17px;
+  text-align: center;
+  text-shadow: 1px 1px  #202020 ;
+  color:#fff;
+  background-color: #202020;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .event{
-  border: 5px solid #000;
+  border-radius: 10px;
+  padding: 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #eee;
 }
 
 .title {
@@ -56,31 +71,36 @@ body {
 
 .navbar {
     margin-bottom: 0;
-    background-color: #f4511e;
+    background-color: #2d7b52;
     z-index: 9999;
     border: 0;
-    font-size: 14px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
     line-height: 1.42857143 !important;
     letter-spacing: 4px;
     border-radius: 0;
+    color: #fff;
 }
 
-.navbar li a, .navbar .navbar-brand, .navbar-text{
+.navOption, #dropdownMenu1{
     color: #fff !important;
+    margin-top: 30px;
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-  color: #f4511e !important;
+  color: #2d7b52 !important;
   background-color: #fff !important;
 }
 
 .dropdown-menu {
-  background-color: #f4511e !important;
+  background-color: #2d7b52 !important;
 }
 
 .dropdown-menu li a {
   color: #fff !important;
-  background-color: #f4511e !important;
+  background-color: #2d7b52 !important;
+  margin-top: 0px !important;
+
 }
 
 .navbar-default .navbar-toggle {
@@ -139,6 +159,14 @@ body {
   vertical-align:middle;
 }
 
+#logo{
+  text-shadow: 3px 3px  #202020 ;
+  color: #fff;
+  font-size: 35px;
+  margin: 15px;
+  text-transform: uppercase;
+}
+
 #nomargins {
   margin: 0;
 }
@@ -164,7 +192,7 @@ p {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  display:none; /* Button only visible on hover */
+  /*display:none;  Button only visible on hover */
 }
 
 .voteButton.nomargin {
@@ -174,6 +202,11 @@ p {
 .voteButton.clicked {
   background-color: #A6D785;
   display:block;
+}
+
+#submitButton{
+  float: right;
+  margin-top: 17px;
 }
 
 /* Shows the vote button on hover over location selection */
@@ -208,4 +241,8 @@ p {
   padding: 7px 0 7px 0;
   margin-top: 5px;
   white-space: pre-line; 
+}
+
+a:active {
+    color: gray;
 }
