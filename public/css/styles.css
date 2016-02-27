@@ -7,6 +7,23 @@ body {
   padding-bottom: 200px;
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
 }
+.eventTitle{
+  text-transform: uppercase;
+}
+.decided{
+  background-color: #AEC797
+;
+}
+.notSubmitted{
+  background-color: #98AFC7;
+}
+.submitted{
+  background-color: gray;
+}
+
+.event{
+  border: 5px solid #000;
+}
 
 .title {
   color: #fff ;
@@ -179,5 +196,5 @@ p {
 }
 
 .bottom {
-  background-color: #FF9900;
+  background-color: #000;
 }
