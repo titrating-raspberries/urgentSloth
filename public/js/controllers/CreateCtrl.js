@@ -105,9 +105,9 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     };
     
     //Check if Decide By date is specified
-    if($scope.decideByTime[0]){
-      eventValidation.deadlineMessage = 'Let your friends know when you expect their response by specifying the Decide By date'
-    };
+    // if($scope.decideByTime[0]){
+    //   eventValidation.deadlineMessage = 'Let your friends know when you expect their response by specifying the Decide By date'
+    // };
 
     //Check if any of the above failed
     var errArr = Object.keys(eventValidation);
