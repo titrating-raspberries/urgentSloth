@@ -6,7 +6,10 @@ body {
   padding-top: 60px;
   padding-bottom: 200px;
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
+  background-repeat: no-repeat;
+  background-size:cover;
 }
+
 .eventTitle{
   text-transform: uppercase;
 }
