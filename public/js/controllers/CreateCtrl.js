@@ -12,6 +12,10 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.noLocationsMessage = '“When you make a choice, you change the future.” - Deepak Chopra';
   $scope.showNoLocationsMessage = true;
 
+  $scope.showValidationMessage = false;  
+
+  //Toggle for Hide/Show Yelp results button
+  $scope.toggle = true;
   
   var getFriends = function(){
     //Replace with User.get() when real user database is ready.
@@ -79,6 +83,44 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   };
 
   $scope.submitEvent = function(){
+    var eventValidation = {};
+    //Check if event name is present
+    if(!$scope.eventName){
+      eventValidation.eventMessage = 'Please enter an event name'
+    };
+
+    //Check if attendees have been added to the event
+    if(!Object.keys($scope.attendees).length){
+      eventValidation.attendeeMessage = 'Invite some friends to the party'
+    };
+
+    //Check if location options are specified
+    if(!Object.keys($scope.locations).length){
+      eventValidation.locationsMessage = 'Give your friends options by specifying possible locations'
+    };
+
+    //Check if dates and times options are specified
+    if(!Object.keys($scope.dateTimes).length){
+      eventValidation.timeMessage = 'Tell your friends when to show by adding some Date and Time options'
+    };
+    
+    //Check if Decide By date is specified
+    if($scope.decideByTime[0]){
+      eventValidation.deadlineMessage = 'Let your friends know when you expect their response by specifying the Decide By date'
+    };
+
+    //Check if any of the above failed
+    var errArr = Object.keys(eventValidation);
+    if(errArr.length){
+      $scope.validationMessage = errArr.map(function(key){
+        return eventValidation[key] 
+      }).join('\n');
+
+      $scope.showValidationMessage = true;
+      return;
+    };
+
+    $scope.showValidationMessage = false;
     var event = {};
     event.name = $scope.eventName;
     event.deadline = $scope.decideByTime[0];

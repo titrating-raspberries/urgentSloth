@@ -55,7 +55,7 @@
     <input type="text" class="form-control" id="locationSearch" ng-model="location">
   </div>
   <input type="submit" value="Search" class="btn btn-primary"/>
-  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapse">Hide results</button>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapse" ng-show="yelpResults.length" ng-click="toggle = !toggle">{{toggle && 'Hide' || 'Show'}} results</button>
 </form>
 
 </br>
@@ -119,7 +119,6 @@
 <div class="list-group">
   <a href="#" class="list-group-item" ng-repeat="time in dateTimes" ng-click="removeDateTime(time)">
     <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
-    <!--<p class="list-group-item-text">{{time.toTimeString()}}</p>-->
   </a>
 </div>
 
@@ -142,7 +141,6 @@
 <div class="list-group">
   <a href="#" class="list-group-item" ng-repeat="time in decideByTime" ng-click="removeDecideBy()">
     <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
-    <!--<p class="list-group-item-text">{{time.toTimeString()}}</p>-->
   </a>
 </div>
 
@@ -151,9 +149,10 @@
 <div class="well"><h3>Submit Event</h3></div>
 
 <div class="row text-center">
-<form role="form" ng-submit="submitEvent()">
-  <input type="submit" value="Submit" class="btn btn-primary"/>
-</form>
+  <form role="form" ng-submit="submitEvent()">
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+  </form>
+  <h3 class="alert alert-danger validationMessage" ng-show="showValidationMessage">{{validationMessage}}</h3>
 </div>
 
 </br>
