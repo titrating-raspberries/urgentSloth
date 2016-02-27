@@ -87,7 +87,7 @@ body {
 
 .card-img-top {
   border-radius: 50%;
-  width: 150px;
+  width: 100px;
 }
 
 .row {
@@ -101,7 +101,7 @@ body {
 }
 
 .scroll {
-  height:180px;
+  height:128px;
   overflow-x: auto;
 }
 
@@ -197,4 +197,12 @@ p {
 
 .bottom {
   background-color: #000;
+}
+
+.validationMessage {
+  text-align: left;
+  font-size: 14px;
+  padding: 7px 0 7px 0;
+  margin-top: 5px;
+  white-space: pre-line; 
 }
