@@ -1,6 +1,6 @@
 angular.module('EventsCtrl', [])
 
-.controller('EventsController', function($scope, $cookies, Event) {
+.controller('EventsController', function($scope, $cookies, Event,$route) {
 
   $scope.data = {};
 
@@ -53,7 +53,7 @@ angular.module('EventsCtrl', [])
     .then(function(submittedEvent){
       getUserEvents();
     });
-    alert('You submitted event votes!');
+     $route.reload();
   };
 
   $scope.getEventStatus = function (event) {

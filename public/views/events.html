@@ -4,7 +4,7 @@
 
 <div class="events">
   <div class='event' ng-repeat="event in data.events" >
-    <div class="well"><h3>{{ event.name }}</h3></div>
+    <div class="well"><h3 class='eventTitle'>{{ event.name }}</h3></div>
     <!-- notSubmitted -->
       <div class='notSubmitted' ng-show="getEventStatus(event) === 'notSubmitted'">
       <div class="well well-sm">Location Options</div>
@@ -70,44 +70,46 @@
   </div>
   <!-- submitted -->
     <div class='submitted' ng-show="getEventStatus(event) === 'submitted'">
-      <h2>Current votes:</h2>
       <div class="well well-sm">Date Options</div>
       <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
         <div class="col-xs-11">
-          <h3 class="h3nomargin"> date:{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }} votes:{{date.votes}}</h3>
+          <h3 class="h3nomargin"> Date: {{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }} ____ Votes: {{date.votes}}</h3>
         </div>
       </div>
       <div class="well well-sm">Location Options</div>
       <div class="row highlight" type="locations" ng-repeat="location in event.locations track by $index">
         <div class="col-xs-11">
-          <h3 class="h3nomargin">location: {{location.location.name}} votes: {{location.votes}}</h3>
+          <h3 class="h3nomargin">Location: {{location.location.name}} ____ Votes: {{location.votes}}</h3>
         </div>
       </div>
     </div>
   <!-- decided -->
     <div class='decided' ng-show="getEventStatus(event) === 'decided'">
-      <div class="col-xs-2">
-      Decided event yayyyy!!
-      Date:
-      {{ event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}
-      Location:
-        
-                 <img class="restImage" src="{{event.decision.location.image_url}}">
-                 <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
-                 <p>{{event.decision.location.review_count}} reviews</p>
-               </div>
+      <div class='row'>
+      <div class="well well-sm">Date:</div>
 
-               <div class="col-xs-9">
-                 <h3 class="card-title">{{event.decision.location.name}}</h3>
-                 <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
-                 <a target="_blank" href="{{event.decision.location.url}}" style="display:block;">Visit website</a>
-                 <a target="_blank" href="http://maps.google.com/?q=?{{event.decision.location.location.display_address[0]}} {{event.decision.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
-               </div>
+     <h3> {{ event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h3>
+     <div class="well well-sm">Location:</div>
+
+            <div class="col-xs-2">
+               <img class="restImage" src="{{event.decision.location.image_url}}">
+               <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
+               <p>{{event.decision.location.review_count}} reviews</p>
              </div>
 
-      </div>
+             <div class="col-xs-9">
+               <h3 class="card-title">{{event.decision.location.name}}</h3>
+               <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
+               <a target="_blank" href="{{event.decision.location.url}}" style="display:block;">Visit website</a>
+               <a target="_blank" href="http://maps.google.com/?q=?{{event.decision.location.location.display_address[0]}} {{event.decision.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+             </div>
+           </div>
+         </div>
     </div>
-
+      <br>
+  <br>
+  <br>
+  <br>
 
 </div>
 
