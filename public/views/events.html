@@ -1,28 +1,23 @@
 <div class="well">
   <h2>Your Events</h2>
 </div>
-
 <div class="events">
   <div class='event' ng-repeat="event in data.events" >
     <div class="well"><h3 class='eventTitle'>{{ event.name }}</h3></div>
     <!-- notSubmitted -->
       <div class='notSubmitted' ng-show="getEventStatus(event) === 'notSubmitted'">
       <div class="well well-sm">Location Options</div>
-      
       <div class="row highlight" ng-repeat="rest in event.locations">
-        
         <div class="col-xs-1">
           <button type="button" class="voteButton" ng-click='locationVote($index,$parent.$index, event)' toggle-class="clicked">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         </div>  
-
         <div class="col-xs-2">
           <img class="restImage" src="{{rest.location.image_url}}">
           <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
           <p>{{rest.location.review_count}} reviews</p>
         </div>
-
         <div class="col-xs-9">
           <h3 class="card-title">{{rest.location.name}}</h3>
           <p class="card-text">{{rest.location.categories[0][0]}}</p>
@@ -30,7 +25,6 @@
           <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
         </div>
       </div>
-
       <div class="well well-sm">Date Options</div>
       <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
         <!-- <div class="col-xs-1"> -->
@@ -43,7 +37,6 @@
           <h3 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h3>
         </div>
       </div>
-
       <div class="well well-sm">Friends Going</div>  
       <div class="row">
         <div class="square text-center" ng-repeat="attendee in event.users">
@@ -53,13 +46,11 @@
           </div>
         </div>
       </div>  
-
       <div class="well well-sm">Decide By</div>
       <div class="row highlight">
         <div class="col-xs-1">
           <div class="decideBy glyphicon glyphicon-time"></div>
         </div> 
-
         <div class="col-xs-11">
           <h3 class="h3nomargin">{{ event.deadline | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h3>
         </div>
@@ -87,16 +78,13 @@
     <div class='decided' ng-show="getEventStatus(event) === 'decided'">
       <div class='row'>
       <div class="well well-sm">Date:</div>
-
      <h3> {{ event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h3>
      <div class="well well-sm">Location:</div>
-
             <div class="col-xs-2">
                <img class="restImage" src="{{event.decision.location.image_url}}">
                <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
                <p>{{event.decision.location.review_count}} reviews</p>
              </div>
-
              <div class="col-xs-9">
                <h3 class="card-title">{{event.decision.location.name}}</h3>
                <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
@@ -110,6 +98,4 @@
   <br>
   <br>
   <br>
-
 </div>
-

@@ -1,6 +1,6 @@
 angular.module('EventsCtrl', [])
 
-.controller('EventsController', function($scope, $cookies, Event,$route) {
+.controller('EventsController', function($scope, $cookies, Event, $route) {
 
   $scope.data = {};
 
@@ -24,21 +24,14 @@ angular.module('EventsCtrl', [])
       $scope.data.events[eventIndex].locationVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
     }
     $scope.data.events[eventIndex].locationVotesArr[index] = !$scope.data.events[eventIndex].locationVotesArr[index];
-
   };
 
   $scope.dateVote = function (index, eventIndex, event) {
-    // var eventIndex = 
-
     if($scope.data.events[eventIndex].dateVotesArr === undefined){
       var length = event.dates.length;
       $scope.data.events[eventIndex].dateVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
     }
     $scope.data.events[eventIndex].dateVotesArr[index] = !$scope.data.events[eventIndex].dateVotesArr[index];
-
-
-  
-
   };
 
   $scope.submit = function (event, index) {
@@ -50,10 +43,7 @@ angular.module('EventsCtrl', [])
       };
     //NOTE: as of right now, user must vote yes for at least one location and one time option
     Event.submitEventVotes(voteData)
-    .then(function(submittedEvent){
-      getUserEvents();
-    });
-     $route.reload();
+    $route.reload();
   };
 
   $scope.getEventStatus = function (event) {
@@ -63,7 +53,7 @@ angular.module('EventsCtrl', [])
       return 'decided';
     } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
      return 'submitted';
-    }  else{
+    } else{
       return 'notSubmitted';
     }
   };

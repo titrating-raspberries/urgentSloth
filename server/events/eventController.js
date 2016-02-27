@@ -112,7 +112,6 @@ module.exports = {
                         console.error(err);
                       } 
                     });
-
                 }
               });
             })
@@ -121,7 +120,6 @@ module.exports = {
       .fail(function (error) {
         next(error);
       });
-
   },
 
   submitEventVotes: function(req, res, next){
@@ -129,8 +127,6 @@ module.exports = {
     var userFbId = req.body.userFbId;
     var locationVotesArr = req.body.locationVotesArr;
     var dateVotesArr = req.body.dateVotesArr;
-
-    console.log('here', locationVotesArr,dateVotesArr );
 
     findEvent({_id: eventId})
     .then(function(event){
