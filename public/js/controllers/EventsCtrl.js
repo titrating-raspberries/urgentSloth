@@ -7,7 +7,17 @@ angular.module('EventsCtrl', [])
   var getUserEvents = function(){
       Event.getUserEvents($cookies.get('fbId'))
         .then(function(events) {
-          $scope.data.events = events;
+          //Events page only includes future events
+          $scope.data.events = events.filter(function(event){
+            return !event.decision || new Date(event.decision.date) > Date.now();
+          });
+          //Past events page only includes past events
+          $scope.data.pastEvents = events.filter(function(event){
+            return event.decision && new Date(event.decision.date) < Date.now();
+          });
+          $scope.data.pastEvents.sort(function(a,b){
+            return new Date(b.decision.date) - new Date(a.decision.date);
+          });
         })
         .catch(function (error) {
           console.error(error);

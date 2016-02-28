@@ -20,6 +20,12 @@
         controller: 'EventsController'
     })
 
+    // past events page 
+    .when('/pastEvents', {
+        templateUrl: 'views/pastEvents.html',
+        controller: 'EventsController'
+    })
+
     //go back to logout page
     .when('/logout', {
         templateUrl: 'views/login.html',
