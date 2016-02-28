@@ -86,7 +86,7 @@
 
     <h3 class = "text-center" ng-show="showNoLocationsMessage">{{noLocationsMessage}}</h3>
 
-    <div class="row highlight" ng-repeat="rest in locations" ng-click="removeLocation(rest)">
+    <div class="row highlight" ng-repeat="rest in locations">
 
       <div class="col-xs-2">
         <img class="restImage" src="{{rest.image_url}}">
