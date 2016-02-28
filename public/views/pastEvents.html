@@ -1,0 +1,38 @@
+<div class="wholeEventsView">
+  <div class='event' ng-repeat="event in data.pastEvents" >
+    <div class='eventTitle'>{{ event.name }}</div></h2>
+      <!-- decided events -->
+      <div class = 'decided'>
+        <div class="well well-sm">
+          <div class='eventSubtitle'>You went to:</div>
+          <div class="row">
+            <div class="col-xs-2">
+              <img class="restImage" src="{{event.decision.location.image_url}}">
+              <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
+              <p>{{event.decision.location.review_count}} reviews</p>
+            </div>
+            <div class="col-xs-6">
+              <h4 class="card-title">{{event.decision.location.name}}</h4>
+              <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
+              <a target="_blank" href="{{event.decision.location.url}}" style="display:block;">Visit website</a>
+              <a target="_blank" href="http://maps.google.com/?q=?{{event.decision.location.location.display_address[0]}} {{event.decision.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+            </div>
+            <div class="col-xs-4">
+              <div class='voteText'>  {{event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}  </div>
+            </div> 
+          </div>
+
+          <!-- Attendees -->
+          <div class="row">
+            <div class='eventSubtitle'>Attendees: </div>
+            <div class="square text-center" ng-repeat="attendee in event.users">
+              <img class="card-img-top" src='{{attendee.picture}}'>
+              <div class="card-block">
+                <h4 class="card-title">{{attendee.name}}</h4>
+              </div>
+            </div>
+          </div> 
+        </div>
+    </div>
+  </div>  
+</div>
