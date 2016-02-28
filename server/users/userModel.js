@@ -1,7 +1,5 @@
 var Q = require('q');
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
-var saltLength = 10;
 
 var userSchema = new mongoose.Schema({
   fbId : String,
