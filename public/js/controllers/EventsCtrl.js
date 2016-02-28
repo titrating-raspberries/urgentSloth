@@ -14,11 +14,22 @@ angular.module('EventsCtrl', [])
         });
   }
 
+  $scope.getEventText = function (event) {
+    var userFbId =$cookies.get('fbId');
+
+    if(event.decision !== undefined){
+      return '   This event has been decided!';
+    } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
+     return '        Current votes';
+    } else{
+      return '   Submit your vote for this event!';
+    }
+  };
+
   //we want to get the user's events when the controller first loads
   getUserEvents();
 
   $scope.locationVote = function (index, eventIndex, event) {
-    console.log($scope.data.events[eventIndex].locations);
     if($scope.data.events[eventIndex].locationVotesArr === undefined){
       var length = event.locations.length;
       $scope.data.events[eventIndex].locationVotesArr = Array.apply(null, Array(length)).map(Boolean.prototype.valueOf, false);
@@ -48,7 +59,6 @@ angular.module('EventsCtrl', [])
 
   $scope.getEventStatus = function (event) {
     var userFbId =$cookies.get('fbId');
-
     if(event.decision !== undefined){
       return 'decided';
     } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
