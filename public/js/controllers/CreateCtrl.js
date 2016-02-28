@@ -48,18 +48,21 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     }
   };
 
-  $scope.addLocation = function(restaurant){
+  $scope.addRemoveLocation = function(restaurant){
     //Create a unique for the locations object
     var uniqueKey = restaurant.location.coordinate.latitude + '-' + restaurant.location.coordinate.longitude;
-    $scope.locations[uniqueKey] = restaurant; 
-    $scope.showNoLocationsMessage = false;
-  };
-
-  $scope.removeLocation = function(restaurant){
-    var uniqueKey = restaurant.location.coordinate.longitude + '-' + restaurant.location.coordinate.longitude;
-    delete $scope.locations[uniqueKey];
+    if($scope.locations[uniqueKey]){
+      delete $scope.locations[uniqueKey];  
+    } else {
+      $scope.locations[uniqueKey] = restaurant;
+    }  
     $scope.showNoLocationsMessage = Object.keys($scope.locations).length === 0 ? true : false;
   };
+
+  // $scope.removeLocation = function(restaurant){
+  //   var uniqueKey = restaurant.location.coordinate.longitude + '-' + restaurant.location.coordinate.longitude;
+  //   delete $scope.locations[uniqueKey];
+  // };
 
   $scope.addDateTimes = function(){
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
@@ -147,4 +150,4 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
       $location.path("/events");
     })
   };
-});
+})
