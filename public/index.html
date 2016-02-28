@@ -28,45 +28,39 @@
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body ng-app="sampleApp" ng-controller = 'IndexController'>
-<div id='{{photo}}'class="container">
+<body ng-app="sampleApp" ng-controller = 'IndexController' ng-class='bodyClass'>
+    <div id='{{photo}}'class="container">
+        <!-- HEADER -->
+        <nav  ng-show="loggedIn" class="navbar navbar-inverse">
 
-    <!-- HEADER -->
-    <nav  ng-show="loggedIn" class="navbar navbar-inverse">
+            <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+            <ul class="nav navbar-nav">
+                <li><a  href="/events" id='logo'>
+                         <img src="https://cdn4.iconfinder.com/data/icons/maps-and-navigation-solid-icons-vol-3/72/131-512.png" style="width:55px;height:48px;">
+                         When & Where
+                </a></li>
+                <li><a class='navOption' href="/events">Events</a></li>
+                <li><a  class='navOption' href="/create">Create</a></li>
+            </ul>
 
-        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-        <ul class="nav navbar-nav">
-            <li><a  href="/events" id='logo'>
-                     <img src="https://cdn4.iconfinder.com/data/icons/maps-and-navigation-solid-icons-vol-3/72/131-512.png" style="width:55px;height:48px;">
-                     When & Where
-            </a></li>
-            <li><a class='navOption' href="/events">Events</a></li>
-            <li><a  class='navOption' href="/create">Create</a></li>
-        </ul>
+           <div class="dropdown pull-right navbar-text" id='nomargins'>
+             <button class="btn dropdown-toggle navbar" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+               <img src='{{userPic}}'>
+               {{userName}}
+               <span class="caret"></span>
+             </button>
+             <ul class="dropdown-menu">
+               <li class="pull-right">
+                 <a href="/logout">
+                   <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                   Logout
+                 </a>
+               </li>
+             </ul>
+           </div>
+        </nav>
 
-       <div class="dropdown pull-right navbar-text" id='nomargins'>
-         <button class="btn dropdown-toggle navbar" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-           <img src='{{userPic}}'>
-           {{userName}}
-           <span class="caret"></span>
-         </button>
-         <ul class="dropdown-menu">
-           <li class="pull-right">
-             <a href="/logout">
-               <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-               Logout
-             </a>
-           </li>
-         </ul>
-       </div>
-
-       
-    </nav>
-
-    <div ng-view></div>
-
-    <!-- USER PROFILE CONTENT -->
-
-</div>
+        <div ng-view></div>
+    </div>
 </body>
 </html>

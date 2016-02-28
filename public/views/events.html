@@ -1,134 +1,123 @@
 <div class="wholeEventsView">
-<!--   <div class="jumbotron text-center">
-    <h1>Your events</h1>
-  </div> -->
   <div class='event' ng-repeat="event in data.events" >
-<div class='eventTitle'>{{ event.name }}</div></h2>
-    <!-- notSubmitted events -->
-    <div class = 'notSubmitted' ng-show="getEventStatus(event) === 'notSubmitted'">
-      <div class="well well-sm">
-        <div class='eventSubtitle'>Select the restaurants you like:  </div>
-        <div class="row highlight" ng-repeat="rest in event.locations">
-          <div class="col-xs-1">
-            <button type="button" class="voteButton" ng-click='locationVote($index,$parent.$index, event)' toggle-class="clicked">
-              <span class="glyphicon glyphicon-ok"></span>
-            </button>
-          </div> 
-          <div class="col-xs-2">
-            <img class="restImage" src="{{rest.location.image_url}}">
-            <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
-            <p>{{rest.location.review_count}} reviews</p>
-          </div>
-          <div class="col-xs-9">
-            <h4 class="card-title">{{rest.location.name}}</h4>
-            <p class="card-text">{{rest.location.categories[0][0]}}</p>
-            <a target="_blank" href="{{rest.location.url}}" style="display:block;">Visit website</a>
-            <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
-          </div>
-        </div>
-        </div> 
+    <div class='eventTitle'>{{ event.name }}</div></h2>
+      <!-- notSubmitted events -->
+      <div class = 'notSubmitted' ng-show="getEventStatus(event) === 'notSubmitted'">
         <div class="well well-sm">
-          <div class='eventSubtitle'>Select the dates you're free: </div>
-          <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
+          <div class='eventSubtitle'>Select the restaurants you like:  </div>
+          <div class="row highlight" ng-repeat="rest in event.locations">
             <div class="col-xs-1">
-              <button type="button" class="voteButton nomargin" ng-click='dateVote($index, $parent.$index, event)' toggle-class="clicked">
+              <button type="button" class="voteButton" ng-click='locationVote($index,$parent.$index, event)' toggle-class="clicked">
                 <span class="glyphicon glyphicon-ok"></span>
               </button>
             </div> 
-
-            <div class="col-xs-11">
-              <h4 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+            <div class="col-xs-2">
+              <img class="restImage" src="{{rest.location.image_url}}">
+              <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
+              <p>{{rest.location.review_count}} reviews</p>
             </div>
+            <div class="col-xs-9">
+              <h4 class="card-title">{{rest.location.name}}</h4>
+              <p class="card-text">{{rest.location.categories[0][0]}}</p>
+              <a target="_blank" href="{{rest.location.url}}" style="display:block;">Visit website</a>
+              <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+            </div>
+          </div>
+          </div> 
+          <div class="well well-sm">
+            <div class='eventSubtitle'>Select the dates you're free: </div>
+            <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
+              <div class="col-xs-1">
+                <button type="button" class="voteButton nomargin" ng-click='dateVote($index, $parent.$index, event)' toggle-class="clicked">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </button>
+              </div> 
+
+              <div class="col-xs-11">
+                <h4 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="well well-sm">
+            <div class='eventSubtitle'>Attendees: </div>
+            <div class="row">
+              <div class="square text-center" ng-repeat="attendee in event.users">
+                <img class="card-img-top" src='{{attendee.picture}}'>
+                <div class="card-block">
+                  <h4 class="card-title">{{attendee.name}}</h4>
+                </div>
+              </div>
+            </div> 
+          </div>
+            <div class="well well-sm"> 
+              <div class='eventSubtitle'>Submit your votes by: </div>
+              <div class="row highlight">
+                <div class="col-xs-1">
+                  <div class="decideBy glyphicon glyphicon-time"></div>
+                </div> 
+                <div class="col-xs-11">
+                  <h4 class="h3nomargin">{{ event.deadline | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+                </div>
+              </div>
+              <div>
+                <input id="submitButton" type="submit" value="Submit Your Votes" class="btn btn-primary" ng-click="submit(event, $index)"/>
+              </div>
+            </div> 
+        </div>
+      <!-- submitted events -->
+      <div class = 'submitted' ng-show="getEventStatus(event) === 'submitted'">
+        <div class="well well-sm">
+          <div class='eventSubtitle'>Restaurant options: </div>
+          <div class="row highlight" ng-repeat="rest in event.locations">
+            <div class="col-xs-2">
+              <img class="restImage" src="{{rest.location.image_url}}">
+              <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
+              <p>{{rest.location.review_count}} reviews</p>
+            </div>
+            <div class="col-xs-8">
+              <h4 class="card-title">{{rest.location.name}}</h4>
+              <p class="card-text">{{rest.location.categories[0][0]}}</p>
+              <a target="_blank" href="{{rest.location.url}}" style="display:block;">Visit website</a>
+              <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+            </div>
+            <div class="col-xs-2">
+              <div class='voteText'> Votes: {{rest.votes}} </div>
+            </div> 
           </div>
         </div>
         <div class="well well-sm">
-          <div class='eventSubtitle'>Attendees: </div>
-          <div class="row">
-            <div class="square text-center" ng-repeat="attendee in event.users">
-              <img class="card-img-top" src='{{attendee.picture}}'>
-              <div class="card-block">
-                <h4 class="card-title">{{attendee.name}}</h4>
-              </div>
+          <div class='eventSubtitle'>Date options: </div>
+          <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
+            <div class="col-xs-10">
+              <h4 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
             </div>
+          <div class="col-xs-2">
+            <div class='voteText'> Votes: {{date.votes}} </div>
           </div> 
         </div>
-          <div class="well well-sm"> 
-            <div class='eventSubtitle'>Submit your votes by: </div>
-            <div class="row highlight">
-              <div class="col-xs-1">
-                <div class="decideBy glyphicon glyphicon-time"></div>
-              </div> 
-              <div class="col-xs-11">
-                <h4 class="h3nomargin">{{ event.deadline | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
-              </div>
-            </div>
-            <div>
-              <input id="submitButton" type="submit" value="Submit Your Votes" class="btn btn-primary" ng-click="submit(event, $index)"/>
-            </div>
-          </div> 
-      </div>
-    <!-- submitted events -->
-    <div class = 'submitted' ng-show="getEventStatus(event) === 'submitted'">
-      <div class="well well-sm">
-        <div class='eventSubtitle'>Restaurant options: </div>
-        <div class="row highlight" ng-repeat="rest in event.locations">
-          <div class="col-xs-2">
-            <img class="restImage" src="{{rest.location.image_url}}">
-            <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
-            <p>{{rest.location.review_count}} reviews</p>
-          </div>
-          <div class="col-xs-8">
-            <h4 class="card-title">{{rest.location.name}}</h4>
-            <p class="card-text">{{rest.location.categories[0][0]}}</p>
-            <a target="_blank" href="{{rest.location.url}}" style="display:block;">Visit website</a>
-            <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.location.display_address[0]}} {{rest.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
-          </div>
-          <div class="col-xs-2">
-            <div class='voteText'> Votes: {{rest.votes}} </div>
-          </div> 
-        </div>
-      </div>
-      <div class="well well-sm">
-        <div class='eventSubtitle'>Date options: </div>
-        <div class="row highlight" type="dates" ng-repeat="date in event.dates track by $index">
-          <div class="col-xs-10">
-            <h4 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
-          </div>
-        <div class="col-xs-2">
-          <div class='voteText'> Votes: {{date.votes}} </div>
-        </div> 
       </div>
     </div>
-  </div>
-    <!-- decided events -->
-    <div class = 'decided' ng-show="getEventStatus(event) === 'decided'">
-      <div class="well well-sm">
-
-        <div class='eventSubtitle'>You're going to:</div>
-        <div class="row">
-          <div class="col-xs-2">
-            <img class="restImage" src="{{event.decision.location.image_url}}">
-            <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
-            <p>{{event.decision.location.review_count}} reviews</p>
+      <!-- decided events -->
+      <div class = 'decided' ng-show="getEventStatus(event) === 'decided'">
+        <div class="well well-sm">
+          <div class='eventSubtitle'>You're going to:</div>
+          <div class="row">
+            <div class="col-xs-2">
+              <img class="restImage" src="{{event.decision.location.image_url}}">
+              <img class="restImage review" src="{{event.decision.location.rating_img_url_large}}">
+              <p>{{event.decision.location.review_count}} reviews</p>
+            </div>
+            <div class="col-xs-6">
+              <h4 class="card-title">{{event.decision.location.name}}</h4>
+              <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
+              <a target="_blank" href="{{event.decision.location.url}}" style="display:block;">Visit website</a>
+              <a target="_blank" href="http://maps.google.com/?q=?{{event.decision.location.location.display_address[0]}} {{event.decision.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
+            </div>
+            <div class="col-xs-4">
+              <div class='voteText'>  {{event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}  </div>
+            </div> 
           </div>
-
-          <div class="col-xs-6">
-            <h4 class="card-title">{{event.decision.location.name}}</h4>
-            <p class="card-text">{{event.decision.location.categories[0][0]}}</p>
-            <a target="_blank" href="{{event.decision.location.url}}" style="display:block;">Visit website</a>
-            <a target="_blank" href="http://maps.google.com/?q=?{{event.decision.location.location.display_address[0]}} {{event.decision.location.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
-          </div>
-
-          <div class="col-xs-4">
-            <div class='voteText'>  {{event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}  </div>
-          </div> 
-
         </div>
-
-
-      </div>
-   </div>
-
-
+    </div>
   </div>  
 </div>

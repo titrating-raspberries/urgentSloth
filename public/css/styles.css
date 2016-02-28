@@ -3,13 +3,29 @@ body {
     font-family: 'Lato', sans-serif;
   }
 
+.standardBodyClass {
+  background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
+}
+
+.createView{
+  background-color: #fff;
+  padding: 15px;
+}
+
 #photo{
   padding-top: 60px;
-  padding-bottom: 200px;
+  padding-bottom: 300px;
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
   background-repeat: no-repeat;
   background-size:cover;
+  border: 20px solid black;
 }
+
+.background: {
+  background-color: #2d7b52;
+  background-size:cover;
+}
+
 
 .eventTitle{
   text-transform: uppercase;
@@ -250,6 +266,6 @@ p {
   font-style: underline;
   color: #2d7b52;
   float: right;
-  padding-right: 20px;
+  padding-right: right;
 
 }
