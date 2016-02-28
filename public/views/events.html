@@ -1,8 +1,8 @@
 <div class="wholeEventsView">
   <div class='event' ng-repeat="event in data.events" >
-    <div class='eventTitle'>{{ event.name }}</div></h2>
+    <div class='eventTitle'>{{ event.name }}   <span class="badge">{{getEventStatus(event)}}</span></div></h2>
       <!-- notSubmitted events -->
-      <div class = 'notSubmitted' ng-show="getEventStatus(event) === 'notSubmitted'">
+      <div class = 'notSubmitted' ng-show="getEventStatus(event) === 'Needs your vote'">
         <div class="well well-sm">
           <div class='eventSubtitle'>Select the restaurants you like:  </div>
           <div class="row highlight" ng-repeat="rest in event.locations">
@@ -65,7 +65,7 @@
             </div> 
         </div>
       <!-- submitted events -->
-      <div class = 'submitted' ng-show="getEventStatus(event) === 'submitted'">
+      <div class = 'submitted' ng-show="getEventStatus(event) === 'Submitted'">
         <div class="well well-sm">
           <div class='eventSubtitle'>Restaurant options: </div>
           <div class="row highlight" ng-repeat="rest in event.locations">
@@ -98,7 +98,7 @@
       </div>
     </div>
       <!-- decided events -->
-      <div class = 'decided' ng-show="getEventStatus(event) === 'decided'">
+      <div class = 'decided' ng-show="getEventStatus(event) === 'Decided'">
         <div class="well well-sm">
           <div class='eventSubtitle'>You're going to:</div>
           <div class="row">
