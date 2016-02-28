@@ -1,7 +1,6 @@
-var Event = require('./EventModel.js');
+var Event = require('./eventModel.js');
     User = require('../users/userModel.js');
     Q = require('q');
-    util = require('../config/utils.js');
     userController = require('../users/userController');
 
 // Promisify a few mongoose methods with the `q` promise library
