@@ -7,11 +7,6 @@ body {
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
 }
 
-.createView{
-  background-color: #fff;
-  padding: 15px;
-}
-
 #photo{
   padding-top: 60px;
   padding-bottom: 300px;
@@ -261,5 +256,16 @@ p {
   color: #2d7b52;
   float: right;
   padding-right: right;
+}
 
+#dateAdder{
+  margin-left: 10px;
+}
+
+#subwell{
+  margin-top: 15px;
+}
+
+#searchRestButton{
+  margin: 10px;
 }
