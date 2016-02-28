@@ -2,7 +2,6 @@ angular.module('sampleApp', [
 	'ngRoute',
   'ngCookies',
 	'appRoutes',
-	'UserCtrl',
 	'CreateCtrl',
   'LogoutCtrl',
   'IndexCtrl',
