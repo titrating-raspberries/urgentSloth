@@ -14,18 +14,6 @@ angular.module('EventsCtrl', [])
         });
   }
 
-  $scope.getEventText = function (event) {
-    var userFbId =$cookies.get('fbId');
-
-    if(event.decision !== undefined){
-      return '   This event has been decided!';
-    } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
-     return '        Current votes';
-    } else{
-      return '   Submit your vote for this event!';
-    }
-  };
-
   //we want to get the user's events when the controller first loads
   getUserEvents();
 
@@ -60,11 +48,11 @@ angular.module('EventsCtrl', [])
   $scope.getEventStatus = function (event) {
     var userFbId =$cookies.get('fbId');
     if(event.decision !== undefined){
-      return 'decided';
+      return 'Decided';
     } else if(event.usersWhoSubmitted.indexOf(userFbId) !== -1){
-     return 'submitted';
-    } else{
-      return 'notSubmitted';
+     return 'Submitted';
+    } else {
+      return 'Needs your vote';
     }
   };
 })
