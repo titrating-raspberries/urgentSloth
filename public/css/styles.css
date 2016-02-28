@@ -21,12 +21,6 @@ body {
   border: 20px solid black;
 }
 
-.background: {
-  background-color: #2d7b52;
-  background-size:cover;
-}
-
-
 .eventTitle{
   text-transform: uppercase;
   font-weight: bold;
