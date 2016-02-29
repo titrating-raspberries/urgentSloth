@@ -2,6 +2,8 @@ angular.module('EventsCtrl', [])
 
 .controller('EventsController', function($scope, $cookies, Event, $route) {
 
+  $scope.showNoEventsMessage = false;
+  $scope.noEventsMessage = 'You have no scheduled events. Time to create one?'
   $scope.data = {};
   //Filter array (0=excl/1=excl)
   //Index meaning: [needs your vote, submitted, decided, maxValue in array]
@@ -30,6 +32,12 @@ angular.module('EventsCtrl', [])
         $scope.data.notVotedEvents = events.filter(function(event){
           return event.usersWhoSubmitted.indexOf(userFbId) == -1 && !event.decision;
         });
+
+        if(!$scope.data.decidedEvents.length && !$scope.data.submittedEvents.length && !$scope.data.notVotedEvents.length){
+          $scope.showNoEventsMessage = true;
+        } else {
+          $scope.showNoEventsMessage = false;
+        };
 
         //Past events page only includes past events
         $scope.data.pastEvents = events.filter(function(event){
