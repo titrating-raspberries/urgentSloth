@@ -16,7 +16,7 @@ module.exports = {
       .then(function (user) {
         if (user) {
           var eventIndex = user.events.indexOf(eventId);
-          user.events.splice(eventIndex);
+          user.events.splice(eventIndex,1);
           user.save(function(err) {
                       if (err) {
                         console.error(err);
