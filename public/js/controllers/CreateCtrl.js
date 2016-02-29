@@ -13,6 +13,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.showNoLocationsMessage = true;
   $scope.showValidationMessage = false;
   $scope.dateTimeMessage = "Please enter a future date"
+  $scope.decideByMessage = "Please enter a future date that is before the earliest date and time option"
   $scope.showDateTimeMessage = false;
   $scope.showDecideByMessage = false;
   $scope.showSpiffy = false;
@@ -87,15 +88,17 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.addDecideByTime = function(){
     //Allow only one decideBy time
     if(!$scope.decideByTime.length){
-      var dateTime = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
-      if(dateTime < Date.now()){
+      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
+      var minDateAndTime = Math.min.apply(null, Object.keys($scope.dateTimes).map(function(key){
+        return 1*$scope.dateTimes[key]
+      }));
+      if(decideBy < Date.now() || decideBy > minDateAndTime){
         $scope.showDecideByMessage = true;
-        console.log('HERE');
         return;
       } else {
         $scope.showDecideByMessage = false;
       }
-      $scope.decideByTime.push(dateTime);
+      $scope.decideByTime.push(decideBy);
     }
   };
 
