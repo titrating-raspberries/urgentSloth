@@ -11,8 +11,10 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.showLonelyMessage = true;
   $scope.noLocationsMessage = '“When you make a choice, you change the future.” - Deepak Chopra';
   $scope.showNoLocationsMessage = true;
-
-  $scope.showValidationMessage = false;  
+  $scope.showValidationMessage = false;
+  $scope.dateTimeMessage = "Please enter a future date"
+  $scope.showDateTimeMessage = false;
+  $scope.showDecideByMessage = false;
 
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
@@ -66,6 +68,12 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.addDateTimes = function(){
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
+    if(dateTime < Date.now()){
+      $scope.showDateTimeMessage = true;
+      return;
+    } else {
+      $scope.showDateTimeMessage = false;
+    }
     $scope.dateTimes[dateTime] = dateTime;
   };
 
@@ -77,6 +85,13 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     //Allow only one decideBy time
     if(!$scope.decideByTime.length){
       var dateTime = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
+      if(dateTime < Date.now()){
+        $scope.showDecideByMessage = true;
+        console.log('HERE');
+        return;
+      } else {
+        $scope.showDecideByMessage = false;
+      }
       $scope.decideByTime.push(dateTime);
     }
   };

@@ -69,6 +69,14 @@ body {
   background-color: #eee;
 }
 
+.event.create {
+  border-radius: 10px;
+  padding: 10px 35px 20px 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #eee;
+}
+
 .title {
   color: #fff ;
   font-family: 'Lato', sans-serif;
@@ -218,7 +226,7 @@ p {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  color: #808080;
+  opacity: 0.5;
   /*display:none;  Button only visible on hover */
 }
 
@@ -228,8 +236,8 @@ p {
 
 .voteButton.clicked {
   background-color: #A6D785;
-  color: black;
   display:block;
+  opacity: 1.0;
 }
 
 #submitButton{
@@ -249,7 +257,6 @@ p {
 
 .h3nomargin {
   padding: 7px 0 7px 0;
-  margin-top: 5px;
 }
 
 .decideBy {
@@ -266,9 +273,11 @@ p {
 .validationMessage {
   text-align: left;
   font-size: 14px;
-  padding: 7px 0 7px 0;
-  margin-top: 5px;
+  padding: 7px 10px 7px 10px;
+  margin-top: 15px;
+  min-height: 20px;
   white-space: pre-line; 
+  line-height: 200%;
 }
 
 .voteText{
@@ -280,14 +289,10 @@ p {
   padding-right: right;
 }
 
-#dateAdder{
+.dateAdder{
   margin-left: 10px;
 }
 
-#subwell{
-  margin-top: 15px;
-}
-
-#searchRestButton{
-  margin: 10px;
+.searchRestButton{
+  margin: 10px 10px 10px 0;
 }
