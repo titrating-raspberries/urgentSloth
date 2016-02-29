@@ -6,7 +6,6 @@ var methodOverride = require('method-override');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
 var mongoose       = require('mongoose');
-var auth           = require('./config/auth.js');
 
 
 //need to include this to add user to db
@@ -25,9 +24,9 @@ var userController = require('./users/userController');
 
 
 passport.use(new Strategy({
-    clientID: auth.facebookAuth.clientID,
-    clientSecret: auth.facebookAuth.clientSecret,
-    callbackURL: auth.facebookAuth.callbackURL,
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: process.env.FACEBOOK_URL,
     profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends']
   },
   function(accessToken, refreshToken, profile, cb) {

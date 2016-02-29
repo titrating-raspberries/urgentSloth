@@ -19,7 +19,6 @@ angular.module('EventsCtrl', [])
     Event.getUserEvents($cookies.get('fbId'))
       .then(function(events) {
         var userFbId = $cookies.get('fbId');
-        
         //Events page only includes future events
         $scope.data.decidedEvents = events.filter(function(event){
           return event.decision && new Date(event.decision.date) > Date.now();
