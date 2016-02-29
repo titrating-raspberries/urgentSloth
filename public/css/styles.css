@@ -41,6 +41,26 @@ body {
   border-radius: 10px;
 }
 
+.eventHeader{
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  background-color: #eee;
+}
+
+.badge.eventTitle {
+  font-size: 14px;
+}
+
+.badge {
+  background-color: #999;
+}
+
+.badge.check {
+  background-color: #2d7b52;
+}
+
 .event{
   border-radius: 10px;
   padding: 35px;
@@ -198,6 +218,7 @@ p {
   border-radius: 50%;
   width: 50px;
   height: 50px;
+  color: #808080;
   /*display:none;  Button only visible on hover */
 }
 
@@ -207,6 +228,7 @@ p {
 
 .voteButton.clicked {
   background-color: #A6D785;
+  color: black;
   display:block;
 }
 
