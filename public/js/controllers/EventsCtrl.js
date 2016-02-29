@@ -83,7 +83,7 @@ angular.module('EventsCtrl', [])
     $route.reload();
   };
 
-  $scope.declineEvent = function(event, eventIndex){
+  $scope.declineEvent = function(event){
     var fbId =  $cookies.get('fbId');
 
     // remove eventid from the user's events
