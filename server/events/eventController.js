@@ -2,7 +2,6 @@ var Event = require('./eventModel.js');
     User = require('../users/userModel.js');
     Q = require('q');
     userController = require('../users/userController');
-    mongoose = require('mongoose');
 
 // Promisify a few mongoose methods with the `q` promise library
 var findEvent = Q.nbind(Event.findOne, Event);
