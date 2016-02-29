@@ -22,7 +22,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.toggle = true;
   
   var getFriends = function(){
-    //Replace with User.get() when real user database is ready.
     User.getFriends($cookies.get('fbId')).then(function(friends){
       $scope.friends = friends;
     });
@@ -31,7 +30,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   getFriends();
 
   $scope.addFriend = function(friend){
-    //Fix when real user database is ready
     $scope.showLonelyMessage = false;
     $scope.attendees[friend.fbId] = friend;
   };
@@ -64,11 +62,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     }  
     $scope.showNoLocationsMessage = Object.keys($scope.locations).length === 0 ? true : false;
   };
-
-  // $scope.removeLocation = function(restaurant){
-  //   var uniqueKey = restaurant.location.coordinate.longitude + '-' + restaurant.location.coordinate.longitude;
-  //   delete $scope.locations[uniqueKey];
-  // };
 
   $scope.addDateTimes = function(){
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
