@@ -91,8 +91,9 @@ module.exports = {
               friends: friends
             };
             createUser(newUser);
-          } else {// if user already exists, update user's friends in the database
+          } else {// if user already exists, update user's friends and prof pic in the database
             match.friends = friends;
+            match.picture = picture;
             match.save(function (err) {
                 if (err){
                   return handleError(err);
