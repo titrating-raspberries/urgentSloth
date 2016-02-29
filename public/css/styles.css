@@ -55,6 +55,7 @@ body {
 
 .badge {
   background-color: #999;
+  cursor:pointer;
 }
 
 .badge.check {
