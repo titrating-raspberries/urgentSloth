@@ -79,6 +79,12 @@
         <input id="eventActionButton" type="submit" value="Submit Your Votes" class="btn btn-primary" ng-click="submit(event, $index)"/>
       </div>
     </div>
+    <!-- ensure the user votes on a date and time -->
+    <div class='row'>
+          <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">Please select at least one date.</h3>
+          <h3 class="alert alert-danger validationMessage" ng-show="showLocationMessage">Please select at least one restaurant.</h3>
+    </div>
+
   </div>
 
   <!-- Submitted events -->
