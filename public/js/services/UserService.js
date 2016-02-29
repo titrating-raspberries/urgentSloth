@@ -38,8 +38,6 @@ angular.module('UserService', []).factory('User', ['$http', function($http) {
             method: 'POST',
             url: '/api/users/removeEvent',
             data: { eventID: eventID, fbId: fbId }
-          }).then(function(res){
-            // return res.data;
           })
       }
 
