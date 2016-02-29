@@ -16,6 +16,6 @@
   },
   "scripts": { 
     "start": "node server/server.js",
-    "preinstall": "bower install"
+    "postinstall": "bower install"
   }
 }
