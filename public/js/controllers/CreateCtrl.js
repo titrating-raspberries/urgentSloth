@@ -15,6 +15,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.dateTimeMessage = "Please enter a future date"
   $scope.showDateTimeMessage = false;
   $scope.showDecideByMessage = false;
+  $scope.showSpiffy = false;
 
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
@@ -42,7 +43,9 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   //Fires up Yelp search for restaurants based on 'Add location' form on create.html
   $scope.submit = function() {
     if ($scope.term && $scope.location) {
+      $scope.showSpiffy = true;
       Event.searchYelp($scope.term, $scope.location).then(function(results){
+        $scope.showSpiffy = false;
         $scope.yelpResults = results.data.businesses;
       }).catch(function(err){
         console.log(err);
