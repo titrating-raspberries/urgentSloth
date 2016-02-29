@@ -6,7 +6,6 @@ var methodOverride = require('method-override');
 var passport       = require('passport');
 var Strategy       = require('passport-facebook').Strategy;
 var mongoose       = require('mongoose');
-var auth           = require('./config/auth.js');
 
 
 //need to include this to add user to db
