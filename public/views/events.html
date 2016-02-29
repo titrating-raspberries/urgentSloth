@@ -5,6 +5,11 @@
   <span class="badge eventTitle" toggle-class="check" ng-click='filterEvents(2)'>Decided</span>
 </div>
 
+<!-- If there are no events, show message -->
+<div class='event' ng-show="showNoEventsMessage">
+  <h3>{{noEventsMessage}}</h3>
+</div>
+
 <div class="wholeEventsView">
   <!-- notSubmitted events -->
   <div class='event' ng-repeat="event in data.notVotedEvents" ng-show="filters[0] === filters[3]">
