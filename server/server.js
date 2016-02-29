@@ -25,9 +25,9 @@ var userController = require('./users/userController');
 
 
 passport.use(new Strategy({
-    clientID: auth.facebookAuth.clientID,
-    clientSecret: auth.facebookAuth.clientSecret,
-    callbackURL: auth.facebookAuth.callbackURL,
+    clientID: ENV["FACEBOOK_APP_ID"],
+    clientSecret: ENV["FACEBOOK_SECRET"],
+    callbackURL: ENV["FACEBOOK_URL"],
     profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends']
   },
   function(accessToken, refreshToken, profile, cb) {
