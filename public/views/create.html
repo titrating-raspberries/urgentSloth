@@ -1,11 +1,11 @@
 <div>
   
-  <div class="event">
+  <div class="event create">
      <h2>Name your event:</h2>
     <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
   </div>
 
-  <div class="event">
+  <div class="event create">
     <h2>Invite some friends:</h2>
     <!-- Dynamic search form for friends -->
     <form>
@@ -15,19 +15,21 @@
       </fieldset>
     </form>
 
-    <div class="row scroll">
-      <div style="width: {{friends.length * 165}}px">
-        <div class="square text-center" ng-repeat="friend in friends | filter:{name:friendName}" ng-click="addFriend(friend)">
-          <img class="card-img-top" src='{{friend.picture}}'>
-          <div class="card-block">
-            <h4 class="card-title">{{friend.name}}</h4>
+    <div class='well well-sm'>
+      <div class="row scroll">
+        <div style="width: {{friends.length * 165}}px">
+          <div class="square text-center" ng-repeat="friend in friends | filter:{name:friendName}" ng-click="addFriend(friend)">
+            <img class="card-img-top" src='{{friend.picture}}'>
+            <div class="card-block">
+              <h4 class="card-title">{{friend.name}}</h4>
+            </div>
           </div>
-        </div>
-      </div>  
+        </div>  
+      </div>
     </div>
       
     <!-- List of attendees -->
-    <div id='subwell' class='well'>
+    <div class='well well-sm'>
       <h3 class='eventSubtitle' >INVITEES</h3>
       <div class="row text-center">
         <h3 ng-show="showLonelyMessage">{{lonelyMessage}}</h3>
@@ -41,7 +43,7 @@
     </div>
   </div>
 
-  <div class="event"><h2>Add restaurant options</h2>
+  <div class="event create"><h2>Add restaurant options</h2>
 
   <!-- Dynamic search form using YelpAPI -->
   <form role="form" ng-submit="submit()">
@@ -51,8 +53,8 @@
       <label for="locationSearch">Where:</label>
       <input type="text" class="form-control" id="locationSearch" ng-model="location">
     </div>
-    <input type="submit"  id='searchRestButton' value="Search" class="btn btn-primary"/>
-    <button type="button" id='searchRestButton' class="btn btn-info" data-toggle="collapse" data-target="#collapse" ng-show="yelpResults.length" ng-click="toggle = !toggle">{{toggle && 'Hide' || 'Show'}} results</button>
+    <input type="submit" value="Search" class="btn btn-primary searchRestButton"/>
+    <button type="button" class="btn btn-info searchRestButton" data-toggle="collapse" data-target="#collapse" ng-show="yelpResults.length" ng-click="toggle = !toggle">{{toggle && 'Hide' || 'Show'}} results</button>
   </form>
 
   <!-- Search results from Yelp API -->
@@ -81,7 +83,7 @@
   </div>
 
   <!-- List of locations -->
-    <div id='subwell' class="well">
+    <div class="well well-sm">
       <h3 class='eventSubtitle'>MY PICKS</h3>
 
     <h3 class = "text-center" ng-show="showNoLocationsMessage">{{noLocationsMessage}}</h3>
@@ -105,7 +107,7 @@
 
   </div>
   <!-- List of dates -->
-  <div class="event"><h3> Add date and time options: </h3>
+  <div class="event create"><h3> Add date and time options: </h3>
 
   <form role="form" ng-submit="addDateTimes()">
     <div class="form-group">
@@ -113,7 +115,8 @@
       <input type="date" id="Date" ng-model="date">
       <label for="Time">Pick a time</label>
       <input type="time" id="Time" ng-model="time">
-      <input id='dateAdder' type="submit" value="Add" class="btn btn-primary"/>
+      <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
+      <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">{{dateTimeMessage}}</h3>
     </div>
   </form>
 
@@ -128,7 +131,7 @@
 
 
   <!-- Decide by date -->
-  <div class="event"><h3>Add a decide-by date</h3>
+  <div class="event create"><h3>Add a decide-by date</h3>
 
   <form role="form" ng-submit="addDecideByTime()">
     <div class="form-group">
@@ -136,7 +139,8 @@
       <input type="date" id="DecideDate" ng-model="decideDate">
       <label for="DecideTime">Pick a time</label>
       <input type="time" id="DecideTime" ng-model="decideTime">
-      <input id='dateAdder' type="submit" value="Add" class="btn btn-primary"/>
+      <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
+      <h3 class="alert alert-danger validationMessage" ng-show="showDecideByMessage">{{dateTimeMessage}}</h3>
     </div>
   </form>
 
@@ -148,7 +152,7 @@
 
   </div>
   <!-- Submit Event -->
-  <div class="event"><h3>Send off your event!</h3>
+  <div class="event create"><h3>Send off your event!</h3>
 
   <div class="row text-center">
     <form role="form" ng-submit="submitEvent()">
