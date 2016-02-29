@@ -72,15 +72,31 @@ angular.module('EventsCtrl', [])
   };
 
   $scope.submit = function (event, index) {
-    var voteData = {
-        userFbId: $cookies.get('fbId'), 
-        eventId: event._id,
-        dateVotesArr: $scope.data.notVotedEvents[index].dateVotesArr, 
-        locationVotesArr: $scope.data.notVotedEvents[index].locationVotesArr 
-      };
-    //NOTE: as of right now, user must vote yes for at least one location and one time option
-    Event.submitEventVotes(voteData)
-    $route.reload();
+    dateVotesArr = $scope.data.notVotedEvents[index].dateVotesArr;
+    locationVotesArr = $scope.data.notVotedEvents[index].locationVotesArr;
+    
+    //if there are no votes in either vote arrays, show error messages
+    if(dateVotesArr === undefined || dateVotesArr.indexOf(true) === -1){
+      $scope.showDateTimeMessage = true;
+    } else{
+      $scope.showDateTimeMessage = false;
+    }
+    if(locationVotesArr === undefined || locationVotesArr.indexOf(true) === -1){
+      $scope.showLocationMessage = true;
+    } else{
+      $scope.showLocationMessage = false;
+    }
+
+    if( dateVotesArr && locationVotesArr && dateVotesArr.indexOf(true) > -1 && locationVotesArr.indexOf(true) > -1){
+      var voteData = {
+          userFbId: $cookies.get('fbId'), 
+          eventId: event._id,
+          dateVotesArr: dateVotesArr, 
+          locationVotesArr: locationVotesArr 
+        };
+      Event.submitEventVotes(voteData)
+      $route.reload();
+    }
   };
 
   $scope.declineEvent = function(event){
