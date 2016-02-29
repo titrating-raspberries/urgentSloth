@@ -94,17 +94,21 @@ module.exports = {
           findAllEvents({'_id': {$in: userEvents}})
             .then(function(events){
               var counter = 0;
-              events.forEach(function(event,index){
-                var userIds = event.users;
-                getAllUsers({'fbId': {$in: userIds}})
-                  .then(function(users){
-                    event.users = users;
-                    counter++;
-                    if(counter === events.length){
-                      res.json(events);
-                    }
-                  });
-              });
+              if(!events.length){
+                res.json([]); //Send back empty array
+              } else {
+                events.forEach(function(event,index){
+                  var userIds = event.users;
+                  getAllUsers({'fbId': {$in: userIds}})
+                    .then(function(users){
+                      event.users = users;
+                      counter++;
+                      if(counter === events.length){
+                        res.json(events);
+                      }
+                    });
+                });
+              }
             })
         }
       })
