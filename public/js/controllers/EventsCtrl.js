@@ -1,6 +1,6 @@
 angular.module('EventsCtrl', [])
 
-.controller('EventsController', function($scope, $cookies, Event, $route) {
+.controller('EventsController', function($scope, $cookies, Event, User,$route) {
 
   $scope.showNoEventsMessage = false;
   $scope.noEventsMessage = 'You have no scheduled events. Time to create one?'
@@ -82,6 +82,19 @@ angular.module('EventsCtrl', [])
     Event.submitEventVotes(voteData)
     $route.reload();
   };
+
+  $scope.declineEvent = function(event){
+    var fbId =  $cookies.get('fbId');
+
+    // remove eventid from the user's events
+    User.removeEvent(fbId, event._id);
+    //remove userid from the event's users
+    Event.removeUser(event._id, fbId);
+
+    //reload the page now that event is gone
+    window.location.reload();
+  };
+
 })
 .directive('toggleClass', function() {
   return {

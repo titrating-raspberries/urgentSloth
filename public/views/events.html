@@ -76,7 +76,7 @@
         </div>
       </div>
       <div>
-        <input id="submitButton" type="submit" value="Submit Your Votes" class="btn btn-primary" ng-click="submit(event, $index)"/>
+        <input id="eventActionButton" type="submit" value="Submit Your Votes" class="btn btn-primary" ng-click="submit(event, $index)"/>
       </div>
     </div>
   </div>
@@ -161,6 +161,28 @@
           <div class="card-block"><h4 class="card-title">{{attendee.name}}</h4></div>
         </div>
       </div> 
+      <!-- Trigger the modal with a button -->
+      <button id='eventActionButton' type="button" class="btn btn-danger" data-toggle="modal" data-target="#declineModal">I can't attend</button>
+
+      <!-- Modal -->
+      <div id="declineModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Are you sure you want to decline this event?</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(event)'>Decline</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- modal -->
     </div>
   </div>
 </div>

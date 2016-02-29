@@ -107,7 +107,7 @@ body {
 .navbar {
     margin-bottom: 0;
     background-color: #2d7b52;
-    z-index: 9999;
+    z-index: 100;
     border: 0;
     font-size: 18px !important;
     font-weight: 600 !important;
@@ -241,7 +241,7 @@ p {
   opacity: 1.0;
 }
 
-#submitButton{
+#eventActionButton{
   float: right;
   margin-top: 17px;
 }
@@ -297,3 +297,6 @@ p {
 .searchRestButton{
   margin: 10px 10px 10px 0;
 }
+
+.modal-dialog { z-index: 1000; }
+

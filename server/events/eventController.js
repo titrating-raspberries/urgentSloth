@@ -31,6 +31,26 @@ var makeEventDecision = function(event){
 
 module.exports = {
 
+  removeUser: function (req, res) {
+    var fbId = req.body.fbId;
+    var eventId = req.body.eventId;
+
+    findEvent({_id: eventId})
+      .then(function (event) {
+        if (event) {
+          var userIndex = event.users.indexOf(fbId);
+          event.users.splice(userIndex,1);
+          event.save(function(err) {
+                      if (err) {
+                        console.error(err);
+                      } 
+                    });
+        } else {
+          console.error('Error finding event');
+        }
+      });
+  },
+
   allEvents: function (req, res, next) {
     findAllEvents({})
       .then(function (events) {

@@ -7,13 +7,34 @@ var findUser = Q.nbind(User.findOne, User);
 var createUser = Q.nbind(User.create, User);
 
 module.exports = {
+
+  removeEvent: function (req, res) {
+    var fbId = req.body.fbId;
+    var eventId = req.body.fbId;
+
+    findUser({fbId: fbId})
+      .then(function (user) {
+        if (user) {
+          var eventIndex = user.events.indexOf(eventId);
+          user.events.splice(eventIndex,1);
+          user.save(function(err) {
+                      if (err) {
+                        console.error(err);
+                      } 
+                    });
+        } else {
+          console.error('Error finding user');
+        }
+      });
+  },
+
   getUsers: function (req, res) {
     getAllUsers({})
       .then(function (users) {
         if (users) {
           res.send(users);
         } else {
-          console.log('THERE ARE NO USERS');
+          console.error('Error finding users');
         }
       });
   },
