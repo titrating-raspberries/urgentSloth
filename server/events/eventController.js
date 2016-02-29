@@ -2,6 +2,7 @@ var Event = require('./eventModel.js');
     User = require('../users/userModel.js');
     Q = require('q');
     userController = require('../users/userController');
+    mongoose = require('mongoose');
 
 // Promisify a few mongoose methods with the `q` promise library
 var findEvent = Q.nbind(Event.findOne, Event);
@@ -30,6 +31,26 @@ var makeEventDecision = function(event){
 }
 
 module.exports = {
+
+  removeUser: function (req, res) {
+    var fbId = req.body.fbId;
+    var eventId = req.body.eventId;
+
+    findEvent({_id: eventId})
+      .then(function (event) {
+        if (event) {
+          var userIndex = event.users.indexOf(fbId);
+          event.users.splice(userIndex);
+          event.save(function(err) {
+                      if (err) {
+                        console.error(err);
+                      } 
+                    });
+        } else {
+          console.error('Error finding event');
+        }
+      });
+  },
 
   allEvents: function (req, res, next) {
     findAllEvents({})

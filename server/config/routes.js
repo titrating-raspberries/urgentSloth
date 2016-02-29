@@ -16,12 +16,16 @@ module.exports = function(app) {
   
   app.get('/api/users/:fbId', UserController.getUserFriends);
 
+  app.post('/api/users/removeEvent', UserController.removeEvent);
+
   app.post('/api/users', UserController.createOrFindOne);
 
   //event routes
   app.get('/api/events', EventController.allEvents);
 
   app.get('/api/events/:fbId', EventController.userEvents);
+
+  app.post('/api/events/removeUser', EventController.removeUser);
 
   app.post('/api/events', EventController.newEvent);
 
