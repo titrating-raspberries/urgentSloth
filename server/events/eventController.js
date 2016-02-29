@@ -109,7 +109,6 @@ module.exports = {
         }
       })
       .fail(function (error) {
-        res.send('SERVER NOT WORKING RIGHT');
         next(error);
       });
   }, 
