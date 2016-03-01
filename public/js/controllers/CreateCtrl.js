@@ -6,14 +6,15 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.locations = {};
   $scope.dateTimes = {};
   $scope.decideByTime = [];
+  $scope.description = '';
 
   $scope.lonelyMessage = "...There's nothing quite like sharing a meal with someone you love - yourself...";
   $scope.showLonelyMessage = true;
   $scope.noLocationsMessage = '“When you make a choice, you change the future.” - Deepak Chopra';
   $scope.showNoLocationsMessage = true;
   $scope.showValidationMessage = false;
-  $scope.dateTimeMessage = "Please enter a future date"
-  $scope.decideByMessage = "Please enter a future date that is before the earliest date and time option"
+  $scope.dateTimeMessage = "Please enter a future date";
+  $scope.decideByMessage = "Please enter a future date that is before the earliest date and time option";
   $scope.showDateTimeMessage = false;
   $scope.showDecideByMessage = false;
   $scope.showSpiffy = false;
@@ -48,7 +49,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
         $scope.yelpResults = results.data.businesses;
       }).catch(function(err){
         console.log(err);
-      })
+      });
     }
   };
 
@@ -83,7 +84,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     if(!$scope.decideByTime.length){
       var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
       var minDateAndTime = Math.min.apply(null, Object.keys($scope.dateTimes).map(function(key){
-        return 1*$scope.dateTimes[key]
+        return 1*$scope.dateTimes[key];
       }));
       if(decideBy < Date.now() || decideBy > minDateAndTime){
         $scope.showDecideByMessage = true;
@@ -103,39 +104,39 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     var eventValidation = {};
     //Check if event name is present
     if(!$scope.eventName){
-      eventValidation.eventMessage = 'Please enter an event name'
-    };
+      eventValidation.eventMessage = 'Please enter an event name';
+    }
 
     //Check if attendees have been added to the event
     if(!Object.keys($scope.attendees).length){
-      eventValidation.attendeeMessage = 'Invite some friends to the party'
-    };
+      eventValidation.attendeeMessage = 'Invite some friends to the party';
+    }
 
     //Check if location options are specified
     if(!Object.keys($scope.locations).length){
-      eventValidation.locationsMessage = 'Give your friends options by specifying possible locations'
-    };
+      eventValidation.locationsMessage = 'Give your friends options by specifying possible locations';
+    }
 
     //Check if dates and times options are specified
     if(!Object.keys($scope.dateTimes).length){
-      eventValidation.timeMessage = 'Tell your friends when to show by adding some Date and Time options'
-    };
+      eventValidation.timeMessage = 'Tell your friends when to show by adding some Date and Time options';
+    }
     
     //Check if Decide By date is specified
     if(!$scope.decideByTime.length){
-      eventValidation.deadlineMessage = 'Let your friends know when you expect their response by specifying the decide-by date'
-    };
+      eventValidation.deadlineMessage = 'Let your friends know when you expect their response by specifying the decide-by date';
+    }
 
     //Check if any of the above failed
     var errArr = Object.keys(eventValidation);
     if(errArr.length){
       $scope.validationMessage = errArr.map(function(key){
-        return eventValidation[key] 
+        return eventValidation[key];
       }).join('\n');
 
       $scope.showValidationMessage = true;
       return;
-    };
+    }
 
     $scope.showValidationMessage = false;
     var event = {};
@@ -162,6 +163,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
     Event.create(event).then(function(){
       $location.path("/events");
-    })
+    });
   };
-})
+});

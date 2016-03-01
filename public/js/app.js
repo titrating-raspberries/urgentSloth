@@ -15,7 +15,7 @@ angular.module('sampleApp', [
     isUserLoggedIn : function(){
       return ($cookies.get('name')!== undefined);
     }
-  }
+  };
 }])
 
 .run(function($rootScope, Auth, $location) {

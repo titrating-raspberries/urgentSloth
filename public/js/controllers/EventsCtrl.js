@@ -3,7 +3,7 @@ angular.module('EventsCtrl', [])
 .controller('EventsController', function($scope, $cookies, Event, User,$route) {
 
   $scope.showNoEventsMessage = false;
-  $scope.noEventsMessage = 'You have no scheduled events. Time to create one?'
+  $scope.noEventsMessage = 'You have no scheduled events. Time to create one?';
   $scope.data = {};
   //Filter array (0=excl/1=excl)
   //Index meaning: [needs your vote, submitted, decided, maxValue in array]
@@ -37,7 +37,7 @@ angular.module('EventsCtrl', [])
           $scope.showNoEventsMessage = true;
         } else {
           $scope.showNoEventsMessage = false;
-        };
+        }
 
         //Past events page only includes past events
         $scope.data.pastEvents = events.filter(function(event){
@@ -50,7 +50,7 @@ angular.module('EventsCtrl', [])
       .catch(function (error) {
         console.error(error);
       });
-  }
+  };
 
   //we want to get the user's events when the controller first loads
   getUserEvents();
@@ -94,7 +94,7 @@ angular.module('EventsCtrl', [])
           dateVotesArr: dateVotesArr, 
           locationVotesArr: locationVotesArr 
         };
-      Event.submitEventVotes(voteData)
+      Event.submitEventVotes(voteData);
       $route.reload();
     }
   };
