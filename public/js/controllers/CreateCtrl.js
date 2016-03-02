@@ -21,7 +21,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
-  
+
   var getFriends = function(){
     User.getFriends($cookies.get('fbId')).then(function(friends){
       $scope.friends = friends;
@@ -42,9 +42,10 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   //Fires up Yelp search for restaurants based on 'Add location' form on create.html
   $scope.submit = function() {
-    if ($scope.term && $scope.location) {
+    if ($scope.location) {
       $scope.showSpiffy = true;
-      Event.searchYelp($scope.term, $scope.location).then(function(results){
+      console.log("$scope.term = ", $scope.term);
+      Event.searchYelp($scope.term || "food", $scope.location).then(function(results){
         $scope.showSpiffy = false;
         $scope.yelpResults = results.data.businesses;
       }).catch(function(err){
@@ -57,10 +58,10 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     //Create a unique for the locations object
     var uniqueKey = restaurant.location.coordinate.latitude + '-' + restaurant.location.coordinate.longitude;
     if($scope.locations[uniqueKey]){
-      delete $scope.locations[uniqueKey];  
+      delete $scope.locations[uniqueKey];
     } else {
       $scope.locations[uniqueKey] = restaurant;
-    }  
+    }
     $scope.showNoLocationsMessage = Object.keys($scope.locations).length === 0 ? true : false;
   };
 
@@ -121,7 +122,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     if(!Object.keys($scope.dateTimes).length){
       eventValidation.timeMessage = 'Tell your friends when to show by adding some Date and Time options';
     }
-    
+
     //Check if Decide By date is specified
     if(!$scope.decideByTime.length){
       eventValidation.deadlineMessage = 'Let your friends know when you expect their response by specifying the decide-by date';
