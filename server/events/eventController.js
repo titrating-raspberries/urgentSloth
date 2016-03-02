@@ -11,11 +11,11 @@ var findAllEvents = Q.nbind(Event.find, Event);
 var findUser = Q.nbind(User.findOne, User);
 var getAllUsers = Q.nbind(User.find, User);
 
-var pickWinner = function(choices, category){
+var pickWinner = function(choices, category) {
   var mostVotes = 0;
   var winner = choices[0][category];
-  for(var i = 0; i < choices.length; i ++){
-    if(choices[i].votes > mostVotes){
+  for(var i = 0; i < choices.length; i ++) {
+    if(choices[i].votes > mostVotes) {
       mostVotes = choices[i].votes;
       winner = choices[i][category];
     }
@@ -23,7 +23,7 @@ var pickWinner = function(choices, category){
   return winner;
 }
 
-var makeEventDecision = function(event){
+var makeEventDecision = function(event) {
   var date = pickWinner(event['dates'], 'date');
   var location = pickWinner(event['locations'],'location');
   return {date: date, location: location};
@@ -39,7 +39,7 @@ module.exports = {
       .then(function (event) {
         if (event) {
           var userIndex = event.users.indexOf(fbId);
-          if (userIndex > -1){
+          if (userIndex > -1) {
             event.users.splice(userIndex,1);
             event.save(function(err) {
                         if (err) {
@@ -68,7 +68,7 @@ module.exports = {
 
     //store dates as js objects
     event.deadline = new Date(event.deadline);
-    event.dates.forEach(function(choice){
+    event.dates.forEach(function(choice) {
       choice.date = new Date(choice.date);
     });
 
@@ -94,18 +94,18 @@ module.exports = {
         } else {
           var userEvents = user.events;
           findAllEvents({'_id': {$in: userEvents}})
-            .then(function(events){
+            .then(function(events) {
               var counter = 0;
-              if(!events.length){
+              if(!events.length) {
                 res.json([]); //Send back empty array
               } else {
-                events.forEach(function(event,index){
+                events.forEach(function(event,index) {
                   var userIds = event.users;
                   getAllUsers({'fbId': {$in: userIds}})
-                    .then(function(users){
+                    .then(function(users) {
                       event.users = users;
                       counter++;
-                      if(counter === events.length){
+                      if(counter === events.length) {
                         res.json(events);
                       }
                     });
@@ -119,7 +119,7 @@ module.exports = {
       });
   },
 
-  decideUsersEvents: function(fbId){
+  decideUsersEvents: function(fbId) {
     findUser({fbId: fbId})
       .then(function (user) {
         if (!user) {
@@ -127,10 +127,10 @@ module.exports = {
         } else {
           var userEvents = user.events;
           findAllEvents({'_id': {$in: userEvents}})
-            .then(function(events){
-              events.forEach(function(event){
+            .then(function(events) {
+              events.forEach(function(event) {
                 //if the event's deadline has passed and it doesn't have a decision, decide it
-                if(event.deadline < new Date() && event.decision === undefined){
+                if(event.deadline < new Date() && event.decision === undefined) {
                   var decision = makeEventDecision(event);
                   Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
                       if (err) {
@@ -147,25 +147,25 @@ module.exports = {
       });
   },
 
-  submitEventVotes: function(req, res, next){
+  submitEventVotes: function(req, res, next) {
     var eventId = req.body.eventId;
     var userFbId = req.body.userFbId;
     var locationVotesArr = req.body.locationVotesArr;
     var dateVotesArr = req.body.dateVotesArr;
 
     findEvent({_id: eventId})
-    .then(function(event){
-      if(event){
+    .then(function(event) {
+      if(event) {
 
         //add votes to selected locations
-        locationVotesArr.forEach(function(vote, index){
-          if(vote){
+        locationVotesArr.forEach(function(vote, index) {
+          if(vote) {
             event['locations'][index].votes += 1;
           }
         });
         //add votes to selected dates
-        dateVotesArr.forEach(function(vote, index){
-          if(vote){
+        dateVotesArr.forEach(function(vote, index) {
+          if(vote) {
             event['dates'][index].votes += 1;
           }
         });
