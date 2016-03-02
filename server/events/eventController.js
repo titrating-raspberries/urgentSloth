@@ -13,7 +13,7 @@ var getAllUsers = Q.nbind(User.find, User);
 
 var pickWinner = function(choices, category){
   var mostVotes = 0;
-  var winner = choices[0][category]; 
+  var winner = choices[0][category];
   for(var i = 0; i < choices.length; i ++){
     if(choices[i].votes > mostVotes){
       mostVotes = choices[i].votes;
@@ -39,12 +39,14 @@ module.exports = {
       .then(function (event) {
         if (event) {
           var userIndex = event.users.indexOf(fbId);
-          event.users.splice(userIndex,1);
-          event.save(function(err) {
-                      if (err) {
-                        console.error(err);
-                      } 
-                    });
+          if (userIndex > -1){
+            event.users.splice(userIndex,1);
+            event.save(function(err) {
+                        if (err) {
+                          console.error(err);
+                        }
+                      });
+          }
         } else {
           console.error('Error finding event');
         }
@@ -84,7 +86,7 @@ module.exports = {
 
   userEvents: function (req, res, next) {
     var fbId = req.params.fbId.slice(1);
-    
+
     findUser({fbId: fbId})
       .then(function (user) {
         if (!user) {
@@ -115,7 +117,7 @@ module.exports = {
       .fail(function (error) {
         next(error);
       });
-  }, 
+  },
 
   decideUsersEvents: function(fbId){
     findUser({fbId: fbId})
@@ -133,7 +135,7 @@ module.exports = {
                   Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
                       if (err) {
                         console.error(err);
-                      } 
+                      }
                     });
                 }
               });
