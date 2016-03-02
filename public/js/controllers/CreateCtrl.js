@@ -21,7 +21,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
-
   var getFriends = function(){
     User.getFriends($cookies.get('fbId')).then(function(friends){
       $scope.friends = friends;
@@ -44,7 +43,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.submit = function() {
     if ($scope.location) {
       $scope.showSpiffy = true;
-      console.log("$scope.term = ", $scope.term);
       Event.searchYelp($scope.term || "food", $scope.location).then(function(results){
         $scope.showSpiffy = false;
         $scope.yelpResults = results.data.businesses;
