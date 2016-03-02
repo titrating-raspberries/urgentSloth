@@ -1,12 +1,12 @@
 // modules =================================================
-var express        = require('express');
-var app            = express();
-var bodyParser     = require('body-parser');
-var methodOverride = require('method-override');
-var passport       = require('passport');
-var Strategy       = require('passport-facebook').Strategy;
-var mongoose       = require('mongoose');
-
+var express           = require('express');
+var bodyParser        = require('body-parser');
+var methodOverride    = require('method-override');
+var passport          = require('passport');
+var fbStrategy        = require('passport-facebook').Strategy;
+var mongoose          = require('mongoose');
+var app               = express();
+var configAuth        = require('./config/auth.js');
 
 //need to include this to add user to db
 var userController = require('./users/userController');
@@ -23,10 +23,10 @@ var userController = require('./users/userController');
 // authentication.
 
 
-passport.use(new Strategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: process.env.FACEBOOK_URL,
+passport.use(new fbStrategy({
+    clientID: configAuth.facebookAuth.clientID, // process.env.FACEBOOK_APP_ID 
+    clientSecret: configAuth.facebookAuth.clientSecret, // process.env.FACEBOOK_SECRET
+    callbackURL: configAuth.facebookAuth.callbackURL,
     profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends']
   },
   function(accessToken, refreshToken, profile, cb) {
