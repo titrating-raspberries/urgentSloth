@@ -15,19 +15,19 @@
   <div class='event' ng-repeat="event in data.notVotedEvents" ng-show="filters[0] === filters[3]">
     <div class='eventTitle'>{{ event.name }}   <span class="badge">Needs your vote</span></div>
     <!-- Event Description -->
-    <div class="well well-sm">
+    <div class="well well-sm" ng-if="event.description">
       <div class='eventSubtitle'>Description:  </div>
       <div class="eventDescription"> {{ event.description }} </div>
     </div>
-    <!-- Restaurant choices -->
+    <!-- location choices -->
     <div class="well well-sm">
-      <div class='eventSubtitle'>Select the restaurants you like:  </div>
+      <div class='eventSubtitle'>Select the locations you like:  </div>
       <div class="row highlight" ng-repeat="rest in event.locations">
         <div class="col-xs-1">
           <button type="button" class="voteButton" ng-click='locationVote($index,$parent.$index, event)' toggle-class="clicked">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
-        </div> 
+        </div>
         <div class="col-xs-2">
           <img class="restImage" src="{{rest.location.image_url}}">
           <img class="restImage review" src="{{rest.location.rating_img_url_large}}">
@@ -49,14 +49,14 @@
           <button type="button" class="voteButton nomargin" ng-click='dateVote($index, $parent.$index, event)' toggle-class="clicked">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
-        </div> 
+        </div>
 
         <div class="col-xs-11">
           <h4 class="h3nomargin">{{ date.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
         </div>
       </div>
     </div>
-      
+
     <!-- Attendee list -->
     <div class="well well-sm">
       <div class='eventSubtitle'>Attendees: </div>
@@ -67,15 +67,15 @@
             <h4 class="card-title">{{attendee.name}}</h4>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
     <!-- Decide-by date -->
-    <div class="well well-sm"> 
+    <div class="well well-sm">
       <div class='eventSubtitle'>Submit your votes by: </div>
       <div class="row highlight">
         <div class="col-xs-1">
           <div class="decideBy glyphicon glyphicon-time"></div>
-        </div> 
+        </div>
         <div class="col-xs-11">
           <h4 class="h3nomargin">{{ event.deadline | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
         </div>
@@ -87,7 +87,7 @@
     <!-- ensure the user votes on a date and time -->
     <div class='row'>
           <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">Please select at least one date.</h3>
-          <h3 class="alert alert-danger validationMessage" ng-show="showLocationMessage">Please select at least one restaurant.</h3>
+          <h3 class="alert alert-danger validationMessage" ng-show="showLocationMessage">Please select at least one location.</h3>
     </div>
 
   </div>
@@ -95,9 +95,13 @@
   <!-- Submitted events -->
   <div class='event' ng-repeat="event in data.submittedEvents" ng-show="filters[1] === filters[3]">
     <div class='eventTitle'>{{ event.name }}   <span class="badge">Submitted</span></div>
-    <!-- Restaurant choices -->
+    <div class="well well-sm" ng-if="event.description">
+      <div class='eventSubtitle'>Description:  </div>
+      <div class="eventDescription"> {{ event.description }} </div>
+    </div>
+    <!-- location choices -->
     <div class="well well-sm">
-      <div class='eventSubtitle'>Restaurant options: </div>
+      <div class='eventSubtitle'>location options: </div>
       <div class="row highlight" ng-repeat="rest in event.locations">
         <div class="col-xs-2">
           <img class="restImage" src="{{rest.location.image_url}}">
@@ -112,7 +116,7 @@
         </div>
         <div class="col-xs-2">
           <div class='voteText'> Votes: {{rest.votes}} </div>
-        </div> 
+        </div>
       </div>
     </div>
     <!-- Date and time choices -->
@@ -124,7 +128,7 @@
         </div>
         <div class="col-xs-2">
           <div class='voteText'> Votes: {{date.votes}} </div>
-        </div> 
+        </div>
       </div>
     </div>
     <!-- Attendee list -->
@@ -137,16 +141,20 @@
             <h4 class="card-title">{{attendee.name}}</h4>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 
   <!-- Decided events -->
   <div class='event' ng-repeat="event in data.decidedEvents" ng-show="filters[2] === filters[3]">
     <div class='eventTitle'>{{ event.name }}   <span class="badge">Decided</span></div>
+    <div class="well well-sm" ng-if="event.description">
+      <div class='eventSubtitle'>Description:  </div>
+      <div class="eventDescription"> {{ event.description }} </div>
+    </div>
     <div class="well well-sm">
       <div class='eventSubtitle'>You're going to:</div>
-      <!-- Chosen Restaurant -->
+      <!-- Chosen location -->
       <div class="row">
         <div class="col-xs-2">
           <img class="restImage" src="{{event.decision.location.image_url}}">
@@ -161,7 +169,7 @@
         </div>
         <div class="col-xs-4">
           <div class='voteText'>  {{event.decision.date | date:'EEEE, MMMM d, yyyy @ h:mma' }}  </div>
-        </div> 
+        </div>
       </div>
 
       <!-- Attendees -->
@@ -171,7 +179,7 @@
           <img class="card-img-top" src='{{attendee.picture}}'>
           <div class="card-block"><h4 class="card-title">{{attendee.name}}</h4></div>
         </div>
-      </div> 
+      </div>
       <!-- Trigger the modal with a button -->
       <button id='eventActionButton' type="button" class="btn btn-danger" data-toggle="modal" data-target="#declineModal">I can't attend</button>
 
