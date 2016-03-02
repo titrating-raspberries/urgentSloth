@@ -137,6 +137,10 @@ margin: -5px 0 10px 0;
   background-color: #fff !important;
 }
 
+.noAttendBtn {
+  margin-top: -15px;
+}
+
 .dropdown-menu {
   background-color: #2d7b52 !important;
 }
@@ -258,7 +262,7 @@ p {
 }
 
 #eventActionButton{
-  float: right;
+  float: left;
   margin-top: 17px;
 }
 
