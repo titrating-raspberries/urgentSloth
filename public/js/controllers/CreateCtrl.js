@@ -109,9 +109,9 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
 
     //Check if attendees have been added to the event
-    // if(!Object.keys($scope.attendees).length){
-    //   eventValidation.attendeeMessage = 'Invite some friends to the party';
-    // }
+    if(!Object.keys($scope.attendees).length){
+      eventValidation.attendeeMessage = 'Invite some friends to the party';
+    }
 
     //Check if location options are specified
     if(!Object.keys($scope.locations).length){
