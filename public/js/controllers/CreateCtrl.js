@@ -6,7 +6,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.locations = {};
   $scope.dateTimes = {};
   $scope.decideByTime = [];
-  $scope.description = '';
 
   $scope.lonelyMessage = "...There's nothing quite like sharing a meal with someone you love - yourself...";
   $scope.showLonelyMessage = true;
@@ -106,6 +105,9 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
       eventValidation.eventMessage = 'Please enter an event name';
     }
 
+    //Check if event description is present TODO OPTIONAL?
+
+
     //Check if attendees have been added to the event
     if(!Object.keys($scope.attendees).length){
       eventValidation.attendeeMessage = 'Invite some friends to the party';
@@ -140,17 +142,23 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     $scope.showValidationMessage = false;
     var event = {};
     event.name = $scope.eventName;
+    event.description = $scope.eventDescription;
+    console.log(event.description);
     event.deadline = $scope.decideByTime[0];
+    //TODO ADD ADMIN USER DATA ON EVENT LISTING
+
     //Add locations from locations object
     event.locations = [];
     Object.keys($scope.locations).forEach(function(key){
       event.locations.push({location: $scope.locations[key], votes: 0});
     });
+
     //Add dates and times from dateTime object
     event.dates = [];
     Object.keys($scope.dateTimes).forEach(function(key){
       event.dates.push({date:$scope.dateTimes[key], votes: 0});
     });
+
     //Add attendee fbId's from attendees object
     event.users = [];
     Object.keys($scope.attendees).forEach(function(fbId){

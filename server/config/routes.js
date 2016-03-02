@@ -46,7 +46,7 @@ module.exports = function(app) {
   app.get('/login/facebook',
     passport.authenticate('facebook', {scope: ['user_friends']}));
 
-  app.get('/login/facebook/return', 
+  app.get('/login/facebook/return', // this path is the callbackURL that matches the one stored in the auth.js
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
       //check users events and decide any passed deadline

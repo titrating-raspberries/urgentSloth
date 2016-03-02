@@ -14,6 +14,11 @@
   <!-- notSubmitted events -->
   <div class='event' ng-repeat="event in data.notVotedEvents" ng-show="filters[0] === filters[3]">
     <div class='eventTitle'>{{ event.name }}   <span class="badge">Needs your vote</span></div>
+    <!-- Event Description -->
+    <div class="well well-sm">
+      <div class='eventSubtitle'>Description:  </div>
+      <div class="eventDescription"> {{ event.description }} </div>
+    </div>
     <!-- Restaurant choices -->
     <div class="well well-sm">
       <div class='eventSubtitle'>Select the restaurants you like:  </div>

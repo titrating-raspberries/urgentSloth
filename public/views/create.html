@@ -5,6 +5,14 @@
     <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
   </div>
 
+  <!-- Add Description -->
+  <div class="event create">
+    <h2>Add a short description!</h2>
+    <form role="form" id='usrform'>
+      <textarea class="form-control eventname text-center" maxlength="140" ng-model='eventDescription' form="usrform"  placeholder="What's the occasion?"></textarea>
+    </form>
+  </div>
+
   <div class="event create">
     <h2>Invite some friends:</h2>
     <!-- Dynamic search form for friends -->
@@ -151,13 +159,6 @@
       </a>
     </div>
 
-  </div>
-  <!-- Add Description -->
-  <div class="event create"><h3>Add a short description!</h3>
-    <form role="form">
-      <label for="EnterDescription">Enter a Description</label>
-      <input type="text" id="AddEventDescription" ng-model="eventDescription">
-    </form>
   </div>
 
 
