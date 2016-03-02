@@ -6,7 +6,7 @@ angular.module('EventService', [])
         var result = '';
         for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
         return result;
-      };
+      }
 
   return {
     get : function() {
@@ -23,7 +23,7 @@ angular.module('EventService', [])
           method: 'POST',
           url: '/api/events/removeUser',
           data: { eventId: eventId, fbId: fbId }
-        })
+        });
     },
 
     submitEventVotes : function(voteData) {
@@ -77,8 +77,8 @@ angular.module('EventService', [])
 
       //Generate oauth_signature using 3rd party script (included on index.html):
       var oauth_signature = oauthSignature.generate(httpMethod, yelpUrl, parameters, consumerSecret, tokenSecret, { encodeSignature: false});
-      parameters['oauth_signature'] = oauth_signature;
-      return $http.jsonp(yelpUrl, {params: parameters})
+      parameters.oauth_signature = oauth_signature;
+      return $http.jsonp(yelpUrl, {params: parameters});
     }
   };       
 }]);

@@ -1,7 +1,7 @@
 <div>
   
   <div class="event create">
-     <h2>Name your event:</h2>
+    <h2>Name your event:</h2>
     <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
   </div>
 
@@ -110,57 +110,66 @@
   <!-- List of dates -->
   <div class="event create"><h3> Add date and time options: </h3>
 
-  <form role="form" ng-submit="addDateTimes()">
-    <div class="form-group">
-      <label for="Date">Pick a date</label>
-      <input type="date" id="Date" ng-model="date">
-      <label for="Time">Pick a time</label>
-      <input type="time" id="Time" ng-model="time">
-      <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
-      <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">{{dateTimeMessage}}</h3>
+    <form role="form" ng-submit="addDateTimes()">
+      <div class="form-group">
+        <label for="Date">Pick a date</label>
+        <input type="date" id="Date" ng-model="date">
+        <label for="Time">Pick a time</label>
+        <input type="time" id="Time" ng-model="time">
+        <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
+        <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">{{dateTimeMessage}}</h3>
+      </div>
+    </form>
+
+
+    <!-- List of picked dates -->
+    <div class="list-group">
+      <a href="#" class="list-group-item" ng-repeat="time in dateTimes" ng-click="removeDateTime(time)">
+        <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+      </a>
     </div>
-  </form>
-
-
-  <!-- List of picked dates -->
-  <div class="list-group">
-    <a href="#" class="list-group-item" ng-repeat="time in dateTimes" ng-click="removeDateTime(time)">
-      <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
-    </a>
-  </div>
   </div>
 
 
   <!-- Decide by date -->
   <div class="event create"><h3>Add a decide-by date</h3>
 
-  <form role="form" ng-submit="addDecideByTime()">
-    <div class="form-group">
-      <label for="DecideDate">Pick a date</label>
-      <input type="date" id="DecideDate" ng-model="decideDate">
-      <label for="DecideTime">Pick a time</label>
-      <input type="time" id="DecideTime" ng-model="decideTime">
-      <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
-      <h3 class="alert alert-danger validationMessage" ng-show="showDecideByMessage">{{decideByMessage}}</h3>
+    <form role="form" ng-submit="addDecideByTime()">
+      <div class="form-group">
+        <label for="DecideDate">Pick a date</label>
+        <input type="date" id="DecideDate" ng-model="decideDate">
+        <label for="DecideTime">Pick a time</label>
+        <input type="time" id="DecideTime" ng-model="decideTime">
+        <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
+        <h3 class="alert alert-danger validationMessage" ng-show="showDecideByMessage">{{decideByMessage}}</h3>
+      </div>
+    </form>
+
+    <div class="list-group">
+      <a href="#" class="list-group-item" ng-repeat="time in decideByTime" ng-click="removeDecideBy()">
+        <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
+      </a>
     </div>
-  </form>
-
-  <div class="list-group">
-    <a href="#" class="list-group-item" ng-repeat="time in decideByTime" ng-click="removeDecideBy()">
-      <h4 class="list-group-item-heading">{{ time | date:'EEEE, MMMM d, yyyy @ h:mma' }}</h4>
-    </a>
-  </div>
 
   </div>
+  <!-- Add Description -->
+  <div class="event create"><h3>Add a short description!</h3>
+    <form role="form">
+      <label for="EnterDescription">Enter a Description</label>
+      <input type="text" id="AddEventDescription" ng-model="eventDescription">
+    </form>
+  </div>
+
+  
   <!-- Submit Event -->
   <div class="event create"><h3>Send off your event!</h3>
 
-  <div class="row text-center">
-    <form role="form" ng-submit="submitEvent()">
-      <input type="submit" value="Submit" class="btn-lg btn btn-primary"/>
-    </form>
-    <h3 class="alert alert-danger validationMessage" ng-show="showValidationMessage">{{validationMessage}}</h3>
-  </div>
+    <div class="row text-center">
+      <form role="form" ng-submit="submitEvent()">
+        <input type="submit" value="Submit" class="btn-lg btn btn-primary"/>
+      </form>
+      <h3 class="alert alert-danger validationMessage" ng-show="showValidationMessage">{{validationMessage}}</h3>
+    </div>
 
   </div>
 </div>

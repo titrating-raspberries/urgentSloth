@@ -7,7 +7,7 @@ angular.module('UserService', []).factory('User', ['$http', function($http) {
             url: '/api/users/'
           }).then(function(res){
             return res.data;
-          })
+          });
       },
 
       getFriends: function(fbId){
@@ -26,7 +26,7 @@ angular.module('UserService', []).factory('User', ['$http', function($http) {
             method: 'POST',
             url: '/api/users/',
             data: userData
-          })
+          });
       },
 
       delete : function(id) {
@@ -38,7 +38,7 @@ angular.module('UserService', []).factory('User', ['$http', function($http) {
             method: 'POST',
             url: '/api/users/removeEvent',
             data: { eventID: eventID, fbId: fbId }
-          })
+          });
       }
 
   };       
