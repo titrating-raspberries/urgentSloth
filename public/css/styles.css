@@ -7,12 +7,16 @@ body {
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
 }
 
+#addAllBtn {
+margin: -5px 0 10px 0;
+}
+
 #photo{
   padding-top: 60px;
   padding-bottom: 300px;
   background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
   border: 20px solid black;
 }
 
@@ -215,7 +219,7 @@ body {
 }
 
 p {
-  margin: 0 0 2px; 
+  margin: 0 0 2px;
 }
 
 .voteButton {
@@ -277,7 +281,7 @@ p {
   padding: 7px 10px 7px 10px;
   margin-top: 15px;
   min-height: 20px;
-  white-space: pre-line; 
+  white-space: pre-line;
   line-height: 200%;
 }
 
