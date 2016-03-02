@@ -1,5 +1,5 @@
 <div>
-  
+
   <div class="event create">
     <h2>Name your event:</h2>
     <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
@@ -24,10 +24,10 @@
               <h4 class="card-title">{{friend.name}}</h4>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     </div>
-      
+
     <!-- List of attendees -->
     <div class='well well-sm'>
       <h3 class='eventSubtitle' >INVITEES</h3>
@@ -43,13 +43,13 @@
     </div>
   </div>
 
-  <div class="event create"><h2>Add restaurant options</h2>
+  <div class="event create"><h2>Add location options</h2>
 
   <!-- Dynamic search form using YelpAPI -->
   <form role="form" ng-submit="submit()">
     <div class="form-group">
-      <label for="termSearch">Name of restaurant:</label>
-      <input type="text" class="form-control" id="termSearch" ng-model="term">
+      <label for="termSearch">Name of Location:</label>
+      <input type="text" class="form-control" id="termSearch" ng-model="term" ng-model-options="{ getterSetter: true, allowInvalid: true }">
       <label for="locationSearch">Where:</label>
       <input type="text" class="form-control" id="locationSearch" ng-model="location">
     </div>
@@ -79,7 +79,7 @@
         <p class="card-text">{{restaurant.categories[0][0]}}</p>
         <a target="_blank" href="{{restaurant.url}}" style="display:block;">Visit website</a>
         <a target="_blank" href="http://maps.google.com/?q=?{{restaurant.location.display_address[0]}} {{restaurant.location.display_address[2]}}" style="display:block;">Find on Google Maps</a>
-      </div>  
+      </div>
     </div>
   </div>
 
@@ -102,7 +102,7 @@
         <p class="card-text">{{rest.categories[0][0]}}</p>
         <a target="_blank" href="{{rest.url}}" style="display:block;">Visit website</a>
         <a target="_blank" href="http://maps.google.com/?q=?{{rest.location.display_address[0]}} {{rest.location.display_address[2]}}" style="display:block;">Find in Google Maps</a>
-      </div>  
+      </div>
     </div>
 </div>
 
@@ -160,7 +160,7 @@
     </form>
   </div>
 
-  
+
   <!-- Submit Event -->
   <div class="event create"><h3>Send off your event!</h3>
 
