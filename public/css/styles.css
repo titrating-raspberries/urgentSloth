@@ -3,8 +3,8 @@ body {
     font-family: 'Lato', sans-serif;
   }
 
-textarea { 
-  resize: vertical; 
+textarea {
+  resize: vertical;
   min-height: 100px;
   max-height: 480px;
 }
@@ -217,9 +217,8 @@ textarea {
 }
 
 .eventDescription {
-  font-size: 20px;
+  font-size: 15px;
   font-style: italic;
-  color: #2d7b52;
   margin: 15px;
 }
 
@@ -228,7 +227,7 @@ textarea {
 }
 
 p {
-  margin: 0 0 2px; 
+  margin: 0 0 2px;
 }
 
 .voteButton {
@@ -290,7 +289,7 @@ p {
   padding: 7px 10px 7px 10px;
   margin-top: 15px;
   min-height: 20px;
-  white-space: pre-line; 
+  white-space: pre-line;
   line-height: 200%;
 }
 
