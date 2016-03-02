@@ -1,6 +1,7 @@
 body {
     overflow: scroll;
     font-family: 'Lato', sans-serif;
+    background-color: #bcbcbc;
   }
 
 textarea {
@@ -10,7 +11,8 @@ textarea {
 }
 
 .standardBodyClass {
-  background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
+  background-image: url('http://danypaul.com/wp-content/uploads/2015/09/348_1img_1150hdr.jpg');
+  background-attachment: fixed;
 }
 
 #addAllBtn {
@@ -20,10 +22,11 @@ margin: -5px 0 10px 0;
 #photo{
   padding-top: 60px;
   padding-bottom: 300px;
-  background-image: url('http://styledcanvas.com/wp-content/uploads/2015/04/IG-salmon.jpg');
+  background-image: url('http://danypaul.com/wp-content/uploads/2015/09/348_1img_1150hdr.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
-  border: 20px solid black;
+  background-size: 100% 100%;
+  border-top: 25px solid black;
+  border-bottom: 25px solid black;
 }
 
 .eventTitle{
@@ -97,22 +100,39 @@ margin: -5px 0 10px 0;
   padding-bottom: 60px;
 }
 
+.title span {
+  color: #2d7b52;
+}
+
 .landingText {
   color: #fff ;
   font-family: 'Lato', sans-serif;
   background-color: #202020   ;
   font-size: 50px;
   font-weight: 800;
+  padding-left: 50px;
+  margin-left: 50px;
 
 }
 
 .login {
-  color: #fff ;
+
+  margin-top: 50px;
+  color: #2d7b52;
   background-color:#202020  ;
   font-size: 30px;
   font-weight: 800;
   float: right;
+  padding: 5px;
+  border-radius: 5px;
 }
+
+.login:hover {
+  color: #cccccc;
+  background-color: #2d7b52;
+}
+
+
 
 .navbar {
     margin-bottom: 0;
