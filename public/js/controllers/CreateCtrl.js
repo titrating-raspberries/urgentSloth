@@ -34,6 +34,13 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     $scope.attendees[friend.fbId] = friend;
   };
 
+  $scope.addAllFriends = function() {
+    console.log('adding friends');
+    $scope.friends.forEach(function(friend) {
+      $scope.attendees[friend.fbId] = friend;
+    });
+  }
+
   $scope.removeFriend = function(friend) {
     delete $scope.attendees[friend.fbId];
     $scope.showLonelyMessage = Object.keys($scope.attendees).length === 0 ? true : false;
