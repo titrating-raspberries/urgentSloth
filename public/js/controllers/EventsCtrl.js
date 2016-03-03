@@ -19,14 +19,15 @@ angular.module('EventsCtrl', [])
     Event.getUserEvents($cookies.get('fbId'))
       .then(function(events) {
         var userFbId = $cookies.get('fbId');
-        
+
         //Events page only includes future events
         $scope.data.decidedEvents = events.filter(function(event){
-          return event.decision && new Date(event.decision.date) > Date.now();
+
+          return event.decision;
         });
 
         $scope.data.submittedEvents = events.filter(function(event){
-          return event.usersWhoSubmitted.indexOf(userFbId) !== -1 && (!event.decision || new Date(event.decision.date) > Date.now());
+          return event.usersWhoSubmitted.indexOf(userFbId) !== -1 && (!event.decision);
         });
 
         $scope.data.notVotedEvents = events.filter(function(event){
@@ -74,7 +75,7 @@ angular.module('EventsCtrl', [])
   $scope.submit = function (event, index) {
     dateVotesArr = $scope.data.notVotedEvents[index].dateVotesArr;
     locationVotesArr = $scope.data.notVotedEvents[index].locationVotesArr;
-    
+
     //if there are no votes in either vote arrays, show error messages
     if(dateVotesArr === undefined || dateVotesArr.indexOf(true) === -1){
       $scope.showDateTimeMessage = true;
@@ -89,10 +90,10 @@ angular.module('EventsCtrl', [])
 
     if( dateVotesArr && locationVotesArr && dateVotesArr.indexOf(true) > -1 && locationVotesArr.indexOf(true) > -1){
       var voteData = {
-          userFbId: $cookies.get('fbId'), 
+          userFbId: $cookies.get('fbId'),
           eventId: event._id,
-          dateVotesArr: dateVotesArr, 
-          locationVotesArr: locationVotesArr 
+          dateVotesArr: dateVotesArr,
+          locationVotesArr: locationVotesArr
         };
       Event.submitEventVotes(voteData);
       $route.reload();
