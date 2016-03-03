@@ -23,6 +23,37 @@ var pickWinner = function(choices, category) {
   return winner;
 }
 
+var decideUsersEvents = function(fbId) {
+    console.log("deciding event");
+    findUser({fbId: fbId})
+      .then(function (user) {
+        if (!user) {
+          console.log('user not found');
+        } else {
+          var userEvents = user.events;
+          findAllEvents({'_id': {$in: userEvents}})
+            .then(function(events) {
+              events.forEach(function(event) {
+                //if the event's deadline has passed and it doesn't have a decision, decide it
+                if((event.deadline < new Date() && event.decision === undefined) ||
+                    event.usersWhoSubmitted.length === event.users.length) {
+                  var decision = makeEventDecision(event);
+                console.log('decision is made and decision is ', decision);
+                  Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
+                      if (err) {
+                        console.error(err);
+                      }
+                    });
+                }
+              });
+            })
+        }
+      })
+      .fail(function (error) {
+        next(error);
+      });
+  }
+
 var makeEventDecision = function(event) {
   var date = pickWinner(event['dates'], 'date');
   var location = pickWinner(event['locations'],'location');
@@ -119,33 +150,7 @@ module.exports = {
       });
   },
 
-  decideUsersEvents: function(fbId) {
-    findUser({fbId: fbId})
-      .then(function (user) {
-        if (!user) {
-          console.log('user not found');
-        } else {
-          var userEvents = user.events;
-          findAllEvents({'_id': {$in: userEvents}})
-            .then(function(events) {
-              events.forEach(function(event) {
-                //if the event's deadline has passed and it doesn't have a decision, decide it
-                if(event.deadline < new Date() && event.decision === undefined) {
-                  var decision = makeEventDecision(event);
-                  Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
-                      if (err) {
-                        console.error(err);
-                      }
-                    });
-                }
-              });
-            })
-        }
-      })
-      .fail(function (error) {
-        next(error);
-      });
-  },
+  decideUsersEvents: decideUsersEvents,
 
   submitEventVotes: function(req, res, next) {
     var eventId = req.body.eventId;
@@ -172,6 +177,11 @@ module.exports = {
 
         //add user to list of user's who've submitted
         event.usersWhoSubmitted.push(userFbId);
+        console.log('users submitted is ', event.usersWhoSubmitted.length, "and total users is ", event.users.length);
+        if (event.usersWhoSubmitted.length === event.users.length) {
+          console.log("attempting to decide event");
+          decideUsersEvents(event.host.fbId);
+        }
 
         //save event
         Event.update({_id: event._id}, {dates: event.dates, locations: event.locations, usersWhoSubmitted: event.usersWhoSubmitted} ,function (err, savedEvent) {
