@@ -116,7 +116,7 @@ angular.module('EventsCtrl', [])
     Event.removeUser(event._id, fbId);
 
     //reload the page now that event is gone
-    // window.location.reload();
+    window.location.reload();
   };
 
 })
