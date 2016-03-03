@@ -35,7 +35,17 @@ angular.module('LocationService', [])
     });
   };
 
+  var ip = function() {
+    return $q(function(resolve, reject) {
+      $http.get('http://freegeoip.net/json/')
+        .success(function(res) {
+          resolve(res.city + ', ' + res.region_code);
+        }).error(reject);
+    });
+  };
+
   return {
-    browser: browser
+    browser: browser,
+    ip: ip,
   };
 }]);
