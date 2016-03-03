@@ -24,7 +24,6 @@ var pickWinner = function(choices, category) {
 }
 
 var decideUsersEvents = function(fbId) {
-    console.log("deciding event");
     findUser({fbId: fbId})
       .then(function (user) {
         if (!user) {
@@ -38,7 +37,6 @@ var decideUsersEvents = function(fbId) {
                 if((event.deadline < new Date() && event.decision === undefined) ||
                     event.usersWhoSubmitted.length === event.users.length) {
                   var decision = makeEventDecision(event);
-                console.log('decision is made and decision is ', decision);
                   Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
                       if (err) {
                         console.error(err);
@@ -177,11 +175,6 @@ module.exports = {
 
         //add user to list of user's who've submitted
         event.usersWhoSubmitted.push(userFbId);
-        console.log('users submitted is ', event.usersWhoSubmitted.length, "and total users is ", event.users.length);
-        if (event.usersWhoSubmitted.length === event.users.length) {
-          console.log("attempting to decide event");
-          decideUsersEvents(event.host.fbId);
-        }
 
         //save event
         Event.update({_id: event._id}, {dates: event.dates, locations: event.locations, usersWhoSubmitted: event.usersWhoSubmitted} ,function (err, savedEvent) {
@@ -192,6 +185,10 @@ module.exports = {
           }
         });
       } else{ //if event isn't found send a 404
+      if (event.usersWhoSubmitted.length === event.users.length) {
+        decideUsersEvents(event.host.fbId)
+        .then(function(){res.send(404);});
+      }
         res.send(404);
       }
     });

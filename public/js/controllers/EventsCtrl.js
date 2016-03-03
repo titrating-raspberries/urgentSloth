@@ -102,7 +102,6 @@ angular.module('EventsCtrl', [])
 
   $scope.declineEvent = function(event){
     var fbId =  $cookies.get('fbId');
-
     // remove eventid from the user's events
     User.removeEvent(fbId, event._id);
     //remove userid from the event's users
