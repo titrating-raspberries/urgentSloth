@@ -9,18 +9,23 @@ var createUser = Q.nbind(User.create, User);
 module.exports = {
 
   removeEvent: function (req, res) {
+    console.log(req);
     var fbId = req.body.fbId;
-    var eventId = req.body.fbId;
+    var eventId = req.body.eventID;
 
     findUser({fbId: fbId})
       .then(function (user) {
         if (user) {
           console.log('all user events are ', user.events);
-          var eventIndex = user.events.indexOf(eventId);
-          console.log('index of removal is ', eventIndex);
 
+          var eventList = [];
+          // user.events.forEach()
+          var eventIndex = user.events.indexOf(eventId);
+          console.log('the event id is ', eventId);
+          console.log('index of removal is ', eventIndex);
+          // if()
           user.events.splice(eventIndex,1);
-          console.log('after removal, event list is ', user.ßevents);
+          console.log('after removal, event list is ', user.events);
           user.save(function(err) {
                       if (err) {
                         console.error(err);

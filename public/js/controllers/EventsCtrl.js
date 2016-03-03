@@ -9,6 +9,11 @@ angular.module('EventsCtrl', [])
   //Index meaning: [needs your vote, submitted, decided, maxValue in array]
   //Events will only be shown on the page if value at event index === maxValue
   $scope.filters = [0,0,0,0];
+  $scope.selectedEvent = null;
+
+  $scope.bindEventToModal = function (event){
+    $scope.selectedEvent = event;
+  }
 
   $scope.filterEvents = function(index){
     $scope.filters[index] = !$scope.filters[index]*1;
@@ -19,6 +24,7 @@ angular.module('EventsCtrl', [])
     Event.getUserEvents($cookies.get('fbId'))
       .then(function(events) {
         var userFbId = $cookies.get('fbId');
+        console.log("USER EVENTS: ", events);
 
         //Events page only includes future events
         $scope.data.decidedEvents = events.filter(function(event){
@@ -101,6 +107,8 @@ angular.module('EventsCtrl', [])
   };
 
   $scope.declineEvent = function(event){
+
+    console.log('event to be deleted is ', event);
     var fbId =  $cookies.get('fbId');
     // remove eventid from the user's events
     User.removeEvent(fbId, event._id);
@@ -108,7 +116,7 @@ angular.module('EventsCtrl', [])
     Event.removeUser(event._id, fbId);
 
     //reload the page now that event is gone
-    window.location.reload();
+    // window.location.reload();
   };
 
 })
