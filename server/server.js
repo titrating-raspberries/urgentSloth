@@ -6,7 +6,7 @@ var passport          = require('passport');
 var fbStrategy        = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var app               = express();
-// var configAuth        = require('./config/auth.js');
+var configAuth        = require('./config/auth.js');
 
 //need to include this to add user to db
 var userController = require('./users/userController');
@@ -24,8 +24,8 @@ var userController = require('./users/userController');
 
 
 passport.use(new fbStrategy({
-    clientID:  process.env.FACEBOOK_APP_ID, // configAuth.facebookAuth.clientID, //
-    clientSecret: process.env.FACEBOOK_SECRET, //configAuth.facebookAuth.clientSecret, //
+    clientID:  process.env.FACEBOOK_APP_ID || configAuth.facebookAuth.clientID,
+    clientSecret: process.env.FACEBOOK_SECRET || configAuth.facebookAuth.clientSecret,
     callbackURL: 'https://whenwhere2.herokuapp.com/login/facebook/return',
     profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends']
   },
@@ -67,7 +67,7 @@ app.use(passport.session());
 var db = require('./config/db');
 
 //db conncection
-mongoose.connect(process.env.DB_URL);
+mongoose.connect(process.env.DB_URL || db.url);
 var connection = mongoose.connection;
 connection.on('error', function (err) { console.log('db connection err:',err)});
 
