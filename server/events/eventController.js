@@ -37,6 +37,7 @@ var decideUsersEvents = function(fbId) {
                 if((event.deadline < new Date() && event.decision === undefined) ||
                     event.usersWhoSubmitted.length === event.users.length) {
                   var decision = makeEventDecision(event);
+                  console.log('decision made!!');
                   Event.update({_id: event._id}, {decision: decision}, function (err, savedEvent) {
                       if (err) {
                         console.error(err);
@@ -182,7 +183,8 @@ module.exports = {
             next(err);
           } else {
             if (event.usersWhoSubmitted.length === event.users.length) {
-              decideUsersEvents(event.host.fbId);
+              console.log('about to decide event');
+              decideUsersEvents(userFbId);
             }
             res.send(savedEvent);
           }
