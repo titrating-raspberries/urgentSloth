@@ -84,7 +84,7 @@
         <input id="eventActionButton" type="submit" value="Submit Your Votes" class="btn btn-primary" ng-click="submit(event, $index)"/>
       </div>
     </div>
-     <button type="button" class="noAttendBtn pull-right btn btn-danger" data-toggle="modal" data-target="#declineModal">I can't attend</button>
+     <button type="button" class="noAttendBtn pull-right btn btn-danger" data-toggle="modal" data-target="#declineModal" ng-click="bindEventToModal(event)">I can't attend</button>
 
     <!-- Modal -->
     <div id="declineModal" class="modal fade" role="dialog">
@@ -97,7 +97,7 @@
             <h4 class="modal-title">Are you sure you want to decline this event?</h4>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(event)'>Decline</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(selectedEvent)'>Decline</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -164,7 +164,7 @@
         </div>
       </div>
     </div>
-  <button type="button" class="btn btn-danger noAttendBtn pull-right" data-toggle="modal" data-target="#declineModal">I can't attend</button>
+  <button type="button" class="btn btn-danger noAttendBtn pull-right" data-toggle="modal" data-target="#declineModal" ng-click="bindEventToModal(event)">I can't attend</button>
 
     <!-- Modal -->
     <div id="declineModal" class="modal fade" role="dialog">
@@ -177,7 +177,7 @@
             <h4 class="modal-title">Are you sure you want to decline this event?</h4>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(event)'>Decline</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(selectedEvent)'>Decline</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -223,7 +223,7 @@
         </div>
       </div>
       <!-- Trigger the modal with a button -->
-      <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#declineModal">I can't attend</button>
+      <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#declineModal" ng-click="bindEventToModal(event)">I can't attend</button>
 
       <!-- Modal -->
       <div id="declineModal" class="modal fade" role="dialog">
@@ -236,7 +236,7 @@
               <h4 class="modal-title">Are you sure you want to decline this event?</h4>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(event)'>Decline</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click='declineEvent(selectedEvent)'>Decline</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
           </div>

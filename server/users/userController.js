@@ -9,18 +9,27 @@ var createUser = Q.nbind(User.create, User);
 module.exports = {
 
   removeEvent: function (req, res) {
+    console.log(req);
     var fbId = req.body.fbId;
-    var eventId = req.body.fbId;
+    var eventId = req.body.eventID;
 
     findUser({fbId: fbId})
       .then(function (user) {
         if (user) {
+          console.log('all user events are ', user.events);
+
+          var eventList = [];
+          // user.events.forEach()
           var eventIndex = user.events.indexOf(eventId);
+          console.log('the event id is ', eventId);
+          console.log('index of removal is ', eventIndex);
+          // if()
           user.events.splice(eventIndex,1);
+          console.log('after removal, event list is ', user.events);
           user.save(function(err) {
                       if (err) {
                         console.error(err);
-                      } 
+                      }
                     });
         } else {
           console.error('Error finding user');
@@ -57,7 +66,7 @@ module.exports = {
           }
         });
   },
-  
+
   addEventToUsers: function (usersArray, eventId) {
     getAllUsers({'fbId': {$in: usersArray}})
       .then(function(users) {
@@ -66,7 +75,7 @@ module.exports = {
           user.save(function(err) {
             if (err) {
               console.error(err);
-            } 
+            }
           });
         });
       });
@@ -77,12 +86,12 @@ module.exports = {
     var name = profile.displayName;
     var picture = profile.photos[0].value;
     var friends = profile._json.friends.data.map(function(friend) {
-      return {fbId: friend.id}; 
+      return {fbId: friend.id};
     });
 
       findUser({fbId: fbId})
         .then(function (match) {
-          //if there's no match, we want to create a new user 
+          //if there's no match, we want to create a new user
           if (match === null) {
             var newUser = {
               name: name,
@@ -97,7 +106,7 @@ module.exports = {
             match.save(function (err) {
                 if (err){
                   return handleError(err);
-                } 
+                }
               });
           }
         })

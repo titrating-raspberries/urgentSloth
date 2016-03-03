@@ -31,7 +31,6 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.addFriend = function(friend) {
     $scope.showLonelyMessage = false;
     $scope.attendees[friend.fbId] = friend;
-    console.log($scope.attendees);
   };
 
   $scope.addAllFriends = function() {
@@ -49,7 +48,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.submit = function() {
     if ($scope.location) {
       $scope.showSpiffy = true;
-      Event.searchYelp($scope.term || 'food', $scope.location).then(function(results){
+      Event.searchYelp($scope.term || "food", $scope.location).then(function(results) {
         $scope.showSpiffy = false;
         $scope.yelpResults = results.data.businesses;
       }).catch(function(err) {
@@ -151,9 +150,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     event.name = $scope.eventName;
     event.description = $scope.eventDescription;
     event.deadline = $scope.decideByTime[0];
-
-    // event.host will be an object that stores the cookie data
-    event.host = $cookies.getAll();
+    //TODO ADD ADMIN USER DATA ON EVENT LISTING
 
     //Add locations from locations object
     event.locations = [];
@@ -176,9 +173,8 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     //Add logged in user
     event.users.push($cookies.get('fbId'));
 
-    Event.create(event).then(function(){
-      $location.path('/events');
-
+    Event.create(event).then(function() {
+      $location.path("/events");
     });
   };
 });
