@@ -181,18 +181,16 @@ module.exports = {
           if (err) {
             next(err);
           } else {
+            if (event.usersWhoSubmitted.length === event.users.length) {
+              decideUsersEvents(event.host.fbId);
+            }
             res.send(savedEvent);
           }
         });
       } else{ //if event isn't found send a 404
-      if (event.usersWhoSubmitted.length === event.users.length) {
-        decideUsersEvents(event.host.fbId)
-        .then(function(){res.send(404);});
-      }
         res.send(404);
       }
     });
   }
-
 
 };
