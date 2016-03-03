@@ -67,7 +67,7 @@ app.use(passport.session());
 var db = require('./config/db');
 
 //db conncection
-mongoose.connect(db.url);
+mongoose.connect(process.env.DB_URL);
 var connection = mongoose.connection;
 connection.on('error', function (err) { console.log('db connection err:',err)});
 
