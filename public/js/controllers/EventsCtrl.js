@@ -1,10 +1,12 @@
-angular.module('EventsCtrl', [])
+angular.module('EventsCtrl', ['ui.bootstrap'])
 
-.controller('EventsController', function($scope, $cookies, Event, User,$route) {
+.controller('EventsController', function($scope, $cookies, Event, User, $route) {
 
   $scope.showNoEventsMessage = false;
   $scope.noEventsMessage = 'You have no scheduled events. Time to create one?';
   $scope.data = {};
+  $scope.show = 'Show Details';
+  $scope.isCollapsed = true;
   //Filter array (0=excl/1=excl)
   //Index meaning: [needs your vote, submitted, decided, maxValue in array]
   //Events will only be shown on the page if value at event index === maxValue
@@ -13,7 +15,14 @@ angular.module('EventsCtrl', [])
 
   $scope.bindEventToModal = function (event){
     $scope.selectedEvent = event;
-  }
+  };
+
+  $scope.showOrHideDetails = function( event ) {
+    console.log(event);
+
+    $scope.isCollapsed = !$scope.isCollapsed;
+    $scope.show = $scope.isCollapsed ? 'Show Details' : 'Hide Details';
+  };
 
   $scope.filterEvents = function(index){
     $scope.filters[index] = !$scope.filters[index]*1;
@@ -119,15 +128,5 @@ angular.module('EventsCtrl', [])
     window.location.reload();
   };
 
-})
-.directive('toggleClass', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      element.bind('click', function() {
-        element.toggleClass(attrs.toggleClass);
-      });
-    }
-  };
 });
 

@@ -1,8 +1,8 @@
 body {
-    overflow: scroll;
-    font-family: 'Lato', sans-serif;
-    background-color: #bcbcbc;
-  }
+  overflow: scroll;
+  font-family: 'Lato', sans-serif;
+  background-color: #bcbcbc;
+}
 
 textarea {
   resize: vertical;
@@ -165,7 +165,26 @@ margin: -5px 0 10px 0;
   background-color: #2d7b52;
 }
 
+.rotatedUp {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -moz-transform: rotate(90deg); /* Firefox */
+  -webkit-transform: rotate(90deg); /* Safari and Chrome */
+  -o-transform: rotate(90deg);
+}
 
+.rotatedDown {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -moz-transform: rotate(90deg); /* Firefox */
+  -webkit-transform: rotate(90deg); /* Safari and Chrome */
+  -o-transform: rotate(90deg);
+}
+
+.hideDetails {
+  font-size: 10px;
+  color: #2d7b52;
+}
 
 .navbar {
     margin-bottom: 0;
