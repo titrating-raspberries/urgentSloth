@@ -14,13 +14,13 @@
         controller: 'CreateController'
     })
 
-    // event page 
+    // event page
     .when('/events', {
         templateUrl: 'views/events.html',
         controller: 'EventsController'
     })
 
-    // past events page 
+    // past events page
     .when('/pastEvents', {
         templateUrl: 'views/pastEvents.html',
         controller: 'EventsController'
@@ -31,7 +31,12 @@
         templateUrl: 'views/login.html',
         controller: 'LogoutController'
     })
-    
+
+    .when('/calendar', {
+        templateUrl: 'views/calendar.html',
+        controller: 'CalendarController'
+    })
+
     .otherwise({
       redirectTo: '/events'
     });

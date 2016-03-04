@@ -8,6 +8,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-cookies": "latest",
-    "oauth-signature": "latest"
+    "oauth-signature": "latest",
+    "fullcalendar": "^2.6.1"
   }
 }

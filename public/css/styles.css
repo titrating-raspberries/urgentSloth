@@ -75,6 +75,10 @@ margin: -5px 0 10px 0;
   background-color: #2d7b52;
 }
 
+.calendarView {
+  height: 600px;
+}
+
 .event{
   border-radius: 10px;
   padding: 35px;

@@ -6,6 +6,7 @@ angular.module('sampleApp', [
   'LogoutCtrl',
   'IndexCtrl',
 	'EventsCtrl',
+  'CalendarCtrl',
 	'UserService',
 	'EventService',
 ])
