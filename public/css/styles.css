@@ -215,6 +215,27 @@ margin: -5px 0 10px 0;
   width: 100px;
 }
 
+/*.card-img-top:hover {
+  background-color: red;
+  border-radius: 50%;
+  width: 100px;
+}*/
+
+.addFriendsList  >  .card-img-top:hover {
+  border-radius: 50%;
+  width: 100px;
+  border: solid #2d7b52 5px;
+  cursor: pointer;
+}
+
+.invitees  >  .card-img-top:hover {
+  border-radius: 50%;
+  width: 100px;
+  border: solid red 5px;
+  color: #990000;
+  cursor: pointer;
+}
+
 .row {
   width: 100%;
   margin: 0;
