@@ -3,8 +3,11 @@ angular.module('CalendarCtrl', [])
 
   $scope.test ="hello world";
   $scope.calendarEvents = [];
+  $scope.firstName = "YOUR";
+  $scope.firstName = $cookies.get('name').split(' ')[0].toUpperCase()+"'S";
 
   var userFbId = $cookies.get('fbId');
+  console.log(userFbId);
 
   Event.getUserEvents($cookies.get('fbId'))
   .then(function(events) {
@@ -25,15 +28,11 @@ angular.module('CalendarCtrl', [])
       });
     });
     $(document).ready(function() {
-      // page is now ready, initialize the calendar...
-      // setTimeout(function (){
-        console.log($scope.calendarEvents);
-        $('#calendar').fullCalendar({
-          events: $scope.calendarEvents,
-            // put your options and callbacks here
-          // eventColor: '#2d7b52'
-        })
-      // }, 500);
-  });
+      console.log($scope.calendarEvents);
+      $('#calendar').fullCalendar({
+        events: $scope.calendarEvents,
+          // put your options and callbacks here
+      })
+    });
   });
 });
