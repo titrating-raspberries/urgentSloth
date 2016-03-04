@@ -75,6 +75,23 @@ margin: -5px 0 10px 0;
   background-color: #2d7b52;
 }
 
+#calendar {
+  margin-top: 1.5em;
+}
+
+.calendarView {
+  height: 1100px;
+}
+
+.calendarTitle {
+  text-align: center;
+  font-family: 'Shanti', sans-serif;
+  font-size: 3em;
+  font-weight: bold;
+  color: green;
+  margin-top: -.5em;
+}
+
 .event{
   border-radius: 10px;
   padding: 35px;
@@ -89,6 +106,22 @@ margin: -5px 0 10px 0;
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: #eee;
+}
+
+
+.legend {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.legend div {
+  background-color: green;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+  padding-left: 10px;
+  width: 160px;
 }
 
 .title {
@@ -248,6 +281,38 @@ margin: -5px 0 10px 0;
   font-size: 15px;
   font-style: italic;
   margin: 15px;
+}
+.ui-dialog {
+  position: absolute;
+  z-index: 1;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+}
+#ui-id-1 {
+  padding-left: 10px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  background-color: gray;
+  position: absolute;
+  right: 0;
+  top:0;
+}
+
+#eventInfo {
+  font-weight: normal;
+  background-color: white;
+  opacity: 100%;
+  border: solid black 1px;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+  font-family: 'Lato', sans-serif;
+  color: green;
+  padding-left: 3em;
+  text-indent:-2.5em;
 }
 
 .highlight:hover {
