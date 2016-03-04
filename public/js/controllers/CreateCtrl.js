@@ -44,6 +44,10 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     $scope.showLonelyMessage = Object.keys($scope.attendees).length === 0 ? true : false;
   };
 
+  Location.ip().then(function(ipLocation) {
+    $scope.location = ipLocation;
+  }, console.error);
+
   //Fires up Yelp search for restaurants based on 'Add location' form on create.html
   $scope.submit = function() {
     if ($scope.location) {
