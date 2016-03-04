@@ -10,37 +10,51 @@ angular.module('LocationService', [])
             lat: position.coords.latitude,
             lng: position.coords.longitude
           });
-        }, reject);
+        }, function(err) {
+          reject(err.message);
+        });
       } else {
-        reject(new Error('Geolocation is not supported'));
+        reject('Geolocation is not supported');
       }
     });
   };
 
   var reverseGeocode = function(coords) {
     return $q(function(resolve, reject) {
-      var url = 'http://maps.google.com/maps/api/geocode/json?latlng=';
+      var url = 'https://maps.google.com/maps/api/geocode/json?latlng=';
       url += coords.lat + ',' + coords.lng;
-      $http.get(url).success(resolve).error(reject);
+      $http.get(url)
+        .then(function(res) {
+          resolve(res.data);
+        })
+        .catch(function() {
+          reject('Error retrieving address from coords.');
+        });
     });
   };
 
   var browser = function() {
     return $q(function(resolve, reject) {
       geoLocate()
-        .then(reverseGeocode, reject)
-        .then(function(reversed) {
-          resolve(reversed.results[0].formatted_address);
-        });
+      .then(reverseGeocode)
+      .then(function(reversed) {
+        resolve(reversed.results[0].formatted_address);
+      })
+      .catch(function(err) {
+        reject(err);
+      });
     });
   };
 
   var ip = function() {
     return $q(function(resolve, reject) {
-      $http.get('http://freegeoip.net/json/')
-        .success(function(res) {
-          resolve(res.city + ', ' + res.region_code);
-        }).error(reject);
+      $http.get('https://freegeoip.net/json/')
+        .then(function(res) {
+          resolve(res.data.city + ', ' + res.data.region_code);
+        })
+        .catch(function() {
+          reject('Error retrieving IP location.');
+        });
     });
   };
 

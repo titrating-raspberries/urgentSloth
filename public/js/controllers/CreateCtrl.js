@@ -1,4 +1,4 @@
-angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, User, Event) {
+angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, Location, User, Event) {
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
@@ -42,6 +42,24 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.removeFriend = function(friend) {
     delete $scope.attendees[friend.fbId];
     $scope.showLonelyMessage = Object.keys($scope.attendees).length === 0 ? true : false;
+  };
+
+  Location.ip()
+    .then(function(ipLocation) {
+      $scope.location = ipLocation;
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+
+  $scope.getUserLocation = function() {
+    Location.browser()
+      .then(function(browserLocation) {
+        $scope.location = browserLocation;
+      })
+      .catch(function(err) {
+        $scope.locationError = err;
+      });
   };
 
   //Fires up Yelp search for restaurants based on 'Add location' form on create.html

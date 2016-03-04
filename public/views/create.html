@@ -2,14 +2,14 @@
 
   <div class="event create">
     <h2>Name your event:</h2>
-    <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come...">
+    <input type="text" class="form-control eventname text-center" ng-model="eventName" placeholder="Name it and they will come..." />
   </div>
 
   <!-- Add Description -->
   <div class="event create">
     <h2>Add a short description!</h2>
-    <form role="form" id='usrform'>
-      <textarea class="form-control eventname text-center" maxlength="140" ng-model='eventDescription' form="usrform"  placeholder="What's the occasion?"></textarea>
+    <form role="form" id="usrform">
+      <textarea class="form-control eventname text-center" maxlength="140" ng-model="eventDescription" form="usrform" placeholder="What's the occasion?"></textarea>
     </form>
   </div>
 
@@ -19,11 +19,11 @@
     <form>
       <fieldset class="form-group">
         <!-- <label for="friendSearch">Find friends:</label> -->
-        <input class="form-control" ng-model='friendName' id="friendSearch" placeholder="Filter friends by name"/>
+        <input class="form-control" ng-model="friendName" id="friendSearch" placeholder="Filter friends by name" />
       </fieldset>
     </form>
     <button id="addAllBtn" class="btn btn-primary" ng-click="addAllFriends()">Add all friends!</button>
-    <div class='well well-sm'>
+    <div class="well well-sm">
       <div class="row scroll">
         <div style="width: {{friends.length * 190}}px">
           <div class="square text-center addFriendsList" ng-repeat="friend in friends | filter:{name:friendName}" ng-click="addFriend(friend)">
@@ -37,8 +37,8 @@
     </div>
 
     <!-- List of attendees -->
-    <div class='well well-sm'>
-      <h3 class='eventSubtitle' >INVITEES</h3>
+    <div class="well well-sm">
+      <h3 class="eventSubtitle">INVITEES</h3>
       <div class="row text-center">
         <h3 ng-show="showLonelyMessage">{{lonelyMessage}}</h3>
         <div class="square text-center invitees" ng-repeat="attendee in attendees" ng-click="removeFriend(attendee)">
@@ -57,13 +57,15 @@
   <form role="form" ng-submit="submit()">
     <div class="form-group">
       <label for="termSearch">Name of Location:</label>
-      <input type="text" class="form-control" id="termSearch" ng-model="term" ng-model-options="{ getterSetter: true, allowInvalid: true }">
+      <input type="text" class="form-control" id="termSearch" ng-model="term" ng-model-options="{ getterSetter: true, allowInvalid: true }" />
       <label for="locationSearch">Where:</label>
-      <input type="text" class="form-control" id="locationSearch" ng-model="location">
+      <input type="text" class="form-control" id="locationSearch" ng-model="location" />
+      <button type="button" ng-click="getUserLocation()">Locate Me</button>
+      <span class="locationError" ng-show="locationError">{{ locationError }}</span>
     </div>
-    <input type="submit" value="Search" class="btn btn-primary searchRestButton"/>
+    <input type="submit" value="Search" class="btn btn-primary searchRestButton" />
     <button type="button" class="btn btn-info searchRestButton" data-toggle="collapse" data-target="#collapse" ng-show="yelpResults.length" ng-click="toggle = !toggle">{{toggle && 'Hide' || 'Show'}} results</button>
-    <img src='css/spiffy.gif' ng-show="showSpiffy">
+    <img src="css/spiffy.gif" ng-show="showSpiffy" />
   </form>
 
   <!-- Search results from Yelp API -->
@@ -77,8 +79,8 @@
       </div>
 
       <div class="col-xs-2">
-        <img class="restImage" src="{{restaurant.image_url}}">
-        <img class="restImage review" src="{{restaurant.rating_img_url_large}}">
+        <img class="restImage" src="{{restaurant.image_url}}" />
+        <img class="restImage review" src="{{restaurant.rating_img_url_large}}" />
         <p>{{restaurant.review_count}} reviews</p>
       </div>
 
@@ -93,15 +95,15 @@
 
   <!-- List of locations -->
     <div class="well well-sm">
-      <h3 class='eventSubtitle'>MY PICKS</h3>
+      <h3 class="eventSubtitle">MY PICKS</h3>
 
     <h3 class = "text-center" ng-show="showNoLocationsMessage">{{noLocationsMessage}}</h3>
 
     <div class="row highlight" ng-repeat="rest in locations">
 
       <div class="col-xs-2">
-        <img class="restImage" src="{{rest.image_url}}">
-        <img class="restImage review" src="{{rest.rating_img_url_large}}">
+        <img class="restImage" src="{{rest.image_url}}" />
+        <img class="restImage review" src="{{rest.rating_img_url_large}}" />
         <p>{{rest.review_count}} reviews</p>
       </div>
 
@@ -121,10 +123,10 @@
     <form role="form" ng-submit="addDateTimes()">
       <div class="form-group">
         <label for="Date">Pick a date</label>
-        <input type="date" id="Date" ng-model="date">
+        <input type="date" id="Date" ng-model="date" />
         <label for="Time">Pick a time</label>
-        <input type="time" id="Time" ng-model="time">
-        <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
+        <input type="time" id="Time" ng-model="time" />
+        <input type="submit" value="Add" class="btn btn-primary dateAdder" />
         <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">{{dateTimeMessage}}</h3>
       </div>
     </form>
@@ -145,10 +147,10 @@
     <form role="form" ng-submit="addDecideByTime()">
       <div class="form-group">
         <label for="DecideDate">Pick a date</label>
-        <input type="date" id="DecideDate" ng-model="decideDate">
+        <input type="date" id="DecideDate" ng-model="decideDate" />
         <label for="DecideTime">Pick a time</label>
-        <input type="time" id="DecideTime" ng-model="decideTime">
-        <input type="submit" value="Add" class="btn btn-primary dateAdder"/>
+        <input type="time" id="DecideTime" ng-model="decideTime" />
+        <input type="submit" value="Add" class="btn btn-primary dateAdder" />
         <h3 class="alert alert-danger validationMessage" ng-show="showDecideByMessage">{{decideByMessage}}</h3>
       </div>
     </form>

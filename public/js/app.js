@@ -9,6 +9,7 @@ angular.module('sampleApp', [
   'CalendarCtrl',
 	'UserService',
 	'EventService',
+	'LocationService', // TODO: move dependencies to load when required
 ])
 
 .factory('Auth', ['$http','$cookies', function($http, $cookies) {
