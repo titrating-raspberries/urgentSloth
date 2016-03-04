@@ -60,6 +60,8 @@
       <input type="text" class="form-control" id="termSearch" ng-model="term" ng-model-options="{ getterSetter: true, allowInvalid: true }" />
       <label for="locationSearch">Where:</label>
       <input type="text" class="form-control" id="locationSearch" ng-model="location" />
+      <button type="button" ng-click="getUserLocation()">Locate Me</button>
+      <span class="locationError" ng-show="locationError">{{ locationError }}</span>
     </div>
     <input type="submit" value="Search" class="btn btn-primary searchRestButton" />
     <button type="button" class="btn btn-info searchRestButton" data-toggle="collapse" data-target="#collapse" ng-show="yelpResults.length" ng-click="toggle = !toggle">{{toggle && 'Hide' || 'Show'}} results</button>
