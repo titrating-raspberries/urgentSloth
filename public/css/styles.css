@@ -75,8 +75,21 @@ margin: -5px 0 10px 0;
   background-color: #2d7b52;
 }
 
+#calendar {
+  margin-top: 1.5em;
+}
+
 .calendarView {
-  height: 600px;
+  height: 1000px;
+}
+
+.calendarTitle {
+  text-align: center;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 3em;
+  font-weight: bold;
+  color: green;
+  margin-top: -.5em;
 }
 
 .event{
@@ -93,6 +106,22 @@ margin: -5px 0 10px 0;
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: #eee;
+}
+
+.legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-bottom: 20px;
+}
+
+.legend div {
+  background-color: green;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  padding-left: 10px;
+  width: 160px;
 }
 
 .title {
