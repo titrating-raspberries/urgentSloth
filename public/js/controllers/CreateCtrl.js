@@ -1,4 +1,4 @@
-angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, User, Event) {
+angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, Location, User, Event) {
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
