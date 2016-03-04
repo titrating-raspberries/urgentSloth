@@ -9,6 +9,7 @@
     "angular-route": "latest",
     "angular-cookies": "latest",
     "oauth-signature": "latest",
-    "fullcalendar": "^2.6.1"
+    "fullcalendar": "^2.6.1",
+    "jquery-ui": "^1.11.4"
   }
 }
