@@ -18,7 +18,7 @@ angular.module('EventsCtrl', ['ui.bootstrap'])
   };
 
   $scope.showOrHideDetails = function( event ) {
-    console.log(event);
+    console.log("EVENT OBJECT", event);
 
     $scope.isCollapsed = !$scope.isCollapsed;
     $scope.show = $scope.isCollapsed ? 'Show Details' : 'Hide Details';

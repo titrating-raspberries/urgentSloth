@@ -14,10 +14,10 @@
   <!-- notSubmitted events -->
   <div class='event' ng-repeat="event in data.notVotedEvents" ng-show="filters[0] === filters[3]">
     <div class='eventTitle'> {{ event.name }} <span class="badge">Needs your vote</span><br>
-    <div class='hideDetails' ng-click="showOrHideDetails(event)"> {{ show }} </div>
+    <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
     </div>
 
-    <div uib-collapse="isCollapsed">
+    <div ng-attr-id="{{event._id}}" class="panel-collapse collapse" >
       <!-- Event Description -->
       <div class="well well-sm" ng-if="event.description">
         <div class='eventSubtitle'>Description:  </div>
@@ -121,10 +121,10 @@
   <!-- Submitted events -->
   <div class='event' ng-repeat="event in data.submittedEvents" ng-show="filters[1] === filters[3]">
     <div class='eventTitle'>{{ event.name }}   <span class="badge">Submitted</span><br>
-    <div class='hideDetails' ng-click="showOrHideDetails($event)"> {{ show }} </div>
+    <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
     </div>
 
-    <div uib-collapse="isCollapsed"  >
+    <div ng-attr-id="{{event._id}}" class="panel-collapse collapse" >
       <div class="well well-sm" ng-if="event.description">
         <div class='eventSubtitle'>Description:  </div>
         <div class="eventDescription"> {{ event.description }} </div>
@@ -200,10 +200,10 @@
   <!-- Decided events -->
   <div class='event' ng-repeat="event in data.decidedEvents" ng-show="filters[2] === filters[3]">
     <div class='eventTitle'>{{ event.name }}   <span class="badge">Decided</span><br>
-    <div class='hideDetails' ng-click="showOrHideDetails(event)"> {{ show }} </div>
+    <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
     </div>
 
-    <div uib-collapse="isCollapsed">
+    <div ng-attr-id="{{event._id}}" class="panel-collapse collapse" >
 
       <div class="well well-sm" ng-if="event.description">
         <div class='eventSubtitle'>Description:  </div>
