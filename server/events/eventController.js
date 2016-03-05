@@ -39,7 +39,7 @@ var checkEventAndNotify = function() {
         emailListStr = emailList.join(', ');
         emailList.forEach( function(email) {
           console.log('send email to', email);
-          var transporter = nodemailer.createTransport('smtps://webdevtestserver@gmail.com:wordpass321@smtp.gmail.com');
+          var transporter = nodemailer.createTransport('smtps://webdevtestserver@gmail.com:titrating-raspberries@smtp.gmail.com');
           var mailOptions = {
               from: '"Your Events" <events@whereandwhen.com>', // sender address
               to: email, // list of receivers
