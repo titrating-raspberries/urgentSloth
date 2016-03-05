@@ -29,10 +29,14 @@ var userController = require('./users/userController');
 passport.use(new fbStrategy({
     clientID:  process.env.FACEBOOK_APP_ID || configAuth.facebookAuth.clientID,
     clientSecret: process.env.FACEBOOK_SECRET || configAuth.facebookAuth.clientSecret,
-    callbackURL: process.env.CALLBACK_URL || 'http://localhost:3000/login/facebook/return',
-    profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends', 'link']
+
+    callbackURL: 'http://localhost:3000/login/facebook/return',
+    profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends', 'email', 'link'],
+
   },
   function(accessToken, refreshToken, profile, cb) {
+    profile.email=profile.emails[0];
+    console.log('PROFILE FROM FB IS ', profile);
     //call a function which checks if user is in db
     userController.createOrFindOne(profile);
     return cb(null, profile);

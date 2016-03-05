@@ -11,6 +11,7 @@ var eventSchema = new mongoose.Schema({
     decision: {},// object with decided time and location, undefined until after deadline
     description: String,
     host: {}, //object that will come from $cookies when event is created
+    notified: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('Event', eventSchema);
