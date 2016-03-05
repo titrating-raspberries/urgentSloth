@@ -6,7 +6,10 @@ var passport          = require('passport');
 var fbStrategy        = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var app               = express();
-var configAuth        = require('./config/auth.js');
+
+if (!process.env.FACEBOOK_APP_ID) {
+  var configAuth        = require('./config/auth.js');
+}
 
 //need to include this to add user to db
 var userController = require('./users/userController');
