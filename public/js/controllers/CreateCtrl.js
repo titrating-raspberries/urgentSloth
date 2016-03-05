@@ -31,7 +31,9 @@ angular.module('CreateCtrl', ['ui.bootstrap']).controller('CreateController', fu
 
   $scope.today = function(){
     $scope.dt = new Date();
+    $scope.ddt = new Date();
   };
+  $scope.today();
   $scope.clear = function() {
     $scope.dt = null;
   };
@@ -155,7 +157,8 @@ angular.module('CreateCtrl', ['ui.bootstrap']).controller('CreateController', fu
   $scope.addDecideByTime = function() {
     //Allow only one decideBy time
     if(!$scope.decideByTime.length) {
-      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
+      // var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
+      var decideBy = new Date(1 * $scope.ddt);
       var minDateAndTime = Math.min.apply(null, Object.keys($scope.dateTimes).map(function(key) {
         return 1*$scope.dateTimes[key];
       }));
