@@ -125,7 +125,16 @@ angular.module('EventsCtrl', ['ui.bootstrap'])
 
     //reload the page now that event is gone
     window.location.reload();
+  }
+})
+.directive('toggleClass', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      element.bind('click', function() {
+        element.toggleClass(attrs.toggleClass);
+      });
+    }
   };
-
 });
 
