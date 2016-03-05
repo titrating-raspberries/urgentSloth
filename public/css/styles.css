@@ -109,6 +109,14 @@ margin: -5px 0 10px 0;
 }
 
 
+.hosted {
+  color: #2d7b52;
+}
+
+.hostPic {
+  margin-top: -40px;
+}
+
 .legend {
   font-weight: bold;
   font-size: 1.2em;
