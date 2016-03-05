@@ -54,6 +54,7 @@ module.exports = {
         .then(function (user) {
           if(user !== null){
             var friendArray = user.friends.map(function(friend) {
+
               return friend.fbId;
             });
             getAllUsers({'fbId': {$in: friendArray}})
@@ -83,9 +84,11 @@ module.exports = {
 
   createOrFindOne: function (profile) {
     var url = profile.profileUrl;
+    // console.log(profile);
     var fbId = profile.id;
     var name = profile.displayName;
     var picture = profile.photos[0].value;
+    var email = profile.email;
     var friends = profile._json.friends.data.map(function(friend) {
       return {fbId: friend.id};
     });
@@ -94,11 +97,13 @@ module.exports = {
         .then(function (match) {
           //if there's no match, we want to create a new user
           if (match === null) {
+            console.log("EMAIL IS ", email);
             var newUser = {
               name: name,
               fbId: fbId,
               picture: picture,
               friends: friends,
+              email: email,
               url: url,
             };
             createUser(newUser);
@@ -106,6 +111,7 @@ module.exports = {
             match.url = url;
             match.friends = friends;
             match.picture = picture;
+            match.email = email;
             match.save(function (err) {
                 if (err){
                   return handleError(err);

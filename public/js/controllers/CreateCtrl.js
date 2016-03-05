@@ -196,8 +196,14 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
       event.users.push(fbId);
     });
 
+    event.emails = [];
+    Object.keys($scope.attendees).forEach(function(fbId) {
+      event.emails.push(fbId.email);
+    });
     //Add logged in user
     event.users.push($cookies.get('fbId'));
+
+    console.log("EVENT EMAILS ARE ,", event.emails);
 
     Event.create(event).then(function() {
       $location.path("/events");

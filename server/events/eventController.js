@@ -2,14 +2,84 @@ var Event = require('./eventModel.js');
     User = require('../users/userModel.js');
     Q = require('q');
     userController = require('../users/userController');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+var CronJob = require('cron').CronJob;
+// var http = require('http');
+
 
 // Promisify a few mongoose methods with the `q` promise library
 var findEvent = Q.nbind(Event.findOne, Event);
 var createEvent = Q.nbind(Event.create, Event);
+var updateEvent = Q.nbind(Event.update, Event);
 var findAllEvents = Q.nbind(Event.find, Event);
+var getAllUsers = Q.nbind(User.find, User);
 
 var findUser = Q.nbind(User.findOne, User);
 var getAllUsers = Q.nbind(User.find, User);
+
+
+var checkEventAndNotify = function() {
+  console.log('CHECKEVENTANDNOTIFY');
+  findAllEvents({ notified: false })
+  .then(function (events) {
+    var EventsToNotify = [];
+    events.forEach( function (event) {
+      if (event.decision){
+        EventsToNotify.push(event);
+      };
+    });
+
+    EventsToNotify.forEach(function(event){
+      updateEvent({name: event.name}, {notified: 'true'}, { multi: false }, function(err, success){console.log("RESULT OF NOTIFIED CHANGE ON EVENT ISSSSSSSS", err,'or', success)});
+      getAllUsers({ 'fbId':  { $in: event.users}})
+      .then(function (userList) {
+        var emailList= [];
+        userList.forEach(function (user) { emailList.push(user.email.value); });
+        emailListStr = emailList.join(', ');
+        emailList.forEach( function(email) {
+          console.log('send email to', email);
+          var transporter = nodemailer.createTransport('smtps://webdevtestserver@gmail.com:titrating-raspberries@smtp.gmail.com');
+          var mailOptions = {
+              from: '"Your Events" <events@whereandwhen.com>', // sender address
+              to: email, // list of receivers
+              subject: 'You have an event coming up!', // Subject line
+              text: 'Hello world', // plaintext body
+              html: '<b>Hello world </b>' // html body
+          };
+
+          transporter.sendMail({
+          from: 'walkingonglass@gmail.com',
+            to: email,
+            subject: 'You have an upcoming event!',
+            text: 'Please visit When and Where to check for you upcoming',
+          }, function(error, info){
+              if (error){
+                console.log('error is ', error);
+              } else if (info){
+                console.log('info is ', info);
+              } else {
+                console.log('nothing is happening');
+              }
+          });
+        });
+      });
+
+    });
+
+  });
+}
+
+checkEventAndNotify();
+
+// var notifications = new CronJob('*/ * * * *', function() {
+
+//   },
+//   checkEventAndNotify,
+//   true,
+//   timeZone: 'America/Los_Angeles'
+// );
+
 
 var pickWinner = function(choices, category) {
   var mostVotes = 0;
