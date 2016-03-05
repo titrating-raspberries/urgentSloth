@@ -1,5 +1,4 @@
 body {
-  overflow: scroll;
   font-family: 'Lato', sans-serif;
   background-color: #bcbcbc;
 }
@@ -9,6 +8,64 @@ textarea {
   min-height: 100px;
   max-height: 480px;
 }
+
+/* HEADER
+==================*/
+header {
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 2.25em;
+  font-weight: bold;
+}
+
+#logo {
+  height: 30px;
+}
+
+#primary-nav ul {
+  margin: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+#primary-nav li {
+  padding: 10px 15px;
+}
+
+#primary-nav a {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#user-nav {
+  margin-left: auto;
+}
+
+.dropdown-toggle {
+  border-radius: 5px;
+}
+
+/* VIEW: create
+==================*/
+
+#locationSearch {
+  margin-bottom: 10px;
+}
+
+.searchRestButton {
+  margin-top: 0 !important; /* FIXME */
+}
+
+/* then chaos */
 
 .standardBodyClass {
   background-image: url('http://danypaul.com/wp-content/uploads/2015/09/348_1img_1150hdr.jpg');
@@ -205,20 +262,13 @@ margin: -5px 0 10px 0;
 
 .navbar {
     margin-bottom: 0;
-    background-color: #2d7b52;
+    background-color: #222;
     z-index: 100;
     border: 0;
     font-size: 18px !important;
     font-weight: 600 !important;
     line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    border-radius: 0;
     color: #fff;
-}
-
-.navOption, #dropdownMenu1{
-    color: #fff !important;
-    margin-top: 30px;
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
@@ -231,14 +281,12 @@ margin: -5px 0 10px 0;
 }
 
 .dropdown-menu {
-  background-color: #2d7b52 !important;
+  background-color: #222 !important;
 }
 
 .dropdown-menu li a {
   color: #fff !important;
-  background-color: #2d7b52 !important;
   margin-top: 0px !important;
-
 }
 
 .navbar-default .navbar-toggle {
