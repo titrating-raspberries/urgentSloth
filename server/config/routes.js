@@ -11,9 +11,9 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  //user routes 
+  //user routes
   app.get('/api/users', UserController.getUsers);
-  
+
   app.get('/api/users/:fbId', UserController.getUserFriends);
 
   app.post('/api/users/removeEvent', UserController.removeEvent);
@@ -55,6 +55,7 @@ module.exports = function(app) {
       //send cookie so client side has user info
       res.cookie('name',req.user.displayName);
       res.cookie('fbId',req.user.id);
+      res.cookie('url', req.user.profileUrl);
       res.cookie('picture',req.user.photos[0].value);
       res.redirect('/#events');
 

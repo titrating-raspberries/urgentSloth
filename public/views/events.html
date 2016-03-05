@@ -16,7 +16,7 @@
 
     <div class="row">
       <div class='eventTitle'> {{ event.name }} <span class="badge">Needs your vote</span>
-      <div class='host'> Hosted By: {{ host.name }} </div>
+      <div class='host'> <a href="{{host.url}}" > Hosted By: {{ host.name }} </a> </div>
       <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
       </div>
     </div>
