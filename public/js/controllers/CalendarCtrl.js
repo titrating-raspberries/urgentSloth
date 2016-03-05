@@ -24,7 +24,7 @@ angular.module('CalendarCtrl', [])
       console.log(event);
       $scope.calendarEvents.push({
         title: event.name,
-        start: event.dates[0].date.slice(0, 10),
+        start: event.decision ? event.dates[0].date.slice(0, 10) : event.deadline.slice(0,10),
         allDay: false,
         color: color,
         eventData: {
