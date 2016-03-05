@@ -12,7 +12,6 @@ angular.module('EventsCtrl', ['ui.bootstrap'])
   //Events will only be shown on the page if value at event index === maxValue
   $scope.filters = [0,0,0,0];
   $scope.selectedEvent = null;
-  $scope.host = $cookies.getAll();
 
   $scope.bindEventToModal = function (event){
     $scope.selectedEvent = event;

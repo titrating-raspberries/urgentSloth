@@ -18,6 +18,37 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.showDecideByMessage = false;
   $scope.showSpiffy = false;
 
+
+  // config and options for uib-datepicker
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+
+  $scope.today = function(){
+    $scope.dt = new Date();
+  };
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.popup1 = {
+     opened: false
+   };
+
+   $scope.popup2 = {
+     opened: false
+   };
+
+  // Handles opening of the date-options pop-up
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+  // Used for opening the deadline date-options popup
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+
+
+
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
   var getFriends = function() {
@@ -89,11 +120,12 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.addDateTimes = function() {
 
-    console.log($scope.date);
     if (!$scope.time){
       $scope.showDateTimeMessage = true;
       return;
     }
+
+    // ng-model = "date"
 
 
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
@@ -180,6 +212,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     event.description = $scope.eventDescription;
     event.deadline = $scope.decideByTime[0];
     //TODO ADD ADMIN USER DATA ON EVENT LISTING
+    event.host = $cookies.getAll();
 
     //Add locations from locations object
     event.locations = [];

@@ -123,14 +123,22 @@
   <div class="event create"><h3> Add date and time options: </h3>
 
     <form role="form" ng-submit="addDateTimes()">
-      <div class="form-group">
-        <label for="Date">Pick a date</label>
-        <input type="date" id="Date" ng-model="date" />
+      <!-- <div class="form-group"> -->
+        <div class="row">
+          <p class="input-group">
+            <label for="Date">Pick a date</label>
+            <input uib-datepicker-popup="{{format}}" id="Date" ng-model="dt" is-open="popup1.opened" ng-required="true" close-text="Close"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+
         <label for="Time">Pick a time</label>
         <input type="time" id="Time" ng-model="time" />
         <input type="submit" value="Add" class="btn btn-primary dateAdder" />
         <h3 class="alert alert-danger validationMessage" ng-show="showDateTimeMessage">{{dateTimeMessage}}</h3>
-      </div>
+      <!-- </div> -->
     </form>
 
 
