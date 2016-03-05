@@ -454,3 +454,13 @@ p {
 
 .modal-dialog { z-index: 1000; }
 
+.badge.needsVote {
+  background-color: #005cd6;
+}
+.badge.submitted {
+  background-color: #2d7b52;
+}
+.badge.decided {
+  background-color: #86592d;
+}
+
