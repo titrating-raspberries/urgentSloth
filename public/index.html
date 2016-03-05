@@ -5,7 +5,7 @@
     <base href="/" />
     <title>When &amp; Where</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Slabo+27px|Lato:400,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Slabo+27px|Lato" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Shanti" />
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="libs/fullcalendar/dist/fullcalendar.min.css" />
@@ -21,7 +21,6 @@
     <script src="libs/angular-cookies/angular-cookies.min.js"></script>
     <script src="libs/oauth-signature/dist/oauth-signature.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap-tpls.min.js"></script>
-
     <!--ANGULAR CUSTOM -->
     <script src="js/controllers/CreateCtrl.js"></script>
     <script src="js/controllers/CalendarCtrl.js"></script>
@@ -37,18 +36,21 @@
   </head>
   <body ng-app="sampleApp" ng-controller="IndexController" ng-class="bodyClass">
     <div id="{{photo}}" class="container">
-      <header ng-show="loggedIn">
-        <img id="logo" src="/images/logo.png" alt="Logo" />
-        <h1>Where &amp; When</h1>
-        <nav id="primary-nav" aria-label="Primary navigation">
-          <ul>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/create">Create</a></li>
-            <!-- <li><a href="/pastEvents">Past events</a></li> -->
-          </ul>
-        </nav>
+      <!-- HEADER -->
+      <nav ng-show="loggedIn" class="navbar navbar-inverse">
 
-        <nav id="user-nav" class="dropdown pull-right navbar-text">
+        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+        <ul class="nav navbar-nav">
+          <li><a href="/events" id="logo">
+            <img src="https://cdn4.iconfinder.com/data/icons/maps-and-navigation-solid-icons-vol-3/72/131-512.png" style="width:55px;height:48px;" />
+            When &amp; Where
+          </a></li>
+          <li><a class="navOption" href="/events">Events</a></li>
+          <li><a class="navOption" href="/create">Create</a></li>
+          <li><a class="navOption" href="/pastEvents">Past events</a></li>
+        </ul>
+
+        <div class="dropdown pull-right navbar-text" id="nomargins">
           <button class="btn dropdown-toggle navbar" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <img src="{{userPic}}" alt="User avatar" />
             {{userName}}
@@ -68,10 +70,10 @@
               </a>
             </li>
           </ul>
-        </nav>
-      </header>
+        </div>
+      </nav>
 
-      <main ng-view></main>
+      <div ng-view></div>
     </div>
     <script> $('#date').datepicker(); </script>
   </body>

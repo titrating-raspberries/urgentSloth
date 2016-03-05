@@ -62,7 +62,7 @@ header h1 {
 }
 
 .searchRestButton {
-  margin-top: 0 !important; /* FIXME */
+  margin-top: 0 !important; /* TODO: resolve */
 }
 
 /* then chaos */
