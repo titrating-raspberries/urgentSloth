@@ -59,7 +59,7 @@ angular.module('CreateCtrl', ['ui.bootstrap']).controller('CreateController', fu
   $scope.mytime = new Date();
 
   $scope.hstep = 1;
-  $scope.mstep = 15;
+  $scope.mstep = 1;
 
   $scope.ismeridian = true;
 
