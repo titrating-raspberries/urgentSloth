@@ -1,4 +1,4 @@
-angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, Location, User, Event) {
+angular.module('CreateCtrl', ['ui.bootstrap']).controller('CreateController', function($scope, $cookies, $location, Location, User, Event) {
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
@@ -22,6 +22,12 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   // config and options for uib-datepicker
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
 
   $scope.today = function(){
     $scope.dt = new Date();
@@ -48,6 +54,16 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   };
 
 
+  $scope.mytime = new Date();
+
+  $scope.hstep = 1;
+  $scope.mstep = 15;
+
+  $scope.ismeridian = true;
+
+  $scope.clear = function() {
+    $scope.mytime = null;
+  };
 
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
@@ -120,15 +136,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.addDateTimes = function() {
 
-    if (!$scope.time){
-      $scope.showDateTimeMessage = true;
-      return;
-    }
-
-    // ng-model = "date"
-
-
-    var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
+    var dateTime =  new Date(1 * $scope.dt);
 
     if(dateTime < Date.now()) {
       $scope.showDateTimeMessage = true;
