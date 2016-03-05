@@ -30,7 +30,7 @@ passport.use(new fbStrategy({
     clientID:  process.env.FACEBOOK_APP_ID || configAuth.facebookAuth.clientID,
     clientSecret: process.env.FACEBOOK_SECRET || configAuth.facebookAuth.clientSecret,
 
-    callbackURL: 'http://localhost:3000/login/facebook/return',
+    callbackURL: 'https://whenwhere2.herokuapp.com/login/facebook/return',
     profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends', 'email', 'link'],
 
   },
