@@ -1,4 +1,4 @@
-angular.module('CreateCtrl', []).controller('CreateController', function($scope, $cookies, $location, Location, User, Event) {
+angular.module('CreateCtrl', ['ui.bootstrap']).controller('CreateController', function($scope, $cookies, $location, Location, User, Event) {
 
   $scope.friends = []; //List of all users
   $scope.attendees = {}; //List of friends added to an event
@@ -17,6 +17,55 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.showDateTimeMessage = false;
   $scope.showDecideByMessage = false;
   $scope.showSpiffy = false;
+
+
+  // config and options for uib-datepicker
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  $scope.today = function(){
+    $scope.dt = new Date();
+    $scope.ddt = new Date();
+  };
+  $scope.today();
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.popup1 = {
+     opened: false
+   };
+
+   $scope.popup2 = {
+     opened: false
+   };
+
+  // Handles opening of the date-options pop-up
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+  // Used for opening the deadline date-options popup
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+
+
+  $scope.mytime = new Date();
+
+  $scope.hstep = 1;
+  $scope.mstep = 15;
+
+  $scope.ismeridian = true;
+
+  $scope.clear = function() {
+    $scope.mytime = null;
+  };
 
   //Toggle for Hide/Show Yelp results button
   $scope.toggle = true;
@@ -89,11 +138,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.addDateTimes = function() {
 
-    if (!$scope.time){
-      $scope.showDateTimeMessage = true;
-      return;
-    }
-    var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
+    var dateTime =  new Date(1 * $scope.dt);
 
     if(dateTime < Date.now()) {
       $scope.showDateTimeMessage = true;
@@ -112,7 +157,8 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.addDecideByTime = function() {
     //Allow only one decideBy time
     if(!$scope.decideByTime.length) {
-      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-6*3600*1000);
+      // var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
+      var decideBy = new Date(1 * $scope.ddt);
       var minDateAndTime = Math.min.apply(null, Object.keys($scope.dateTimes).map(function(key) {
         return 1*$scope.dateTimes[key];
       }));
@@ -177,6 +223,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
     event.description = $scope.eventDescription;
     event.deadline = $scope.decideByTime[0];
     //TODO ADD ADMIN USER DATA ON EVENT LISTING
+    event.host = $cookies.getAll();
 
     //Add locations from locations object
     event.locations = [];

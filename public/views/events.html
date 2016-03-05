@@ -16,7 +16,7 @@
 
     <div class="row">
       <div class='eventTitle'> {{ event.name }} <span class="badge">Needs your vote</span>
-      <div class='host'>Hosted By: {{ host.name }}</div>
+      <div class='host'>Hosted By: {{ event.host.name }}</div>
       <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
       </div>
     </div>
@@ -124,8 +124,11 @@
 
   <!-- Submitted events -->
   <div class='event' ng-repeat="event in data.submittedEvents" ng-show="filters[1] === filters[3]">
-    <div class='eventTitle'>{{ event.name }}   <span class="badge">Submitted</span><br>
-    <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
+    <div class="row">
+      <div class='eventTitle'> {{ event.name }} <span class="badge">Needs your vote</span>
+      <div class='host'>Hosted By: {{ event.host.name }}</div>
+      <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
+      </div>
     </div>
 
     <div ng-attr-id="{{event._id}}" class="panel-collapse collapse" >
@@ -203,8 +206,11 @@
 
   <!-- Decided events -->
   <div class='event' ng-repeat="event in data.decidedEvents" ng-show="filters[2] === filters[3]">
-    <div class='eventTitle'>{{ event.name }}   <span class="badge">Decided</span><br>
-    <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
+    <div class="row">
+      <div class='eventTitle'> {{ event.name }} <span class="badge">Needs your vote</span>
+      <div class='host'>Hosted By: {{ event.host.name }}</div>
+      <a class='hideDetails' data-toggle="collapse" data-target="#{{event._id}}"> Toggle Details </a>
+      </div>
     </div>
 
     <div ng-attr-id="{{event._id}}" class="panel-collapse collapse" >
