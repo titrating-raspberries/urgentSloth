@@ -1,4 +1,6 @@
-  <div>
+
+
+<div>
 
   <div class="event create">
     <h2>Name your event:</h2>
@@ -147,9 +149,12 @@
     <form role="form" ng-submit="addDecideByTime()">
       <div class="form-group">
         <label for="DecideDate">Pick a date</label>
-        <input type="date" id="DecideDate" ng-model="decideDate" />
+        <!-- <input type="datetime" id="DecideDate" ng-model="decideDate" /> -->
+        <uib-datepicker ng-model="decideDate" id="DecideDate"></uib-datepicker>
         <label for="DecideTime">Pick a time</label>
-        <input type="time" id="DecideTime" ng-model="decideTime" />
+        <!-- <input type="time" id="DecideTime" ng-model="decideTime" /> -->
+        <uib-timepicker ng-model="decideTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+
         <input type="submit" value="Add" class="btn btn-primary dateAdder" />
         <h3 class="alert alert-danger validationMessage" ng-show="showDecideByMessage">{{decideByMessage}}</h3>
       </div>
@@ -176,3 +181,4 @@
 
   </div>
 </div>
+<script> $('#date').datepicker(); </script>

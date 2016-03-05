@@ -89,10 +89,13 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
 
   $scope.addDateTimes = function() {
 
+    console.log($scope.date);
     if (!$scope.time){
       $scope.showDateTimeMessage = true;
       return;
     }
+
+
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
 
     if(dateTime < Date.now()) {
@@ -112,7 +115,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.addDecideByTime = function() {
     //Allow only one decideBy time
     if(!$scope.decideByTime.length) {
-      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-6*3600*1000);
+      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
       var minDateAndTime = Math.min.apply(null, Object.keys($scope.dateTimes).map(function(key) {
         return 1*$scope.dateTimes[key];
       }));
