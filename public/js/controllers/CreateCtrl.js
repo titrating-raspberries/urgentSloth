@@ -12,8 +12,8 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.noLocationsMessage = '“When you make a choice, you change the future.” - Deepak Chopra';
   $scope.showNoLocationsMessage = true;
   $scope.showValidationMessage = false;
-  $scope.dateTimeMessage = "Please enter a future date";
-  $scope.decideByMessage = "Please enter a future date that is before the earliest date and time option";
+  $scope.dateTimeMessage = "Please enter a future date and time.";
+  $scope.decideByMessage = "Please enter a future deadline earlier than the earliest event date.";
   $scope.showDateTimeMessage = false;
   $scope.showDecideByMessage = false;
   $scope.showSpiffy = false;
@@ -34,6 +34,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   };
 
   $scope.addAllFriends = function() {
+    $scope.showLonelyMessage = false;
     $scope.friends.forEach(function(friend) {
       $scope.attendees[friend.fbId] = friend;
     });
@@ -87,7 +88,13 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   };
 
   $scope.addDateTimes = function() {
+
+    if (!$scope.time){
+      $scope.showDateTimeMessage = true;
+      return;
+    }
     var dateTime = new Date(1*$scope.date + 1*$scope.time-8*3600*1000);
+
     if(dateTime < Date.now()) {
       $scope.showDateTimeMessage = true;
       return;
@@ -95,6 +102,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
       $scope.showDateTimeMessage = false;
     }
     $scope.dateTimes[dateTime] = dateTime;
+
   };
 
   $scope.removeDateTime = function(dateTime) {
@@ -104,7 +112,7 @@ angular.module('CreateCtrl', []).controller('CreateController', function($scope,
   $scope.addDecideByTime = function() {
     //Allow only one decideBy time
     if(!$scope.decideByTime.length) {
-      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-8*3600*1000);
+      var decideBy = new Date(1*$scope.decideDate + 1*$scope.decideTime-6*3600*1000);
       var minDateAndTime = Math.min.apply(null, Object.keys($scope.dateTimes).map(function(key) {
         return 1*$scope.dateTimes[key];
       }));

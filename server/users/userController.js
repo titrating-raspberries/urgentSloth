@@ -82,6 +82,7 @@ module.exports = {
   },
 
   createOrFindOne: function (profile) {
+    var url = profile.profileUrl;
     var fbId = profile.id;
     var name = profile.displayName;
     var picture = profile.photos[0].value;
@@ -97,10 +98,12 @@ module.exports = {
               name: name,
               fbId: fbId,
               picture: picture,
-              friends: friends
+              friends: friends,
+              url: url,
             };
             createUser(newUser);
           } else {// if user already exists, update user's friends and prof pic in the database
+            match.url = url;
             match.friends = friends;
             match.picture = picture;
             match.save(function (err) {
