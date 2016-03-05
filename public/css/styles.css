@@ -184,6 +184,11 @@ margin: -5px 0 10px 0;
 .hideDetails {
   font-size: 10px;
   color: #2d7b52;
+  display: block;
+}
+
+.host {
+  font-size: 14px;
 }
 
 .navbar {
