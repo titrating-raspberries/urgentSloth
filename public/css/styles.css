@@ -455,15 +455,14 @@ p {
 .modal-dialog { z-index: 1000; }
 
 .badge.needsVote {
-  background-color: #005cd6;
+  background-color: #005ce6;
   text-transform: uppercase;
 }
 .badge.submitted {
-  background-color: #2d7b52;
-  text-transform: uppercase;
-}
-.badge.decided {
   background-color: #86592d;
   text-transform: uppercase;
 }
-
+.badge.decided {
+  background-color: #2d7b52;
+  text-transform: uppercase;
+}

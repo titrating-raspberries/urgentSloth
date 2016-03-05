@@ -13,11 +13,11 @@ angular.module('CalendarCtrl', [])
   .then(function(events) {
     var eventList = events;
     eventList.forEach(function (event) {
-      var color = '#005ce6'; // color for Needs your vote
+      var color = '#005ce6'; // color for Needs your vote blue
       if (event.decision){
-        color='#2d7b52'; //color for decided
+        color='#2d7b52'; //color for decided green
       } else if (event.usersWhoSubmitted.indexOf(userFbId) !== -1) {
-        color = '#86592d'; //color for Pending
+        color = '#86592d'; //color for Pending brown
       }
       var currentDescription = event.description || '';
       var currentHost = event.host ? event.host.name : '';
