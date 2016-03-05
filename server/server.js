@@ -26,10 +26,12 @@ var userController = require('./users/userController');
 passport.use(new fbStrategy({
     clientID:  process.env.FACEBOOK_APP_ID || configAuth.facebookAuth.clientID,
     clientSecret: process.env.FACEBOOK_SECRET || configAuth.facebookAuth.clientSecret,
-    callbackURL: 'https://whenwhere2.herokuapp.com/login/facebook/return',
-    profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends']
+    callbackURL: 'http://localhost:3000/login/facebook/return',
+    profileFields: ['id', 'displayName', 'picture.height(150).width(150)','friends', 'email'],
   },
   function(accessToken, refreshToken, profile, cb) {
+    profile.email=profile.emails[0];
+    console.log('PROFILE FROM FB IS ', profile);
     //call a function which checks if user is in db
     userController.createOrFindOne(profile);
     return cb(null, profile);

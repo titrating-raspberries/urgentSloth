@@ -54,6 +54,7 @@ module.exports = {
         .then(function (user) {
           if(user !== null){
             var friendArray = user.friends.map(function(friend) {
+
               return friend.fbId;
             });
             getAllUsers({'fbId': {$in: friendArray}})
@@ -82,9 +83,11 @@ module.exports = {
   },
 
   createOrFindOne: function (profile) {
+    // console.log(profile);
     var fbId = profile.id;
     var name = profile.displayName;
     var picture = profile.photos[0].value;
+    var email = profile.email;
     var friends = profile._json.friends.data.map(function(friend) {
       return {fbId: friend.id};
     });
@@ -93,16 +96,20 @@ module.exports = {
         .then(function (match) {
           //if there's no match, we want to create a new user
           if (match === null) {
+            console.log("EMAIL IS ", email);
             var newUser = {
               name: name,
               fbId: fbId,
               picture: picture,
-              friends: friends
+              friends: friends,
+              email: email,
             };
             createUser(newUser);
-          } else {// if user already exists, update user's friends and prof pic in the database
+          } else {// if user already exists, update user's friends, prof pic, and email in the database
+            console.log("EMAIL IS ", email);
             match.friends = friends;
             match.picture = picture;
+            match.email = email;
             match.save(function (err) {
                 if (err){
                   return handleError(err);
