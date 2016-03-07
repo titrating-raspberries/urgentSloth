@@ -65,7 +65,7 @@ var checkEventAndNotify = function() {
   });
 }
 
-var notifications = new CronJob('*/5 * * * *', //Cron Event for checking whether to send event notifications
+var notifications = new CronJob('0 */4 * * *', //Cron Event for checking whether to send event notifications
   checkEventAndNotify,
   true,
   'America/Los_Angeles'
